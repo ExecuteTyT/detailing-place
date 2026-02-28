@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useSyncExternalStore } from "react";
+import { useRef, useEffect, useSyncExternalStore } from "react";
 import { SEASONAL_OFFER } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { reachGoal, goals } from "@/lib/analytics";
 
 interface TimeLeft {
   days: number;
@@ -72,6 +73,14 @@ interface SeasonalTimerProps {
 
 export default function SeasonalTimer({ className }: SeasonalTimerProps) {
   const timeLeft = useCountdown(SEASONAL_OFFER.endDate);
+  const timerFired = useRef(false);
+
+  useEffect(() => {
+    if (timeLeft && !timerFired.current) {
+      timerFired.current = true;
+      reachGoal(goals.TIMER_VIEW);
+    }
+  }, [timeLeft]);
 
   if (!timeLeft) return null;
 

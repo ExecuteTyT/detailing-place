@@ -5,6 +5,7 @@ import { X, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SOCIAL_PROOF_ITEMS } from "@/lib/constants";
 import { isFormSubmitted } from "@/lib/form-submit";
+import { reachGoal, goals } from "@/lib/analytics";
 
 export default function SocialProofToast() {
   const [visible, setVisible] = useState(false);
@@ -17,6 +18,7 @@ export default function SocialProofToast() {
     // First toast after 30s, then every 45s
     const firstTimer = setTimeout(() => {
       setVisible(true);
+      reachGoal(goals.SOCIAL_PROOF_SHOW);
 
       // Auto-hide after 5s
       setTimeout(() => setVisible(false), 5000);
@@ -26,6 +28,7 @@ export default function SocialProofToast() {
       if (dismissed) return;
       setCurrentIndex((prev) => (prev + 1) % SOCIAL_PROOF_ITEMS.length);
       setVisible(true);
+      reachGoal(goals.SOCIAL_PROOF_SHOW);
       setTimeout(() => setVisible(false), 5000);
     }, 45000);
 

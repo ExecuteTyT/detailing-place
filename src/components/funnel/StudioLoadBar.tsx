@@ -1,18 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { reachGoal, goals } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+
+function useRandomLoad() {
+  const valueRef = useRef<number | null>(null);
+
+  const subscribe = () => () => {};
+  const getSnapshot = () => {
+    if (valueRef.current === null) {
+      valueRef.current = Math.floor(Math.random() * 18) + 75;
+    }
+    return valueRef.current;
+  };
+  const getServerSnapshot = () => 80;
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
 
 interface StudioLoadBarProps {
   className?: string;
 }
 
 export default function StudioLoadBar({ className }: StudioLoadBarProps) {
-  const [load, setLoad] = useState(80); // stable default for SSR
+  const load = useRandomLoad();
 
   useEffect(() => {
-    setLoad(Math.floor(Math.random() * 18) + 75);
     reachGoal(goals.LOAD_BAR_VIEW);
   }, []);
 

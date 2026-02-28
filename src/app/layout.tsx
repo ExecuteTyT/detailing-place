@@ -7,6 +7,7 @@ import MobileFloatingPanel from "@/components/layout/MobileFloatingPanel";
 import ExitIntentPopup from "@/components/funnel/ExitIntentPopup";
 import CallbackWidget from "@/components/funnel/CallbackWidget";
 import SocialProofToast from "@/components/funnel/SocialProofToast";
+import ScrollTracker from "@/components/funnel/ScrollTracker";
 import { PHONE, ADDRESS, HOURS, COORDINATES, METRIKA_ID } from "@/lib/constants";
 import { METRIKA_SCRIPT } from "@/lib/analytics";
 
@@ -110,6 +111,7 @@ export default function RootLayout({
         <ExitIntentPopup />
         <CallbackWidget />
         <SocialProofToast />
+        <ScrollTracker />
       </body>
     </html>
   );

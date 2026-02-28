@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CTAForm from "@/components/sections/CTAForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import PortfolioTracker from "./PortfolioTracker";
 
 export const metadata: Metadata = {
   title: "Портфолио работ — детейлинг в Казани | Detailing Place",
@@ -35,6 +36,7 @@ const ALL_TAGS = ["Все", "PPF", "Полировка", "Керамика", "Т
 export default function PortfolioPage() {
   return (
     <>
+      <PortfolioTracker />
       <section className="section-padding">
         <div className="container-main">
           <Breadcrumbs items={[{ label: "Портфолио" }]} className="mb-6" />

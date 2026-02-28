@@ -1,6 +1,22 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { TRUST_BADGES, PARTNER_BRANDS } from "@/lib/constants";
 import TrustBadges from "@/components/sections/TrustBadges";
+
+export const metadata: Metadata = {
+  title: "Детейлинг в Казани — Премиум автодетейлинг | Detailing Place",
+  description:
+    "Антигравийная плёнка, полировка, керамика, тонировка, шумоизоляция, Bi-LED линзы. Премиальный детейлинг в Казани. Гарантия, фотоотчёт.",
+  openGraph: {
+    title: "Детейлинг в Казани — Премиум автодетейлинг | Detailing Place",
+    description:
+      "Антигравийная плёнка, полировка, керамика, тонировка, шумоизоляция, Bi-LED линзы. Премиальный детейлинг в Казани.",
+    url: "https://detailingplace.ru",
+  },
+  alternates: {
+    canonical: "https://detailingplace.ru",
+  },
+};
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import LiveStatus from "@/components/sections/LiveStatus";
 import type { Review } from "@/components/sections/ReviewsCarousel";
