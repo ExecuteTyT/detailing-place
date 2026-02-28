@@ -1,0 +1,323 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ===== THEME TOKENS ===== */
+@theme inline {
+  /* Colors — Premium Dark with warm undertone */
+  --color-bg: #0C0B09;
+  --color-bg-warm: #110F0B;
+  --color-bg-card: #171513;
+  --color-bg-hover: #1E1C18;
+  --color-bg-gradient-end: #12111A;
+
+  --color-text: #F5F4F0;
+  --color-text-secondary: #9A9590;
+
+  --color-accent-cyan: #7DD3E8;
+  --color-accent-gold: #C8A97E;
+  --color-accent-lime: #C8A97E;
+  --color-accent-red: #D45555;
+  --color-accent-whatsapp: #25D366;
+  --color-accent-phone: #2E75B6;
+
+  --color-border: #2A2723;
+
+  /* Fonts */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing */
+  --spacing-section: 3rem;
+  --spacing-section-md: 5rem;
+  --spacing-safe-bottom: 80px;
+
+  /* Border Radius */
+  --radius-card: 12px;
+  --radius-button: 8px;
+
+  /* Container */
+  --container-main: 1280px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.4);
+  --shadow-header: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow-cyan: 0 0 24px rgba(125, 211, 232, 0.1);
+  --shadow-glow-gold: 0 0 24px rgba(200, 169, 126, 0.12);
+  --shadow-glow-lime: 0 0 24px rgba(200, 169, 126, 0.12);
+
+  /* Animations */
+  --animate-pulse-ring: pulse-ring 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-slide-up: slide-up 0.3s ease-out;
+  --animate-fade-in: fade-in 0.3s ease-out;
+
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+
+  @keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  --animate-float-1: float-1 20s ease-in-out infinite;
+  --animate-float-2: float-2 25s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+
+  @keyframes float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.03); }
+    66% { transform: translate(-15px, 10px) scale(0.98); }
+  }
+
+  @keyframes float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-25px, 18px) scale(1.05); }
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+}
+
+/* ===== BASE ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Subtle grain/noise texture overlay on entire page */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+input, select, textarea {
+  font-size: 16px !important; /* iOS zoom prevention */
+}
+
+[id] {
+  scroll-margin-top: 80px;
+}
+
+/* ===== COMPONENT CLASSES ===== */
+.container-main {
+  max-width: var(--container-main);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.section-padding {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.hero-overlay {
+  background: linear-gradient(to bottom, rgba(12, 11, 9, 0.6) 0%, rgba(12, 11, 9, 0.92) 100%);
+}
+
+.card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+/* CTA button — warm gold */
+.btn-cta {
+  background: linear-gradient(135deg, #C8A97E 0%, #B8965E 100%);
+  color: #0C0B09;
+  border-radius: var(--radius-button);
+  font-weight: 700;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-cta:hover {
+  background: linear-gradient(135deg, #D4B88E 0%, #C8A97E 100%);
+  box-shadow: 0 0 20px rgba(200, 169, 126, 0.2);
+}
+
+.btn-cta:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-accent-cyan);
+  color: var(--color-accent-cyan);
+  border-radius: var(--radius-button);
+  font-weight: 600;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(125, 211, 232, 0.08);
+}
+
+.btn-whatsapp {
+  background-color: var(--color-accent-whatsapp);
+  color: #fff;
+  border-radius: var(--radius-button);
+  font-weight: 700;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe57;
+}
+
+/* ===== UTILITIES ===== */
+.pb-safe {
+  padding-bottom: var(--spacing-safe-bottom);
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: calc(var(--spacing-safe-bottom) + env(safe-area-inset-bottom));
+  }
+}
+
+.glass {
+  background-color: rgba(12, 11, 9, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-header);
+  border-top: 1px solid rgba(200, 169, 126, 0.06);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Section background variants */
+.gradient-section {
+  background: linear-gradient(to bottom, var(--color-bg), var(--color-bg-gradient-end));
+}
+
+.section-warm {
+  background: var(--color-bg-warm);
+}
+
+/* Diagonal studio light streak — like automotive photography */
+.section-spotlight {
+  position: relative;
+}
+
+.section-spotlight::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 50%;
+  height: 160%;
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(200, 169, 126, 0.015) 45%,
+    rgba(200, 169, 126, 0.03) 50%,
+    rgba(200, 169, 126, 0.015) 55%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Card premium top accent — subtle gold line */
+.card-glow-top {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-glow-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-accent-gold) 40%, rgba(125, 211, 232, 0.4) 70%, transparent 100%);
+  opacity: 0.4;
+}
+
+/* Glow CTA button — warm gold glow */
+.btn-cta-glow {
+  box-shadow: 0 0 20px rgba(200, 169, 126, 0.2), 0 0 40px rgba(200, 169, 126, 0.08);
+}
+
+/* Header scrolled state */
+.header-scrolled {
+  background-color: rgba(12, 11, 9, 0.97) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+  border-bottom-color: rgba(42, 39, 35, 0.8);
+}
+
+/* CTA section background — warm radial glow */
+.cta-section-bg {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(200, 169, 126, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(125, 211, 232, 0.02) 0%, transparent 60%),
+    linear-gradient(to bottom, var(--color-bg), var(--color-bg-gradient-end));
+}
+
+/* Placeholder image */
+.placeholder-image {
+  background: linear-gradient(135deg, #171513 0%, #1E1C18 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+}
+
+/* Custom select */
+.select-custom {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239A9590' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 2.5rem;
+}
