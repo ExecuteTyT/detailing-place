@@ -24,7 +24,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { INFO_NAV, PHONE, PHONE_RAW, WHATSAPP_URL, ADDRESS, HOURS } from "@/lib/constants";
+import { useSiteData } from "@/lib/site-data";
 import { reachGoal, goals } from "@/lib/analytics";
 import Badge from "@/components/ui/Badge";
 
@@ -112,6 +112,8 @@ interface FullscreenMenuProps {
 }
 
 export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
+  const { infoNav, phone, phoneRaw, whatsappUrl, address, hours } = useSiteData();
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -240,7 +242,7 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
                   Компания
                 </p>
                 <div className="grid grid-cols-2 gap-1">
-                  {INFO_NAV.map((item) => (
+                  {infoNav.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -264,18 +266,18 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
               <motion.div variants={fadeInRight} className="space-y-4">
                 {/* Phone */}
                 <a
-                  href={`tel:${PHONE_RAW}`}
+                  href={`tel:${phoneRaw}`}
                   className="flex items-center gap-3 text-lg font-bold text-text hover:text-accent-gold transition-colors min-h-[44px]"
                 >
                   <span className="w-10 h-10 rounded-full bg-accent-gold/10 flex items-center justify-center flex-shrink-0">
                     <Phone size={18} className="text-accent-gold" />
                   </span>
-                  {PHONE}
+                  {phone}
                 </a>
 
                 {/* WhatsApp CTA */}
                 <a
-                  href={WHATSAPP_URL}
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2.5 w-full min-h-[48px] px-5 py-3 bg-accent-whatsapp text-white rounded-[var(--radius-button)] font-bold text-base hover:bg-[#1ebe57] transition-colors"
@@ -288,11 +290,11 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
                 <div className="pt-2 space-y-3">
                   <div className="flex items-start gap-3 text-sm text-text-secondary">
                     <MapPin size={16} className="text-accent-gold/40 mt-0.5 flex-shrink-0" />
-                    <span>{ADDRESS}</span>
+                    <span>{address}</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-text-secondary">
                     <Clock size={16} className="text-accent-gold/40 flex-shrink-0" />
-                    <span>{HOURS}</span>
+                    <span>{hours}</span>
                   </div>
                 </div>
               </motion.div>

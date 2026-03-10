@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllServices } from "@/lib/services";
+import { getAllServices } from "@/lib/db/queries/services";
 
 const DOMAIN = "https://detailingplace.ru";
 

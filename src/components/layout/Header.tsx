@@ -21,13 +21,7 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import {
-  PHONE,
-  PHONE_RAW,
-  WHATSAPP_URL,
-  LIVE_STATUS,
-  INFO_NAV,
-} from "@/lib/constants";
+import { useSiteData } from "@/lib/site-data";
 import { reachGoal, goals } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import FullscreenMenu from "./FullscreenMenu";
@@ -100,6 +94,7 @@ const MEGA_COLUMNS: MegaCategory[][] = [
 /* ───────── Component ───────── */
 
 export default function Header() {
+  const { phone, phoneRaw, whatsappUrl, liveStatus, infoNav } = useSiteData();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
@@ -155,7 +150,7 @@ export default function Header() {
     reachGoal(goals.MENU_OPEN);
   }
 
-  const liveCount = LIVE_STATUS.length;
+  const liveCount = liveStatus.length;
 
   return (
     <>
@@ -290,7 +285,7 @@ export default function Header() {
             </div>
 
             {/* Info nav links */}
-            {INFO_NAV.map((item) => (
+            {infoNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -305,19 +300,19 @@ export default function Header() {
           <div className="flex items-center gap-2">
             {/* Phone (md+) */}
             <a
-              href={`tel:${PHONE_RAW}`}
+              href={`tel:${phoneRaw}`}
               onClick={handlePhoneClick}
               className="hidden md:flex items-center gap-2 text-text hover:text-accent-gold transition-colors min-h-[44px] px-2"
             >
               <Phone size={18} />
               <span className="font-semibold text-sm hidden xl:inline">
-                {PHONE}
+                {phone}
               </span>
             </a>
 
             {/* WhatsApp (md+) */}
             <a
-              href={WHATSAPP_URL}
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleWhatsAppClick}

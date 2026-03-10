@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import {
   Shield,
@@ -16,12 +17,14 @@ import {
   Globe,
   Wrench,
   ArrowUpRight,
+  ChevronDown,
   type LucideIcon,
 } from "lucide-react";
-import { HOMEPAGE_SERVICES } from "@/lib/services";
+import type { HomepageService } from "@/lib/types";
 import Badge from "@/components/ui/Badge";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
 
 /* ───────── Visual config per service ───────── */
 
@@ -123,10 +126,17 @@ const VISUALS: Record<string, ServiceVisual> = {
 /* ───────── Component ───────── */
 
 interface ServicesGridProps {
+  services: HomepageService[];
   className?: string;
 }
 
-export default function ServicesGrid({ className }: ServicesGridProps) {
+export default function ServicesGrid({ services, className }: ServicesGridProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const INITIAL_COUNT = 6;
+  const visibleServices = isExpanded
+    ? services
+    : services.slice(0, INITIAL_COUNT);
+
   return (
     <section className={cn("section-padding", className)}>
       <div className="container-main">
@@ -145,7 +155,7 @@ export default function ServicesGrid({ className }: ServicesGridProps) {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
           style={{ gridAutoFlow: "dense" }}
         >
-          {HOMEPAGE_SERVICES.map((service, index) => {
+          {visibleServices.map((service, index) => {
             const visual = VISUALS[service.slug] || {
               icon: Wrench,
               gradient:
@@ -158,7 +168,7 @@ export default function ServicesGrid({ className }: ServicesGridProps) {
             return (
               <AnimatedSection
                 key={service.slug}
-                delay={index * 0.05}
+                delay={(index % INITIAL_COUNT) * 0.05}
                 className={cn(isFeatured && "sm:col-span-2")}
               >
                 <Link
@@ -244,6 +254,24 @@ export default function ServicesGrid({ className }: ServicesGridProps) {
             );
           })}
         </div>
+
+        {services.length > INITIAL_COUNT && (
+          <AnimatedSection delay={0.3}>
+            <div className="mt-8 flex justify-center">
+              <Button
+                variant={isExpanded ? "outline" : "secondary"}
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="w-full sm:w-auto"
+                icon={ChevronDown}
+                iconPosition="right"
+              >
+                {isExpanded
+                  ? "Скрыть часть услуг"
+                  : `Показать еще ${services.length - INITIAL_COUNT} услуг`}
+              </Button>
+            </div>
+          </AnimatedSection>
+        )}
       </div>
     </section>
   );

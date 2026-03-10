@@ -5,7 +5,7 @@ import { Car, Truck, Zap, Bus, Check, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
-import { WHATSAPP_URL, QUIZ_CATEGORIES } from "@/lib/constants";
+import { useSiteData } from "@/lib/site-data";
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -85,6 +85,7 @@ interface QuizCalculatorProps {
 }
 
 export default function QuizCalculator({ className }: QuizCalculatorProps) {
+  const { whatsappUrl, quizCategories } = useSiteData();
   const [step, setStep] = useState(1);
   const [carClass, setCarClass] = useState("");
   const [services, setServices] = useState<string[]>([]);
@@ -142,7 +143,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
         <Button
           variant="whatsapp"
           size="md"
-          href={`${WHATSAPP_URL}?text=${encodeURIComponent("Здравствуйте! Жду расчёт стоимости детейлинга.")}`}
+          href={`${whatsappUrl}?text=${encodeURIComponent("Здравствуйте! Жду расчёт стоимости детейлинга.")}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -249,7 +250,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
               Что хотите сделать?
             </p>
             <div className="space-y-2">
-              {QUIZ_CATEGORIES.map((cat) => (
+              {quizCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => toggleService(cat)}

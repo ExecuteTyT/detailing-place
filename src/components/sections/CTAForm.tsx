@@ -5,10 +5,17 @@ import { useForm } from "react-hook-form";
 import { MessageCircle, CheckCircle } from "lucide-react";
 import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
-import { CAR_CLASSES, WHATSAPP_URL } from "@/lib/constants";
+import { useSiteData } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
+
+const CAR_CLASSES = [
+  { value: "sedan", label: "Седан" },
+  { value: "suv", label: "Кроссовер/Внедорожник" },
+  { value: "coupe", label: "Купе/Спорт" },
+  { value: "minivan", label: "Минивэн" },
+] as const;
 
 interface FormValues {
   phone: string;
@@ -30,6 +37,7 @@ export default function CTAForm({
   serviceName,
   className,
 }: CTAFormProps) {
+  const { whatsappUrl } = useSiteData();
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -179,7 +187,7 @@ export default function CTAForm({
             </span>
             <span>Ответим за 15 минут</span>
             <a
-              href={WHATSAPP_URL}
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-accent-whatsapp hover:underline"
@@ -200,7 +208,7 @@ export default function CTAForm({
             Перезвоним в течение 15 минут
           </p>
           <a
-            href={WHATSAPP_URL}
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 btn-whatsapp px-5 py-2.5 text-sm inline-flex items-center gap-2"

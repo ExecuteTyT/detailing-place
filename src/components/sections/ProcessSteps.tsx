@@ -1,4 +1,4 @@
-import type { ProcessStep } from "@/lib/services";
+import type { ProcessStep } from "@/lib/types";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { cn } from "@/lib/utils";
 

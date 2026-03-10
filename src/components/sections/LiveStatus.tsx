@@ -1,5 +1,7 @@
+"use client";
+
 import { Car } from "lucide-react";
-import { LIVE_STATUS } from "@/lib/constants";
+import { useSiteData } from "@/lib/site-data";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +10,7 @@ interface LiveStatusProps {
 }
 
 export default function LiveStatus({ className }: LiveStatusProps) {
+  const { liveStatus } = useSiteData();
   return (
     <section className={cn("py-6 md:py-10", className)}>
       <div className="container-main">
@@ -22,12 +25,12 @@ export default function LiveStatus({ className }: LiveStatusProps) {
                 Live
               </span>
               <h2 className="text-lg font-bold font-display text-text">
-                В работе: <span className="text-accent-gold">{LIVE_STATUS.length} авто</span>
+                В работе: <span className="text-accent-gold">{liveStatus.length} авто</span>
               </h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {LIVE_STATUS.map((item, i) => (
+              {liveStatus.map((item, i) => (
                 <div
                   key={i}
                   className="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-button)] bg-bg-hover/50 border-l-2 border-accent-gold/20"

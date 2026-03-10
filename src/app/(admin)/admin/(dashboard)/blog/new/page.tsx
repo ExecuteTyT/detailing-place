@@ -1,0 +1,171 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import FormField from "@/app/(admin)/admin/_components/FormField";
+import FormActions from "@/app/(admin)/admin/_components/FormActions";
+import ImageUpload from "@/app/(admin)/admin/_components/ImageUpload";
+
+export default function BlogNewPage() {
+  const router = useRouter();
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+
+  const [form, setForm] = useState({
+    slug: "",
+    title: "",
+    excerpt: "",
+    content: "",
+    image: "",
+    category: "",
+    date: new Date().toISOString().split("T")[0],
+    isFeatured: false,
+  });
+
+  function updateField(field: string, value: string | boolean) {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  async function handleSave() {
+    if (!form.title || !form.slug || !form.category) {
+      setError("Заполните обязательные поля: slug, заголовок, категория");
+      return;
+    }
+
+    setSaving(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/admin/blog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.error || "Ошибка сохранения");
+        return;
+      }
+
+      router.push("/admin/blog");
+    } catch {
+      setError("Ошибка сети");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const inputClass =
+    "w-full px-3 py-2.5 rounded-lg bg-[#252525] border border-[#333333] text-[#F5F5F5] text-sm focus:border-[#00F0FF] focus:outline-none transition-colors";
+
+  return (
+    <div>
+      <div className="max-w-3xl mx-auto space-y-6">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => router.push("/admin/blog")}
+            className="text-[#A0A0A0] hover:text-[#F5F5F5] transition-colors text-sm"
+          >
+            &larr; Назад
+          </button>
+          <h1 className="text-2xl font-bold text-[#F5F5F5]">Новая статья</h1>
+        </div>
+
+        {error && (
+          <div className="p-3 rounded-lg bg-[#FF4444]/10 border border-[#FF4444]/30 text-[#FF4444] text-sm">
+            {error}
+          </div>
+        )}
+
+        <div className="bg-[#1A1A1A] border border-[#333333] rounded-xl p-6 space-y-5">
+          <FormField label="Slug *">
+            <input
+              type="text"
+              value={form.slug}
+              onChange={(e) => updateField("slug", e.target.value)}
+              placeholder="my-blog-post"
+              className={inputClass}
+            />
+          </FormField>
+
+          <FormField label="Заголовок *">
+            <input
+              type="text"
+              value={form.title}
+              onChange={(e) => updateField("title", e.target.value)}
+              placeholder="Заголовок статьи"
+              className={inputClass}
+            />
+          </FormField>
+
+          <FormField label="Краткое описание">
+            <textarea
+              value={form.excerpt}
+              onChange={(e) => updateField("excerpt", e.target.value)}
+              placeholder="Краткое описание статьи..."
+              rows={3}
+              className={inputClass}
+            />
+          </FormField>
+
+          <FormField label="Контент">
+            <textarea
+              value={form.content}
+              onChange={(e) => updateField("content", e.target.value)}
+              placeholder="Полный текст статьи..."
+              rows={12}
+              className={inputClass}
+            />
+          </FormField>
+
+          <ImageUpload
+            label="Изображение обложки"
+            value={form.image}
+            onChange={(url) => updateField("image", url)}
+            folder="blog"
+          />
+
+          <FormField label="Категория *">
+            <input
+              type="text"
+              value={form.category}
+              onChange={(e) => updateField("category", e.target.value)}
+              placeholder="Детейлинг"
+              className={inputClass}
+            />
+          </FormField>
+
+          <FormField label="Дата">
+            <input
+              type="date"
+              value={form.date}
+              onChange={(e) => updateField("date", e.target.value)}
+              className={inputClass}
+            />
+          </FormField>
+
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="isFeatured"
+              checked={form.isFeatured}
+              onChange={(e) => updateField("isFeatured", e.target.checked)}
+              className="w-4 h-4 rounded border-[#333333] bg-[#252525] accent-[#CCFF00]"
+            />
+            <label htmlFor="isFeatured" className="text-sm text-[#A0A0A0]">
+              Избранная статья
+            </label>
+          </div>
+
+          <FormActions
+            onSave={handleSave}
+            onCancel={() => router.push("/admin/blog")}
+            loading={saving}
+            saveLabel="Создать статью"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}

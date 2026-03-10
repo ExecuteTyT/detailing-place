@@ -1,4 +1,4 @@
-import type { TrustBadge } from "@/lib/constants";
+import type { TrustBadge } from "@/lib/types";
 import Card from "@/components/ui/Card";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { cn } from "@/lib/utils";

@@ -3,7 +3,7 @@
 import { type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "secondary" | "whatsapp" | "phone" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "whatsapp" | "phone" | "ghost" | "outline";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonBaseProps {
@@ -32,6 +32,8 @@ const variantStyles: Record<ButtonVariant, string> = {
     "bg-gradient-to-r from-accent-gold to-[#B8965E] text-bg font-bold hover:from-[#D4B88E] hover:to-accent-gold active:scale-[0.98]",
   secondary:
     "border border-accent-cyan text-accent-cyan font-semibold hover:bg-accent-cyan/10",
+  outline:
+    "border border-border/80 text-text font-semibold hover:bg-bg-hover hover:border-accent-gold/40 hover:text-accent-gold",
   whatsapp:
     "bg-accent-whatsapp text-white font-bold hover:bg-[#1ebe57]",
   phone:

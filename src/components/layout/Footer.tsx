@@ -3,15 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ChevronDown, Phone, MessageCircle, MapPin, Clock } from "lucide-react";
-import {
-  PHONE,
-  PHONE_RAW,
-  WHATSAPP_URL,
-  ADDRESS,
-  HOURS,
-  SERVICE_NAV,
-  INFO_NAV,
-} from "@/lib/constants";
+import { useSiteData } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 interface FooterAccordionProps {
@@ -47,6 +39,7 @@ function FooterAccordion({ title, children }: FooterAccordionProps) {
 }
 
 export default function Footer() {
+  const { phone, phoneRaw, whatsappUrl, address, hours, serviceNav, infoNav } = useSiteData();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -78,7 +71,7 @@ export default function Footer() {
           {/* Column 2: Services */}
           <FooterAccordion title="Услуги">
             <ul className="space-y-2">
-              {SERVICE_NAV.slice(0, 8).map((item) => (
+              {serviceNav.slice(0, 8).map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -94,7 +87,7 @@ export default function Footer() {
           {/* Column 3: Company */}
           <FooterAccordion title="Компания">
             <ul className="space-y-2">
-              {INFO_NAV.map((item) => (
+              {infoNav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -112,16 +105,16 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href={`tel:${PHONE_RAW}`}
+                  href={`tel:${phoneRaw}`}
                   className="flex items-center gap-2 text-sm text-text hover:text-accent-cyan transition-colors"
                 >
                   <Phone size={16} className="flex-shrink-0" />
-                  {PHONE}
+                  {phone}
                 </a>
               </li>
               <li>
                 <a
-                  href={WHATSAPP_URL}
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm text-accent-whatsapp hover:text-[#1ebe57] transition-colors"
@@ -132,11 +125,11 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2 text-sm text-text-secondary">
                 <MapPin size={16} className="flex-shrink-0 mt-0.5" />
-                {ADDRESS}
+                {address}
               </li>
               <li className="flex items-center gap-2 text-sm text-text-secondary">
                 <Clock size={16} className="flex-shrink-0" />
-                {HOURS}
+                {hours}
               </li>
             </ul>
           </FooterAccordion>

@@ -1,53 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Car, Truck, Crown, Zap } from "lucide-react";
-import type { ServicePackage } from "@/lib/services";
+import { Check, Car } from "lucide-react";
+import type { ServicePackage, ElementPrice } from "@/lib/types";
+import { useSiteData } from "@/lib/site-data";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { cn } from "@/lib/utils";
 
-/* ───────── Car class pricing ───────── */
+/* ───────── Helpers ───────── */
 
-const CAR_CLASSES = [
-  { id: "sedan", label: "Седан", shortLabel: "Седан", icon: Car, multiplier: 1 },
-  { id: "crossover", label: "Кроссовер", shortLabel: "Кросс.", icon: Truck, multiplier: 1.2 },
-  { id: "suv", label: "Внедорожник", shortLabel: "Внедор.", icon: Zap, multiplier: 1.4 },
-  { id: "premium", label: "Премиум", shortLabel: "Прем.", icon: Crown, multiplier: 1.7 },
-];
-
-function parsePrice(price: string): number {
-  return parseInt(price.replace(/\D/g, "")) || 0;
+/** Whether any package uses multi-class pricing (length > 1) */
+function hasClassPricing(packages: ServicePackage[]): boolean {
+  return packages.some((pkg) => pkg.classPrices.length > 1);
 }
 
-function formatPrice(num: number): string {
-  return num.toLocaleString("ru-RU") + "₽";
+/** Get displayed price for a package given the selected class index */
+function getPrice(pkg: ServicePackage, classIndex: number): string {
+  if (pkg.classPrices.length === 1) {
+    return pkg.classPrices[0] || "Дог.";
+  }
+  const price = pkg.classPrices[classIndex];
+  return price ?? "Дог.";
 }
 
-function adjustPrice(basePrice: string, multiplier: number): string {
-  const num = parsePrice(basePrice);
-  if (!num) return basePrice;
-  const adjusted = Math.round((num * multiplier) / 1000) * 1000;
-  return "от " + formatPrice(adjusted);
+/** Get displayed price for an element price row */
+function getElementPrice(ep: ElementPrice, classIndex: number): string {
+  if (ep.classPrices.length === 1) {
+    return ep.classPrices[0] || "Дог.";
+  }
+  const price = ep.classPrices[classIndex];
+  return price ?? "Дог.";
 }
 
 /* ───────── Component ───────── */
 
 interface ServicePackagesProps {
   packages: ServicePackage[];
+  elementPrices?: ElementPrice[];
   serviceName?: string;
   className?: string;
 }
 
 export default function ServicePackages({
   packages,
+  elementPrices,
   serviceName,
   className,
 }: ServicePackagesProps) {
-  const [selectedClass, setSelectedClass] = useState("sedan");
-
-  const currentClass = CAR_CLASSES.find((c) => c.id === selectedClass) || CAR_CLASSES[0];
+  const { carClasses } = useSiteData();
+  const [selectedClass, setSelectedClass] = useState(0);
+  const showClassSelector = hasClassPricing(packages) || (elementPrices && elementPrices.some(ep => ep.classPrices.length > 1));
 
   function scrollToCTA() {
     const el = document.getElementById("cta-form");
@@ -65,58 +69,68 @@ export default function ServicePackages({
             <p className="text-center text-text-secondary mb-6">{serviceName}</p>
           )}
 
-          {/* ───── Car class selector ───── */}
-          <div className="mb-8">
-            <p className="text-sm text-text-secondary text-center mb-3">
-              Выберите класс автомобиля
-            </p>
-            <div className="flex justify-center gap-2 sm:gap-3">
-              {CAR_CLASSES.map((cls) => {
-                const Icon = cls.icon;
-                const isActive = selectedClass === cls.id;
-                return (
-                  <button
-                    key={cls.id}
-                    onClick={() => setSelectedClass(cls.id)}
-                    className={cn(
-                      "flex flex-col items-center gap-1.5 px-3 sm:px-5 py-3 rounded-[var(--radius-card)] border transition-all min-h-[44px] cursor-pointer",
-                      isActive
-                        ? "border-accent-gold bg-accent-gold/10 shadow-[var(--shadow-glow-gold)]"
-                        : "border-border bg-bg-card hover:border-accent-gold/30 hover:bg-bg-hover"
-                    )}
-                  >
-                    <Icon
-                      size={20}
+          {/* ───── Car class selector (only if multi-class pricing exists) ───── */}
+          {showClassSelector && (
+            <div className="mb-8">
+              <p className="text-sm text-text-secondary text-center mb-3">
+                Выберите класс автомобиля
+              </p>
+              <div className="flex justify-center gap-2 sm:gap-3 flex-wrap">
+                {carClasses.map((cls, idx) => {
+                  const isActive = selectedClass === idx;
+                  return (
+                    <button
+                      key={cls.id}
+                      onClick={() => setSelectedClass(idx)}
                       className={cn(
-                        "transition-colors",
-                        isActive ? "text-accent-gold" : "text-text-secondary"
-                      )}
-                    />
-                    <span
-                      className={cn(
-                        "text-xs sm:text-sm font-semibold transition-colors",
-                        isActive ? "text-accent-gold" : "text-text-secondary"
+                        "flex flex-col items-center gap-1 px-3 sm:px-4 py-2.5 rounded-[var(--radius-card)] border transition-all min-h-[44px] cursor-pointer",
+                        isActive
+                          ? "border-accent-gold bg-accent-gold/10 shadow-[var(--shadow-glow-gold)]"
+                          : "border-border bg-bg-card hover:border-accent-gold/30 hover:bg-bg-hover"
                       )}
                     >
-                      <span className="hidden sm:inline">{cls.label}</span>
-                      <span className="sm:hidden">{cls.shortLabel}</span>
-                    </span>
-                  </button>
-                );
-              })}
+                      <Car
+                        size={18}
+                        className={cn(
+                          "transition-colors",
+                          isActive ? "text-accent-gold" : "text-text-secondary"
+                        )}
+                      />
+                      <span
+                        className={cn(
+                          "text-xs sm:text-sm font-semibold transition-colors",
+                          isActive ? "text-accent-gold" : "text-text-secondary"
+                        )}
+                      >
+                        {cls.label}
+                      </span>
+                      <span className="text-[10px] text-text-secondary/60 hidden sm:block">
+                        {cls.example.split(",")[0]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </AnimatedSection>
 
         {/* ───── Package cards ───── */}
         <div
           className={cn(
             "grid gap-4 md:gap-6",
-            packages.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"
+            packages.length === 3 ? "md:grid-cols-3" : packages.length === 2 ? "md:grid-cols-2" : "max-w-lg mx-auto"
           )}
         >
           {packages.map((pkg, index) => (
             <AnimatedSection key={pkg.name} delay={index * 0.1}>
+              <div className="relative">
+                {/* Badge floats ABOVE the card, outside overflow */}
+                {pkg.isPopular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                    <Badge variant="popular">ХИТ</Badge>
+                  </div>
+                )}
               <div
                 className={cn(
                   "card p-5 md:p-6 flex flex-col relative h-full",
@@ -130,12 +144,6 @@ export default function ServicePackages({
                   <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[var(--radius-card)] bg-gradient-to-r from-accent-gold to-accent-cyan/40" />
                 )}
 
-                {pkg.isPopular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <Badge variant="popular">ХИТ</Badge>
-                  </div>
-                )}
-
                 <h3 className="text-lg font-bold font-display text-text">
                   {pkg.name}
                 </h3>
@@ -143,10 +151,10 @@ export default function ServicePackages({
                   {pkg.description}
                 </p>
 
-                {/* Dynamic price based on selected class */}
+                {/* Dynamic price */}
                 <div className="mt-4 flex items-baseline gap-2">
                   <p className="text-3xl font-extrabold font-display text-accent-gold transition-all">
-                    {adjustPrice(pkg.price, currentClass.multiplier)}
+                    {getPrice(pkg, selectedClass)}
                   </p>
                 </div>
                 {pkg.duration && (
@@ -181,158 +189,254 @@ export default function ServicePackages({
                   Записаться
                 </Button>
               </div>
+              </div>
             </AnimatedSection>
           ))}
         </div>
 
-        {/* ───── Price comparison table ───── */}
-        <AnimatedSection delay={0.3}>
-          <div className="mt-8 card p-0 overflow-hidden">
-            <div className="px-5 py-4 border-b border-border bg-bg-hover/30">
-              <h3 className="font-bold font-display text-text text-sm sm:text-base">
-                Полный прайс-лист
-              </h3>
-            </div>
+        {/* ───── Price comparison table (only for multi-class services) ───── */}
+        {showClassSelector && packages.some(pkg => pkg.classPrices.length > 1) && (
+          <AnimatedSection delay={0.3}>
+            <div className="mt-8 card p-0 overflow-hidden">
+              <div className="px-5 py-4 border-b border-border bg-bg-hover/30">
+                <h3 className="font-bold font-display text-text text-sm sm:text-base">
+                  Полный прайс-лист
+                </h3>
+              </div>
 
-            {/* Desktop table */}
-            <div className="hidden sm:block overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left px-5 py-3 font-semibold text-text-secondary">
-                      Пакет
-                    </th>
-                    {CAR_CLASSES.map((cls) => (
-                      <th
-                        key={cls.id}
-                        className={cn(
-                          "text-center px-4 py-3 font-semibold transition-colors",
-                          selectedClass === cls.id
-                            ? "text-accent-gold bg-accent-gold/5"
-                            : "text-text-secondary"
-                        )}
-                      >
-                        {cls.label}
+              {/* Desktop table */}
+              <div className="hidden sm:block overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="text-left px-5 py-3 font-semibold text-text-secondary">
+                        Пакет
                       </th>
-                    ))}
-                    <th className="px-4 py-3" />
-                  </tr>
-                </thead>
-                <tbody>
-                  {packages.map((pkg) => (
-                    <tr
-                      key={pkg.name}
-                      className={cn(
-                        "border-b border-border/50 last:border-0 transition-colors",
-                        pkg.isPopular && "bg-accent-gold/[0.03]"
-                      )}
-                    >
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-text">
-                            {pkg.name}
-                          </span>
-                          {pkg.isPopular && (
-                            <Badge variant="popular">ХИТ</Badge>
-                          )}
-                        </div>
-                        <p className="text-xs text-text-secondary mt-0.5">
-                          {pkg.description}
-                        </p>
-                      </td>
-                      {CAR_CLASSES.map((cls) => (
-                        <td
+                      {carClasses.map((cls, idx) => (
+                        <th
                           key={cls.id}
                           className={cn(
-                            "text-center px-4 py-4 font-bold font-display transition-colors",
-                            selectedClass === cls.id
+                            "text-center px-4 py-3 font-semibold transition-colors",
+                            selectedClass === idx
                               ? "text-accent-gold bg-accent-gold/5"
-                              : "text-text"
+                              : "text-text-secondary"
                           )}
                         >
-                          {adjustPrice(pkg.price, cls.multiplier)}
-                        </td>
+                          {cls.label}
+                        </th>
                       ))}
-                      <td className="px-4 py-4">
-                        <button
-                          onClick={scrollToCTA}
-                          className="text-xs font-semibold text-accent-gold hover:text-accent-gold/80 transition-colors whitespace-nowrap cursor-pointer"
-                        >
-                          Записаться →
-                        </button>
-                      </td>
+                      <th className="px-4 py-3" />
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Mobile card list */}
-            <div className="sm:hidden divide-y divide-border/50">
-              {packages.map((pkg) => (
-                <div
-                  key={pkg.name}
-                  className={cn(
-                    "px-5 py-4",
-                    pkg.isPopular && "bg-accent-gold/[0.03]"
-                  )}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold text-text text-sm">
-                        {pkg.name}
-                      </span>
-                      {pkg.isPopular && (
-                        <Badge variant="popular">ХИТ</Badge>
-                      )}
-                    </div>
-                    <button
-                      onClick={scrollToCTA}
-                      className="text-xs font-semibold text-accent-gold cursor-pointer"
-                    >
-                      Записаться →
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    {CAR_CLASSES.map((cls) => (
-                      <div
-                        key={cls.id}
+                  </thead>
+                  <tbody>
+                    {packages.filter(pkg => pkg.classPrices.length > 1).map((pkg) => (
+                      <tr
+                        key={pkg.name}
                         className={cn(
-                          "text-center py-2 px-3 rounded-lg text-xs transition-colors",
-                          selectedClass === cls.id
-                            ? "bg-accent-gold/10 border border-accent-gold/30"
-                            : "bg-bg-hover/50 border border-transparent"
+                          "border-b border-border/50 last:border-0 transition-colors",
+                          pkg.isPopular && "bg-accent-gold/[0.03]"
                         )}
                       >
-                        <span className="text-text-secondary block">
-                          {cls.shortLabel}
+                        <td className="px-5 py-4">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-text">
+                              {pkg.name}
+                            </span>
+                            {pkg.isPopular && (
+                              <Badge variant="popular">ХИТ</Badge>
+                            )}
+                          </div>
+                          <p className="text-xs text-text-secondary mt-0.5">
+                            {pkg.description}
+                          </p>
+                        </td>
+                        {carClasses.map((cls, idx) => (
+                          <td
+                            key={cls.id}
+                            className={cn(
+                              "text-center px-4 py-4 font-bold font-display transition-colors whitespace-nowrap",
+                              selectedClass === idx
+                                ? "text-accent-gold bg-accent-gold/5"
+                                : "text-text"
+                            )}
+                          >
+                            {getPrice(pkg, idx)}
+                          </td>
+                        ))}
+                        <td className="px-4 py-4">
+                          <button
+                            onClick={scrollToCTA}
+                            className="text-xs font-semibold text-accent-gold hover:text-accent-gold/80 transition-colors whitespace-nowrap cursor-pointer"
+                          >
+                            Записаться →
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile card list */}
+              <div className="sm:hidden divide-y divide-border/50">
+                {packages.filter(pkg => pkg.classPrices.length > 1).map((pkg) => (
+                  <div
+                    key={pkg.name}
+                    className={cn(
+                      "px-5 py-4",
+                      pkg.isPopular && "bg-accent-gold/[0.03]"
+                    )}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-text text-sm">
+                          {pkg.name}
                         </span>
-                        <span
+                        {pkg.isPopular && (
+                          <Badge variant="popular">ХИТ</Badge>
+                        )}
+                      </div>
+                      <button
+                        onClick={scrollToCTA}
+                        className="text-xs font-semibold text-accent-gold cursor-pointer"
+                      >
+                        Записаться →
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      {carClasses.map((cls, idx) => (
+                        <div
+                          key={cls.id}
                           className={cn(
-                            "font-bold font-display",
-                            selectedClass === cls.id
-                              ? "text-accent-gold"
-                              : "text-text"
+                            "text-center py-2 px-3 rounded-lg text-xs transition-colors",
+                            selectedClass === idx
+                              ? "bg-accent-gold/10 border border-accent-gold/30"
+                              : "bg-bg-hover/50 border border-transparent"
                           )}
                         >
-                          {adjustPrice(pkg.price, cls.multiplier)}
-                        </span>
-                      </div>
-                    ))}
+                          <span className="text-text-secondary block">
+                            {cls.label}
+                          </span>
+                          <span
+                            className={cn(
+                              "font-bold font-display",
+                              selectedClass === idx
+                                ? "text-accent-gold"
+                                : "text-text"
+                            )}
+                          >
+                            {getPrice(pkg, idx)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Disclaimer */}
-            <div className="px-5 py-3 border-t border-border bg-bg-hover/20">
-              <p className="text-xs text-text-secondary/70">
-                * Цены ориентировочные. Точная стоимость рассчитывается после
-                осмотра автомобиля.
-              </p>
+              {/* Disclaimer */}
+              <div className="px-5 py-3 border-t border-border bg-bg-hover/20">
+                <p className="text-xs text-text-secondary/70">
+                  * Цены ориентировочные. Точная стоимость рассчитывается после
+                  осмотра автомобиля. 5 класс — цена договорная.
+                </p>
+              </div>
             </div>
-          </div>
-        </AnimatedSection>
+          </AnimatedSection>
+        )}
+
+        {/* ───── Element pricing table ───── */}
+        {elementPrices && elementPrices.length > 0 && (
+          <AnimatedSection delay={0.4}>
+            <div className="mt-8 card p-0 overflow-hidden">
+              <div className="px-5 py-4 border-b border-border bg-bg-hover/30">
+                <h3 className="font-bold font-display text-text text-sm sm:text-base">
+                  Поэлементный прайс
+                </h3>
+              </div>
+
+              {/* Desktop table */}
+              <div className="hidden sm:block overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="text-left px-5 py-3 font-semibold text-text-secondary">
+                        Элемент
+                      </th>
+                      {elementPrices.some(ep => ep.classPrices.length > 1) ? (
+                        carClasses.map((cls, idx) => (
+                          <th
+                            key={cls.id}
+                            className={cn(
+                              "text-center px-4 py-3 font-semibold transition-colors",
+                              selectedClass === idx
+                                ? "text-accent-gold bg-accent-gold/5"
+                                : "text-text-secondary"
+                            )}
+                          >
+                            {cls.label}
+                          </th>
+                        ))
+                      ) : (
+                        <th className="text-center px-4 py-3 font-semibold text-text-secondary">
+                          Цена
+                        </th>
+                      )}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {elementPrices.map((ep) => (
+                      <tr
+                        key={ep.element}
+                        className="border-b border-border/50 last:border-0"
+                      >
+                        <td className="px-5 py-3 font-medium text-text">
+                          {ep.element}
+                        </td>
+                        {ep.classPrices.length > 1 ? (
+                          carClasses.map((cls, idx) => (
+                            <td
+                              key={cls.id}
+                              className={cn(
+                                "text-center px-4 py-3 font-bold font-display whitespace-nowrap transition-colors",
+                                selectedClass === idx
+                                  ? "text-accent-gold bg-accent-gold/5"
+                                  : "text-text"
+                              )}
+                            >
+                              {getElementPrice(ep, idx)}
+                            </td>
+                          ))
+                        ) : (
+                          <td
+                            className="text-center px-4 py-3 font-bold font-display text-text"
+                            colSpan={elementPrices.some(e => e.classPrices.length > 1) ? carClasses.length : 1}
+                          >
+                            {ep.classPrices[0]}
+                          </td>
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile list */}
+              <div className="sm:hidden divide-y divide-border/50">
+                {elementPrices.map((ep) => (
+                  <div key={ep.element} className="px-5 py-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-text font-medium">{ep.element}</span>
+                      <span className="text-sm font-bold font-display text-accent-gold">
+                        {getElementPrice(ep, selectedClass)}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+        )}
       </div>
     </section>
   );

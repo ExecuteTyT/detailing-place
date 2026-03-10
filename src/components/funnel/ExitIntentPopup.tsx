@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { submitForm } from "@/lib/form-submit";
 import { isFormSubmitted } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
-import { WHATSAPP_URL } from "@/lib/constants";
+import { useSiteData } from "@/lib/site-data";
 import Button from "@/components/ui/Button";
 
 type Variant = "discount" | "leadmagnet" | "photo";
@@ -32,6 +32,7 @@ function markShown() {
 }
 
 export default function ExitIntentPopup() {
+  const { whatsappUrl } = useSiteData();
   const [visible, setVisible] = useState(false);
   const [variant] = useState<Variant>(getRandomVariant);
   const [phone, setPhone] = useState("");
@@ -189,7 +190,7 @@ export default function ExitIntentPopup() {
                     <Button
                       variant="whatsapp"
                       className="w-full"
-                      href={`${WHATSAPP_URL}?text=${encodeURIComponent("Здравствуйте! Хочу рассчитать стоимость детейлинга. Отправляю фото:")}`}
+                      href={`${whatsappUrl}?text=${encodeURIComponent("Здравствуйте! Хочу рассчитать стоимость детейлинга. Отправляю фото:")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

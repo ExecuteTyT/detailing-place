@@ -89,6 +89,7 @@
 /* ===== BASE ===== */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -96,6 +97,8 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 /* Subtle grain/noise texture overlay on entire page */
@@ -269,7 +272,6 @@ input, select, textarea {
 /* Card premium top accent — subtle gold line */
 .card-glow-top {
   position: relative;
-  overflow: hidden;
 }
 
 .card-glow-top::before {

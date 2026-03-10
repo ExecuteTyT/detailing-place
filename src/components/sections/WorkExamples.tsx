@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import type { WorkExample } from "@/lib/services";
+import type { WorkExample } from "@/lib/types";
 import Badge from "@/components/ui/Badge";
 import PlaceholderImage from "@/components/ui/PlaceholderImage";
 import AnimatedSection from "@/components/ui/AnimatedSection";
