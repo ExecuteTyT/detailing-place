@@ -57,34 +57,40 @@ export default function HeroSection({
         }}
       />
 
-      {/* Layer 4: Service-specific theme gradient */}
-      {themeGradient && (
+      {/* Layer 4: Service-specific theme gradient — only when no photo */}
+      {themeGradient && !hasPhoto && (
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: themeGradient }}
         />
       )}
 
-      {/* Layer 5: Service icon watermark */}
-      {ThemeIcon && (
+      {/* Layer 5: Service icon watermark — only when no photo */}
+      {ThemeIcon && !hasPhoto && (
         <div className="absolute top-[15%] right-[8%] pointer-events-none opacity-[0.035]">
           <ThemeIcon size={280} strokeWidth={0.5} className="text-text" />
         </div>
       )}
 
-      {/* Layer 6: Subtle grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(200,169,126,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,126,0.3) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+      {/* Layer 6: Subtle grid pattern — only when no photo */}
+      {!hasPhoto && (
+        <div
+          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(200,169,126,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,126,0.3) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
+      )}
 
-      {/* Decorative glows */}
-      <div className="absolute top-1/3 -left-24 w-72 h-72 bg-accent-cyan/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 -right-24 w-72 h-72 bg-accent-gold/3 rounded-full blur-3xl" />
+      {/* Decorative glows — only when no photo */}
+      {!hasPhoto && (
+        <>
+          <div className="absolute top-1/3 -left-24 w-72 h-72 bg-accent-cyan/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/3 -right-24 w-72 h-72 bg-accent-gold/3 rounded-full blur-3xl" />
+        </>
+      )}
 
       {/* Content */}
       <div className="relative z-10 container-main w-full pb-12 md:pb-20 pt-24">

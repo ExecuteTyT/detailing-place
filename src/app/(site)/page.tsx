@@ -78,44 +78,6 @@ export default function Home() {
           }}
         />
 
-        {/* Subtle grid pattern — studio workshop feel */}
-        <div
-          className="absolute inset-0 opacity-[0.025] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(200,169,126,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,126,0.4) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-
-        {/* Warm light streak — automotive photography */}
-        <div
-          className="absolute top-0 right-0 w-full h-full opacity-100 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(135deg, transparent 30%, rgba(200,169,126,0.03) 45%, rgba(200,169,126,0.05) 50%, rgba(200,169,126,0.03) 55%, transparent 70%)",
-          }}
-        />
-
-        {/* Animated floating orbs */}
-        <div
-          className="absolute top-[15%] left-[10%] w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full blur-[100px] animate-float-1 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(200,169,126,0.08) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute bottom-[20%] right-[5%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] rounded-full blur-[80px] animate-float-2 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(125,211,232,0.06) 0%, transparent 70%)",
-          }}
-        />
-
-        {/* Static depth orbs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent-gold/3 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/3 -right-48 w-[500px] h-[500px] bg-accent-cyan/2 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 container-main w-full pb-12 md:pb-20 pt-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
