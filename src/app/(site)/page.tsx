@@ -66,7 +66,7 @@ export default function Home() {
       <SeasonalTimer />
 
       {/* Hero with embedded Quiz instead of simple form */}
-      <section className="relative min-h-[85vh] md:min-h-[90vh] flex items-end overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-bg via-bg-card to-bg-gradient-end" />
         <HeroBackground src="/images/hero/home.webp" alt="Detailing Place — студия премиального детейлинга в Казани" />
@@ -79,7 +79,7 @@ export default function Home() {
         />
 
 
-        <div className="relative z-10 container-main w-full pb-12 md:pb-20 pt-24">
+        <div className="relative z-10 container-main w-full pb-8 md:pb-20 pt-20 md:pt-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
             <div>
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border bg-accent-gold/10 text-accent-gold border-accent-gold/25 mb-4">

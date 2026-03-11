@@ -35,7 +35,7 @@ export default function HeroSection({
   return (
     <section
       className={cn(
-        "relative min-h-[85vh] md:min-h-[90vh] flex items-end overflow-hidden",
+        "relative min-h-[60vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-end overflow-hidden",
         className
       )}
     >
@@ -93,7 +93,7 @@ export default function HeroSection({
       )}
 
       {/* Content */}
-      <div className="relative z-10 container-main w-full pb-12 md:pb-20 pt-24">
+      <div className="relative z-10 container-main w-full pb-8 md:pb-20 pt-20 md:pt-24">
         {badge && (
           <div className="mb-4">
             <Badge variant="new">{badge}</Badge>
