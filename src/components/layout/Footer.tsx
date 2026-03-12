@@ -71,7 +71,7 @@ export default function Footer() {
           {/* Column 2: Services */}
           <FooterAccordion title="Услуги">
             <ul className="space-y-2">
-              {serviceNav.slice(0, 8).map((item) => (
+              {serviceNav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
