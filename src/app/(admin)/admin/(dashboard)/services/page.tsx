@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { services } from "@/lib/db/schema";
 import { asc } from "drizzle-orm";
 import Link from "next/link";
+import DeleteButton from "@/app/(admin)/admin/_components/DeleteButton";
 
 export default async function ServicesPage() {
   const rows = db
@@ -95,12 +96,19 @@ export default async function ServicesPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <Link
-                      href={`/admin/services/${row.id}`}
-                      className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#333333] text-[#00F0FF] hover:bg-[#252525] transition-colors"
-                    >
-                      Изменить
-                    </Link>
+                    <div className="flex items-center justify-end gap-2">
+                      <Link
+                        href={`/admin/services/${row.id}`}
+                        className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#333333] text-[#00F0FF] hover:bg-[#252525] transition-colors"
+                      >
+                        Изменить
+                      </Link>
+                      <DeleteButton
+                        endpoint={`/api/admin/services/${row.id}`}
+                        confirmTitle={`Удалить «${row.title}»?`}
+                        confirmMessage="Услуга и все связанные данные (пакеты, цены, FAQ, этапы) будут удалены безвозвратно."
+                      />
+                    </div>
                   </td>
                 </tr>
               ))
