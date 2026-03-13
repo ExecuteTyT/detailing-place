@@ -104,7 +104,7 @@ export default function ExitIntentPopup() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative z-10 w-full max-w-[480px] bg-bg-card border border-border rounded-2xl p-6 md:p-8 shadow-[0_0_60px_rgba(200,169,126,0.06)] card-glow-top overflow-hidden"
+            className="relative z-10 w-full max-w-[480px] bg-bg-card border border-border rounded-2xl p-6 md:p-8 shadow-[0_0_60px_rgba(212,184,48,0.06)] card-glow-top overflow-hidden"
           >
             <button
               onClick={close}

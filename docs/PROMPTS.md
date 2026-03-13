@@ -248,6 +248,18 @@ Dark car body panel that looks flat and dull, no depth to the paint, light refle
 Same dark car body panel from same angle, now with ceramic coating applied, extreme wet-look gloss and depth, light reflections are razor-sharp, the surface looks like liquid glass, water beading visible at the edge, 8k photorealistic, wide cinematic frame 16:9
 ```
 
+### Антихром До/После
+
+КОПИРОВАТЬ (До):
+```
+Front grille area of a dark luxury car with factory chrome trim elements — chrome window moldings, chrome grille surround, chrome door handles, bright reflective chrome catching harsh inspection light, dark detailing studio, 8k photorealistic, wide cinematic frame 16:9
+```
+
+КОПИРОВАТЬ (После):
+```
+Same car front grille area from same angle in same dark studio, all chrome elements now wrapped or painted in sleek satin black, unified murdered-out aesthetic, no chrome visible anywhere, matte and gloss black contrast, aggressive and stealthy appearance, 8k photorealistic, wide cinematic frame 16:9
+```
+
 ---
 
 ## 4. СРАВНЕНИЕ ТОНИРОВКИ — 4 уровня (Тип B)
@@ -288,92 +300,105 @@ Side view of same dark luxury car in same studio, rear side window with 80 perce
 
 Вертикальные карточки. Добавляй "vertical portrait format 4:5" в конец.
 
+**ВАЖНО:** Сначала сгенерируй студию (секция 6), потом портфолио. Все фото — в одной студии с жёлтой вывеской "Detailing Place" на серой стене.
+
+**Шаблон окружения (добавлять во все промпты):**
+`in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible on the back wall, bright rectangular LED ceiling light fixtures`
+
 ### `/images/works/ppf-1.jpg` — BMW X5 PPF
 
 КОПИРОВАТЬ:
 ```
-Three-quarter front view of a dark BMW X5 in premium detailing studio, entire body wrapped in invisible PPF, the paint has extreme wet gloss depth, hexagonal LED ceiling lights create perfect rectangular reflections across the hood and fender, dramatic dark environment, professional automotive photography, 8k photorealistic, vertical portrait format 4:5
+Three-quarter front view of a dark BMW X5 in a premium detailing studio with dark grey vertical panel walls, a large yellow logo visible on the back wall, bright rectangular LED ceiling light fixtures, entire body wrapped in invisible PPF, the paint has extreme wet gloss depth, LED lights create perfect rectangular reflections across the hood and fender, professional automotive photography, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/polish-1.jpg` — Mercedes C-Class полировка + керамика
 
 КОПИРОВАТЬ:
 ```
-Three-quarter rear view of dark Mercedes C-Class in premium studio, paint polished to absolute mirror finish with ceramic coating, the body panels reflect the studio environment like dark liquid chrome, warm golden key light on the rear quarter panel, 8k photorealistic, vertical portrait format 4:5
+Three-quarter rear view of dark Mercedes C-Class in a premium detailing studio with dark grey vertical panel walls, a large yellow logo visible on the back wall, bright rectangular LED ceiling light fixtures, paint polished to absolute mirror finish with ceramic coating, the body panels reflect the studio like dark liquid chrome, warm golden key light on the rear quarter panel, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/linz-1.jpg` — Kia Ceed Bi-LED линзы
 
 КОПИРОВАТЬ:
 ```
-Front view of Kia Ceed in dark detailing studio, both headlights upgraded with Bi-LED projector lenses emitting bright white beams, the new lens optics glow with precision, contrast between original halogen warmth and new LED clarity, 8k photorealistic, vertical portrait format 4:5
+Front view of Kia Ceed in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible on the back wall, bright rectangular LED ceiling light fixtures, both headlights upgraded with Bi-LED projector lenses emitting bright white beams, the new lens optics glow with precision, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/antihrom-1.jpg` — BMW X3 антихром
 
 КОПИРОВАТЬ:
 ```
-Dramatic low-angle front three-quarter of BMW X3 with complete chrome-delete package, every trim piece matte or gloss black, murdered-out aesthetic, single dramatic side light creating long shadows, aggressive and stealthy mood, 8k photorealistic, vertical portrait format 4:5
+Dramatic low-angle front three-quarter of BMW X3 in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible on the back wall, bright rectangular LED ceiling light fixtures, complete chrome-delete package, every trim piece matte or gloss black, murdered-out aesthetic, aggressive and stealthy mood, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/tonirovka-1.jpg` — Toyota Camry тонировка
 
 КОПИРОВАТЬ:
 ```
-Side profile of Toyota Camry in dark detailing studio, all windows freshly tinted with dark film, clean tint line visible at the top edge, the tinted glass creates a sleek unified look, hexagonal LEDs reflected on the roof, 8k photorealistic, vertical portrait format 4:5
+Side profile of Toyota Camry in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible on the back wall, bright rectangular LED ceiling light fixtures, all windows freshly tinted with dark film, clean tint line visible at the top edge, the tinted glass creates a sleek unified look, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/himchistka-1.jpg` — Toyota Camry химчистка
 
 КОПИРОВАТЬ:
 ```
-Interior shot through the open door of Toyota Camry, freshly detailed cabin with clean leather seats, spotless dashboard, detailed door panel, warm interior ambient lighting, the clean surfaces have a satin sheen, 8k photorealistic, vertical portrait format 4:5
+Interior shot through the open door of Toyota Camry parked in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible through the rear window, bright rectangular LED ceiling light fixtures, freshly detailed cabin with clean leather seats, spotless dashboard, the clean surfaces have a satin sheen, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/ceramic-1.jpg` — Porsche Cayenne керамика
 
 КОПИРОВАТЬ:
 ```
-Low front three-quarter of dark Porsche Cayenne with fresh ceramic coating, extreme wet-look gloss, the curved body panels act like a dark mirror reflecting the entire studio, water beads visible on the rear fender, premium atmosphere, 8k photorealistic, vertical portrait format 4:5
+Low front three-quarter of dark Porsche Cayenne in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible on the back wall, bright rectangular LED ceiling light fixtures, fresh ceramic coating with extreme wet-look gloss, the curved body panels act like a dark mirror, water beads visible on the rear fender, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/shumo-1.jpg` — Audi A6 шумоизоляция
 
 КОПИРОВАТЬ:
 ```
-Interior shot of Audi A6 with door panel removed showing professionally installed sound deadening material, aluminum butyl mats covering every surface, clean professional installation, warm work light illuminating the cabin, 8k photorealistic, vertical portrait format 4:5
+Interior shot of Audi A6 with door panel removed in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible through the windshield, bright rectangular LED ceiling light fixtures, professionally installed sound deadening material, aluminum butyl mats covering every surface, clean professional installation, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/ppf-ceramic-1.jpg` — Lexus RX PPF + керамика
 
 КОПИРОВАТЬ:
 ```
-Rear three-quarter of dark Lexus RX, PPF film edge subtly visible on the rear bumper, ceramic-coated paint creates mirror-like reflections, the tail lights glow warm red, premium studio lighting, 8k photorealistic, vertical portrait format 4:5
+Rear three-quarter of dark Lexus RX in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible on the back wall, bright rectangular LED ceiling light fixtures, PPF film edge subtly visible on the rear bumper, ceramic-coated paint creates mirror-like reflections, the tail lights glow warm red, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ### `/images/works/full-detail-1.jpg` — Genesis G70 полный детейлинг
 
 КОПИРОВАТЬ:
 ```
-Dramatic front view of dark Genesis G70, fully detailed with polished paint, ceramic coating, tinted windows, blacked-out trim, the car looks showroom-perfect, centered in the dark studio bay, hero-car presentation, 8k photorealistic, vertical portrait format 4:5
+Dramatic front view of dark Genesis G70 in a premium detailing studio with dark grey vertical panel walls, a large yellow cursive "Detailing Place" logo visible on the back wall, bright rectangular LED ceiling light fixtures, fully detailed with polished paint, ceramic coating, tinted windows, blacked-out trim, the car looks showroom-perfect, centered in the studio bay, 8k photorealistic, vertical portrait format 4:5
 ```
 
 ---
 
 ## 6. СТУДИЯ — Страница «О нас» (Тип B)
 
+**ВАЖНО:** Генерируй студию ПЕРВОЙ. Потом используй её как визуальный референс для портфолио (секция 5).
+
+Ключевые элементы студии (по реальному фото):
+- Тёмно-серые стены из вертикальных панелей
+- Большая жёлтая надпись-логотип **"Detailing Place"** на стене (курсивный шрифт, жёлтый на сером)
+- Потолочные LED-светильники (прямоугольные, яркий белый свет)
+- Тёмный пол
+
 ### `/images/studio-1.jpg`
 
 КОПИРОВАТЬ:
 ```
-Wide architectural photograph of premium auto detailing studio interior, dark grey walls, black hexagonal LED ceiling light panels casting dramatic geometric shadows on the polished epoxy floor, two luxury dark cars in separate work bays, professional tool walls organized neatly, clean and modern industrial aesthetic, cinematic wide-angle, 8k photorealistic, wide cinematic frame 16:9
+Wide architectural photograph of premium auto detailing studio interior, dark grey vertical panel walls with a large yellow cursive "Detailing Place" logo painted on the back wall, bright rectangular LED ceiling light fixtures, polished dark epoxy floor, two luxury dark cars in separate work bays, professional tool walls organized neatly, clean and modern industrial aesthetic, cinematic wide-angle, 8k photorealistic, wide cinematic frame 16:9
 ```
 
 ### `/images/studio-2.jpg`
 
 КОПИРОВАТЬ:
 ```
-Medium shot of a single detailing work bay, dark car elevated on a professional lift, organized tool cart with polishing machines and chemicals, dramatic overhead hexagonal LED lighting creating pools of light on the car surface, the rest of the studio recedes into deep shadows, professional atmosphere, 8k photorealistic, wide cinematic frame 16:9
+Medium shot of a single detailing work bay, dark car on a professional lift, organized tool cart with polishing machines and chemicals, dark grey panel walls with yellow "Detailing Place" branding visible in the background, bright rectangular LED ceiling lights creating clean white illumination on the car surface, professional atmosphere, 8k photorealistic, wide cinematic frame 16:9
 ```
 
 ---
@@ -462,38 +487,37 @@ Curated collection of premium car care products including spray bottle, microfib
 
 | # | Файл | Формат | Тип | Статус |
 |---|------|--------|-----|--------|
-| 1 | `/images/hero/home.jpg` | 16:9 | A | ✅ Сгенерировано |
-| 2 | `/images/hero/ppf.jpg` | 16:9 | A | |
-| 3 | `/images/hero/polirovka.jpg` | 16:9 | A | |
-| 4 | `/images/hero/himchistka.jpg` | 16:9 | A | |
-| 5 | `/images/hero/shumoizolyaciya.jpg` | 16:9 | A | |
-| 6 | `/images/hero/antihrom.jpg` | 16:9 | A | |
-| 7 | `/images/hero/tonirovka.jpg` | 16:9 | A | |
-| 8 | `/images/hero/ustanovka-linz.jpg` | 16:9 | A | |
-| 9 | `/images/hero/regulirovka-far.jpg` | 16:9 | A | |
-| 10 | `/images/hero/polirovka-stekol.jpg` | 16:9 | A | |
-| 11 | `/images/hero/polirovka-far.jpg` | 16:9 | A | |
-| 12 | `/images/hero/antidozhd.jpg` | 16:9 | A | |
-| 13 | `/images/hero/rusifikaciya-avto.jpg` | 16:9 | A | |
-| 14 | `/images/hero/remont-vmyatin.jpg` | 16:9 | A | |
-| 15 | `/images/hero/keramika.jpg` | 16:9 | A | |
-| 16 | `/images/hero/ustanovka-signalizacii.jpg` | 16:9 | A | |
-| 17–30 | До/После ×7 пар | 16:9 | B | |
-| 31–34 | Тонировка ×4 уровня | 16:9 | B | |
-| 35–44 | Портфолио ×10 | 4:5 | B | |
-| 45–46 | Студия ×2 | 16:9 | B | |
-| 47–50 | Команда ×4 | 3:4 | B | |
-| 51–56 | Блог ×6 | 16:9 | B | |
+| 1 | `/images/hero/home.webp` | 16:9 | A | ✅ |
+| 2 | `/images/hero/ppf.webp` | 16:9 | A | ✅ |
+| 3 | `/images/hero/polirovka.webp` | 16:9 | A | ✅ |
+| 4 | `/images/hero/himchistka.webp` | 16:9 | A | ✅ |
+| 5 | `/images/hero/shumoizolyaciya.webp` | 16:9 | A | ✅ |
+| 6 | `/images/hero/antihrom.webp` | 16:9 | A | ✅ |
+| 7 | `/images/hero/tonirovka.webp` | 16:9 | A | ✅ |
+| 8 | `/images/hero/ustanovka-linz.webp` | 16:9 | A | ✅ |
+| 9 | `/images/hero/regulirovka-far.webp` | 16:9 | A | ✅ |
+| 10 | `/images/hero/polirovka-stekol.webp` | 16:9 | A | ✅ |
+| 11 | `/images/hero/polirovka-far.webp` | 16:9 | A | ✅ |
+| 12 | `/images/hero/antidozhd.webp` | 16:9 | A | ✅ |
+| 13 | `/images/hero/rusifikaciya-avto.webp` | 16:9 | A | ✅ |
+| 14 | `/images/hero/remont-vmyatin.webp` | 16:9 | A | ✅ |
+| 15 | `/images/hero/zashchitnye-pokrytiya.webp` | 16:9 | A | ✅ |
+| 16 | `/images/hero/ustanovka-signalizacii.webp` | 16:9 | A | ✅ |
+| 17–32 | До/После ×8 пар | 16:9 | B | |
+| 37–40 | Тонировка ×4 уровня | 16:9 | B | |
+| 41–50 | Портфолио ×10 | 4:5 | B | |
+| 51–52 | Студия ×2 | 16:9 | B | |
+| 53–56 | Команда ×4 | 3:4 | B | |
+| 57–62 | Блог ×6 | 16:9 | B | |
 
-**Итого: 56 изображений**
+**Итого: 58 изображений** (16 hero ✅ + 42 остальных)
 
 ---
 
 ## Чеклист
 
-- [ ] Hero главной — готово (golden texture)
-- [ ] 15 hero услуг — проверить: видно ли картинку на сайте через оверлей
-- [ ] 7 пар До/После — проверить: одинаковый ракурс в паре
+- [x] Hero главной + 15 hero услуг — ✅ сконвертировано в WebP
+- [ ] 10 пар До/После — проверить: одинаковый ракурс в паре
 - [ ] 4 уровня тонировки — проверить: одна и та же машина
 - [ ] 10 портфолио — проверить: вертикальный формат
 - [ ] 2 студии, 4 команды, 6 блога

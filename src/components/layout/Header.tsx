@@ -168,15 +168,13 @@ export default function Header() {
         <div className="container-main flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <span className="text-lg md:text-xl font-extrabold font-display tracking-tight text-text">
-              DETAILING
-              <span
-                className="text-accent-gold"
-                style={{ textShadow: "0 0 24px rgba(200,169,126,0.25)" }}
-              >
-                {" "}PLACE
-              </span>
-            </span>
+            <img
+              src="/images/logo.webp"
+              alt="Detailing Place"
+              className="h-9 md:h-11 w-auto"
+              width={160}
+              height={44}
+            />
           </Link>
 
           {/* ── Desktop Navigation (lg+) ── */}

@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       url: "https://detailingplace.ru",
     },
     datePublished: "2026-02-01",
-    image: `https://detailingplace.ru/images/blog/${slug}.jpg`,
+    image: `https://detailingplace.ru/images/blog/${slug}.webp`,
     url: `https://detailingplace.ru/blog/${slug}`,
   };
 

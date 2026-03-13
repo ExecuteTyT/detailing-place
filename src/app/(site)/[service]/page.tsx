@@ -55,7 +55,7 @@ const HERO_THEMES: Record<string, ServiceTheme> = {
   },
   polirovka: {
     gradient:
-      "radial-gradient(ellipse at 75% 30%, rgba(245,158,11,0.1) 0%, transparent 60%), radial-gradient(ellipse at 20% 70%, rgba(200,169,126,0.05) 0%, transparent 50%)",
+      "radial-gradient(ellipse at 75% 30%, rgba(245,158,11,0.1) 0%, transparent 60%), radial-gradient(ellipse at 20% 70%, rgba(212,184,48,0.05) 0%, transparent 50%)",
     icon: Sparkles,
   },
   himchistka: {
@@ -110,7 +110,7 @@ const HERO_THEMES: Record<string, ServiceTheme> = {
   },
   "remont-vmyatin": {
     gradient:
-      "radial-gradient(ellipse at 45% 35%, rgba(200,169,126,0.08) 0%, transparent 55%)",
+      "radial-gradient(ellipse at 45% 35%, rgba(212,184,48,0.08) 0%, transparent 55%)",
     icon: Wrench,
   },
   keramika: {

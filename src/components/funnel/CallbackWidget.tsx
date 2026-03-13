@@ -61,7 +61,7 @@ export default function CallbackWidget() {
       <div className="fixed right-4 bottom-24 md:bottom-8 z-[9990]">
         <button
           onClick={openModal}
-          className="relative w-14 h-14 rounded-full bg-gradient-to-br from-accent-gold to-[#B8965E] text-bg flex items-center justify-center shadow-[var(--shadow-glow-gold)] hover:scale-105 transition-transform cursor-pointer group"
+          className="relative w-14 h-14 rounded-full bg-gradient-to-br from-accent-gold to-[#B89E20] text-bg flex items-center justify-center shadow-[var(--shadow-glow-gold)] hover:scale-105 transition-transform cursor-pointer group"
           aria-label="Заказать звонок"
         >
           {/* Pulse ring */}

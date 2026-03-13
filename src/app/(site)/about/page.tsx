@@ -93,7 +93,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="relative aspect-video rounded-[var(--radius-card)] overflow-hidden bg-bg-card border border-border">
               <Image
-                src="/images/studio-1.jpg"
+                src="/images/studio-1.webp"
                 alt="Студия Detailing Place — рабочая зона"
                 fill
                 className="object-cover"
@@ -103,7 +103,7 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-video rounded-[var(--radius-card)] overflow-hidden bg-bg-card border border-border">
               <Image
-                src="/images/studio-2.jpg"
+                src="/images/studio-2.webp"
                 alt="Студия Detailing Place — зона ожидания"
                 fill
                 className="object-cover"

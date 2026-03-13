@@ -12,10 +12,10 @@ interface PhotoComparisonProps {
 }
 
 const DEFAULT_TINT_LEVELS: PhotoComparisonItem[] = [
-  { image: "/images/tonirovka-5.jpg", label: "5% — Лимузинная" },
-  { image: "/images/tonirovka-15.jpg", label: "15% — Тёмная" },
-  { image: "/images/tonirovka-35.jpg", label: "35% — Средняя" },
-  { image: "/images/tonirovka-80.jpg", label: "80% — Атермальная" },
+  { image: "/images/tonirovka-5.webp", label: "5% — Лимузинная" },
+  { image: "/images/tonirovka-15.webp", label: "15% — Тёмная" },
+  { image: "/images/tonirovka-35.webp", label: "35% — Средняя" },
+  { image: "/images/tonirovka-80.webp", label: "80% — Атермальная" },
 ];
 
 export default function PhotoComparison({

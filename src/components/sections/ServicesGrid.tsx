@@ -159,8 +159,8 @@ export default function ServicesGrid({ services, className }: ServicesGridProps)
             const visual = VISUALS[service.slug] || {
               icon: Wrench,
               gradient:
-                "radial-gradient(ellipse at 50% 50%, rgba(200,169,126,0.12) 0%, transparent 70%)",
-              glowColor: "rgba(200,169,126,0.1)",
+                "radial-gradient(ellipse at 50% 50%, rgba(212,184,48,0.12) 0%, transparent 70%)",
+              glowColor: "rgba(212,184,48,0.1)",
             };
             const Icon = visual.icon;
             const isFeatured = !!visual.featured;
@@ -243,7 +243,7 @@ export default function ServicesGrid({ services, className }: ServicesGridProps)
                   <div
                     className="absolute inset-0 rounded-[var(--radius-card)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
-                      boxShadow: `inset 0 1px 0 0 rgba(200,169,126,0.15), 0 0 30px ${visual.glowColor}`,
+                      boxShadow: `inset 0 1px 0 0 rgba(212,184,48,0.15), 0 0 30px ${visual.glowColor}`,
                     }}
                   />
 

@@ -68,7 +68,7 @@ export default function StudioLoadBar({ className }: StudioLoadBarProps) {
             className="h-full rounded-full transition-all duration-1000 relative"
             style={{
               width: `${load}%`,
-              background: "linear-gradient(90deg, #C8A97E 0%, #D45555 100%)",
+              background: "linear-gradient(90deg, #D4B830 0%, #D45555 100%)",
             }}
           >
             {/* Animated glow at the end */}

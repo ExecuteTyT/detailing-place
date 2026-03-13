@@ -40,12 +40,12 @@ const ReviewsCarousel = dynamic(
 );
 
 const HOMEPAGE_WORKS = [
-  { image: "/images/works/ppf-1.jpg", car: "BMW X5", tags: ["PPF", "Полная оклейка"] },
-  { image: "/images/works/polish-1.jpg", car: "Mercedes C-Class", tags: ["Полировка", "Керамика"] },
-  { image: "/images/works/linz-1.jpg", car: "Kia Ceed", tags: ["Bi-LED линзы"] },
-  { image: "/images/works/antihrom-1.jpg", car: "BMW X3", tags: ["Антихром", "Full Black"] },
-  { image: "/images/works/tonirovka-1.jpg", car: "Toyota Camry", tags: ["Тонировка"] },
-  { image: "/images/works/himchistka-1.jpg", car: "Toyota Camry", tags: ["Химчистка"] },
+  { image: "/images/works/ppf-1.webp", car: "BMW X5", tags: ["PPF", "Полная оклейка"] },
+  { image: "/images/works/polish-1.webp", car: "Mercedes C-Class", tags: ["Полировка", "Керамика"] },
+  { image: "/images/works/linz-1.webp", car: "Kia Ceed", tags: ["Bi-LED линзы"] },
+  { image: "/images/works/antihrom-1.webp", car: "BMW X3", tags: ["Антихром", "Full Black"] },
+  { image: "/images/works/tonirovka-1.webp", car: "Toyota Camry", tags: ["Тонировка"] },
+  { image: "/images/works/himchistka-1.webp", car: "Toyota Camry", tags: ["Химчистка"] },
 ];
 
 const HOMEPAGE_SEO = `
@@ -90,7 +90,7 @@ export default function Home() {
                 Оплатим такси до студии
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-display text-text leading-tight">
-                <span className="bg-gradient-to-r from-accent-gold via-[#D4B88E] to-accent-gold bg-clip-text text-transparent">Премиальный</span>{" "}
+                <span className="bg-gradient-to-r from-accent-gold via-[#E0C840] to-accent-gold bg-clip-text text-transparent">Премиальный</span>{" "}
                 детейлинг в Казани
               </h1>
               <p className="mt-4 text-base md:text-lg text-text-secondary max-w-xl leading-relaxed">

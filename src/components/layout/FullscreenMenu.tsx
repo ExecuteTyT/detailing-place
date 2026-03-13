@@ -165,15 +165,13 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
             >
               {/* Header */}
               <motion.div variants={fadeInRight} className="flex items-center justify-between mb-8">
-                <span className="text-lg font-extrabold font-display tracking-tight text-text">
-                  DETAILING
-                  <span
-                    className="text-accent-gold"
-                    style={{ textShadow: "0 0 20px rgba(200,169,126,0.2)" }}
-                  >
-                    {" "}PLACE
-                  </span>
-                </span>
+                <img
+                  src="/images/logo.webp"
+                  alt="Detailing Place"
+                  className="h-9 w-auto"
+                  width={140}
+                  height={36}
+                />
                 <button
                   onClick={onClose}
                   className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-secondary hover:text-text hover:border-text-secondary/50 transition-colors cursor-pointer"

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 
 interface HeroSectionProps {
-  /** Path to hero background image, e.g. "/images/hero/ppf.jpg" */
+  /** Path to hero background image, e.g. "/images/hero/ppf.webp" */
   backgroundImage?: string;
   title: string;
   subtitle?: string;
@@ -78,7 +78,7 @@ export default function HeroSection({
           className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(200,169,126,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,126,0.3) 1px, transparent 1px)",
+              "linear-gradient(rgba(212,184,48,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,184,48,0.3) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />

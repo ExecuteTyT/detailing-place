@@ -55,7 +55,7 @@ export default function SiteLayout({
     },
     openingHours: hours,
     priceRange: "₽₽₽",
-    image: "https://detailingplace.ru/images/studio-1.jpg",
+    image: "https://detailingplace.ru/images/studio-1.webp",
   };
 
   const siteData = {
