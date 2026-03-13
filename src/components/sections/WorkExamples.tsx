@@ -84,7 +84,7 @@ export default function WorkExamples({
                   <p className="font-semibold text-text">{work.car}</p>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {work.tags.map((tag) => (
-                      <Badge key={tag} variant="popular">
+                      <Badge key={tag} variant="tag">
                         {tag}
                       </Badge>
                     ))}
@@ -99,7 +99,7 @@ export default function WorkExamples({
             <SwiperSlide>
               <Link
                 href={moreLink}
-                className="card card-glow-top flex items-center justify-center aspect-video text-accent-gold font-bold text-lg hover:bg-bg-hover hover:shadow-[var(--shadow-glow-gold)] transition-all"
+                className="card flex items-center justify-center aspect-video text-text-secondary font-bold text-lg hover:bg-bg-hover hover:text-text transition-all"
               >
                 Все работы &rarr;
               </Link>

@@ -38,7 +38,7 @@ export default function PortfolioPage() {
             {ALL_TAGS.map((tag) => (
               <button
                 key={tag}
-                className="px-4 py-2 rounded-full text-sm font-semibold border border-border text-text-secondary hover:border-accent-gold hover:text-accent-gold transition-colors min-h-[44px] cursor-pointer first:bg-accent-gold/10 first:border-accent-gold first:text-accent-gold"
+                className="px-4 py-2 rounded-full text-sm font-semibold border border-border text-text-secondary hover:border-text-secondary/50 hover:text-text transition-colors min-h-[44px] cursor-pointer first:bg-bg-hover first:border-text-secondary/50 first:text-text"
               >
                 {tag}
               </button>
@@ -51,7 +51,7 @@ export default function PortfolioPage() {
               <Link
                 key={item.slug}
                 href={`/portfolio/${item.slug}`}
-                className="card block overflow-hidden break-inside-avoid hover:border-accent-gold/50 transition-colors"
+                className="card block overflow-hidden break-inside-avoid hover:border-border transition-colors"
               >
                 <div className={`relative ${i % 3 === 0 ? "aspect-[4/5]" : "aspect-video"}`}>
                   <Image

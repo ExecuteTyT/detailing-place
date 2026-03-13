@@ -125,23 +125,22 @@ export default function ServicePackages({
           {packages.map((pkg, index) => (
             <AnimatedSection key={pkg.name} delay={index * 0.1}>
               <div className="relative">
-                {/* Badge floats ABOVE the card, outside overflow */}
-                {pkg.isPopular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <Badge variant="popular">ХИТ</Badge>
-                  </div>
-                )}
               <div
                 className={cn(
                   "card p-5 md:p-6 flex flex-col relative h-full",
                   pkg.isPopular
-                    ? "border-accent-gold/60 border-2 shadow-[var(--shadow-glow-gold)] card-glow-top"
+                    ? "border-accent-gold/50 border-2 shadow-[var(--shadow-glow-gold)]"
                     : ""
                 )}
               >
-                {/* Popular gradient top bar */}
+                {/* Popular top accent bar + badge */}
                 {pkg.isPopular && (
-                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[var(--radius-card)] bg-gradient-to-r from-accent-gold to-accent-gold/40" />
+                  <>
+                    <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[var(--radius-card)] bg-accent-gold" />
+                    <div className="flex justify-start mb-3">
+                      <Badge variant="popular">ХИТ</Badge>
+                    </div>
+                  </>
                 )}
 
                 <h3 className="text-lg font-bold font-display text-text">
