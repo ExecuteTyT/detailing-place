@@ -171,7 +171,7 @@ export default function Header() {
             <img
               src="/images/logo.webp"
               alt="Detailing Place"
-              className="h-9 md:h-11 w-auto"
+              className="h-10 md:h-12 w-auto"
               width={160}
               height={44}
             />

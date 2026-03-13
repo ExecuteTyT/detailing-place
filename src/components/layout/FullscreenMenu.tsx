@@ -168,7 +168,7 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
                 <img
                   src="/images/logo.webp"
                   alt="Detailing Place"
-                  className="h-9 w-auto"
+                  className="h-10 w-auto"
                   width={140}
                   height={36}
                 />
