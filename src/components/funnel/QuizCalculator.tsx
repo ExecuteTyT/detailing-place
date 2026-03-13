@@ -182,7 +182,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                 s <= step
                   ? {
                       background:
-                        "linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-cyan))",
+                        "linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-gold))",
                     }
                   : undefined
               }
@@ -219,12 +219,12 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                     className={cn(
                       "card p-4 flex flex-col items-center gap-2 min-h-[44px] cursor-pointer transition-all",
                       carClass === opt.value
-                        ? "border-accent-cyan bg-accent-cyan/5 shadow-[var(--shadow-glow-cyan)]"
-                        : "hover:border-accent-cyan/50 hover:bg-bg-hover"
+                        ? "border-accent-gold bg-accent-gold/5 shadow-[var(--shadow-glow-gold)]"
+                        : "hover:border-accent-gold/50 hover:bg-bg-hover"
                     )}
                   >
-                    <div className="w-10 h-10 rounded-xl bg-accent-cyan/10 flex items-center justify-center">
-                      <Icon size={24} className="text-accent-cyan" />
+                    <div className="w-10 h-10 rounded-xl bg-accent-gold/10 flex items-center justify-center">
+                      <Icon size={24} className="text-accent-gold" />
                     </div>
                     <span className="text-sm font-semibold text-text">
                       {opt.label}
@@ -257,15 +257,15 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                   className={cn(
                     "w-full flex items-center gap-3 p-3 rounded-[var(--radius-button)] border text-left min-h-[44px] cursor-pointer transition-all",
                     services.includes(cat)
-                      ? "border-accent-cyan bg-accent-cyan/5 shadow-sm"
-                      : "border-border hover:border-accent-cyan/50 hover:bg-bg-hover"
+                      ? "border-accent-gold bg-accent-gold/5 shadow-sm"
+                      : "border-border hover:border-accent-gold/50 hover:bg-bg-hover"
                   )}
                 >
                   <div
                     className={cn(
                       "w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 transition-colors",
                       services.includes(cat)
-                        ? "bg-accent-cyan"
+                        ? "bg-accent-gold"
                         : "border border-border"
                     )}
                   >
@@ -336,8 +336,8 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                   className={cn(
                     "w-full p-4 rounded-[var(--radius-button)] border text-left min-h-[44px] cursor-pointer transition-all font-semibold text-text",
                     urgency === opt.value
-                      ? "border-accent-cyan bg-accent-cyan/5 shadow-sm"
-                      : "border-border hover:border-accent-cyan/50 hover:bg-bg-hover"
+                      ? "border-accent-gold bg-accent-gold/5 shadow-sm"
+                      : "border-border hover:border-accent-gold/50 hover:bg-bg-hover"
                   )}
                 >
                   {opt.label}
@@ -384,7 +384,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required
-                className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30"
+                className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
               />
               <input
                 type="text"
@@ -392,7 +392,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                 placeholder="Ваше имя"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30"
+                className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
               />
               <Button
                 type="submit"

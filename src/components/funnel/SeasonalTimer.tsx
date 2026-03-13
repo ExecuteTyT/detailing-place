@@ -91,7 +91,7 @@ export default function SeasonalTimer({ className }: SeasonalTimerProps) {
   return (
     <div className={cn("relative z-20 bg-[#0C0B09] border-b border-[#2A2723]", className)}>
       {/* Refined subtle gradient backing */}
-      <div className="absolute inset-0 bg-gradient-to-r from-accent-gold/5 via-transparent to-accent-cyan/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-accent-gold/5 via-transparent to-accent-gold/5 pointer-events-none" />
 
       <div className="container-main relative z-10 py-3 sm:py-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">

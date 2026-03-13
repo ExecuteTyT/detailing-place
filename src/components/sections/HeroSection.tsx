@@ -87,7 +87,7 @@ export default function HeroSection({
       {/* Decorative glows — only when no photo */}
       {!hasPhoto && (
         <>
-          <div className="absolute top-1/3 -left-24 w-72 h-72 bg-accent-cyan/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/3 -left-24 w-72 h-72 bg-accent-gold/5 rounded-full blur-3xl" />
           <div className="absolute bottom-1/3 -right-24 w-72 h-72 bg-accent-gold/3 rounded-full blur-3xl" />
         </>
       )}

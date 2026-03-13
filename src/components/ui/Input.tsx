@@ -58,7 +58,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             "w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg-card border border-border px-4 py-3",
             "text-text text-[16px] placeholder:text-text-secondary/50",
             "outline-none transition-colors duration-200",
-            "focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30",
+            "focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30",
             error && "border-accent-red focus:border-accent-red focus:ring-accent-red/30",
             className
           )}

@@ -21,7 +21,7 @@ interface ReviewsCarouselProps {
 }
 
 const AVATAR_COLORS = [
-  "bg-accent-cyan/20 text-accent-cyan",
+  "bg-accent-gold/20 text-accent-gold",
   "bg-accent-gold/20 text-accent-gold",
   "bg-accent-whatsapp/20 text-accent-whatsapp",
   "bg-purple-500/20 text-purple-400",

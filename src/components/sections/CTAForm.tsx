@@ -84,7 +84,7 @@ export default function CTAForm({
         {/* Decorative glows for section variant */}
         {variant === "section" && (
           <>
-            <div className="absolute top-1/2 -left-24 w-64 h-64 bg-accent-cyan/5 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 -left-24 w-64 h-64 bg-accent-gold/5 rounded-full blur-3xl" />
             <div className="absolute top-1/2 -right-24 w-64 h-64 bg-accent-gold/5 rounded-full blur-3xl" />
           </>
         )}
@@ -124,7 +124,7 @@ export default function CTAForm({
                   "w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg-card border border-border px-4 py-3",
                   "text-text text-[16px] placeholder:text-text-secondary/50",
                   "outline-none transition-colors",
-                  "focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30",
+                  "focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30",
                   errors.phone && "border-accent-red"
                 )}
                 {...register("phone", {
@@ -146,7 +146,7 @@ export default function CTAForm({
                 className={cn(
                   "w-full min-h-[44px] appearance-none select-custom rounded-[var(--radius-button)] bg-bg-card border border-border px-4 py-3",
                   "text-text text-[16px] outline-none transition-colors cursor-pointer",
-                  "focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30"
+                  "focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
                 )}
                 defaultValue=""
                 {...register("carClass")}

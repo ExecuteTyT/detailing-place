@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <p className="mt-2 text-sm text-text-secondary">Detailing Place • 2026</p>
 
           {/* Article content placeholder */}
-          <div className="mt-8 prose prose-invert prose-sm md:prose-base max-w-none prose-headings:font-display prose-p:text-text-secondary prose-a:text-accent-cyan">
+          <div className="mt-8 prose prose-invert prose-sm md:prose-base max-w-none prose-headings:font-display prose-p:text-text-secondary prose-a:text-accent-gold">
             <p>
               Эта статья скоро будет дополнена подробным содержанием.
               Следите за обновлениями блога Detailing Place.

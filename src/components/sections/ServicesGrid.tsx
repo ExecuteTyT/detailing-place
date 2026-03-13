@@ -2,24 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  Shield,
-  Sparkles,
-  Droplets,
-  Sun,
-  Volume2,
-  PaintBucket,
-  Lightbulb,
-  SlidersHorizontal,
-  CircleDot,
-  GlassWater,
-  CloudRain,
-  Globe,
-  Wrench,
-  ArrowUpRight,
-  ChevronDown,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import type { HomepageService } from "@/lib/types";
 import Badge from "@/components/ui/Badge";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -28,100 +11,13 @@ import Button from "@/components/ui/Button";
 
 /* ───────── Visual config per service ───────── */
 
-interface ServiceVisual {
-  icon: LucideIcon;
-  /** CSS radial-gradient for the card background */
-  gradient: string;
-  /** RGBA for the glow effect on hover */
-  glowColor: string;
-  /** If true, spans 2 columns in lg grid */
-  featured?: boolean;
-}
-
-const VISUALS: Record<string, ServiceVisual> = {
-  ppf: {
-    icon: Shield,
-    gradient:
-      "radial-gradient(ellipse at 25% 30%, rgba(59,130,246,0.22) 0%, rgba(67,56,202,0.08) 40%, transparent 70%)",
-    glowColor: "rgba(59,130,246,0.15)",
-    featured: true,
-  },
-  polirovka: {
-    icon: Sparkles,
-    gradient:
-      "radial-gradient(ellipse at 70% 25%, rgba(245,158,11,0.2) 0%, rgba(217,119,6,0.07) 40%, transparent 70%)",
-    glowColor: "rgba(245,158,11,0.15)",
-  },
-  himchistka: {
-    icon: Droplets,
-    gradient:
-      "radial-gradient(ellipse at 30% 60%, rgba(20,184,166,0.2) 0%, rgba(6,148,162,0.07) 40%, transparent 70%)",
-    glowColor: "rgba(20,184,166,0.15)",
-  },
-  shumoizolyaciya: {
-    icon: Volume2,
-    gradient:
-      "radial-gradient(ellipse at 60% 35%, rgba(139,92,246,0.2) 0%, rgba(109,40,217,0.07) 40%, transparent 70%)",
-    glowColor: "rgba(139,92,246,0.15)",
-  },
-  antihrom: {
-    icon: PaintBucket,
-    gradient:
-      "radial-gradient(ellipse at 50% 25%, rgba(161,161,170,0.14) 0%, rgba(82,82,91,0.05) 40%, transparent 70%)",
-    glowColor: "rgba(161,161,170,0.12)",
-  },
-  tonirovka: {
-    icon: Sun,
-    gradient:
-      "radial-gradient(ellipse at 75% 20%, rgba(249,115,22,0.2) 0%, rgba(234,88,12,0.07) 40%, transparent 70%)",
-    glowColor: "rgba(249,115,22,0.15)",
-    featured: true,
-  },
-  "ustanovka-linz": {
-    icon: Lightbulb,
-    gradient:
-      "radial-gradient(ellipse at 45% 20%, rgba(250,204,21,0.2) 0%, rgba(234,179,8,0.07) 40%, transparent 70%)",
-    glowColor: "rgba(250,204,21,0.15)",
-    featured: true,
-  },
-  "regulirovka-far": {
-    icon: SlidersHorizontal,
-    gradient:
-      "radial-gradient(ellipse at 40% 50%, rgba(100,116,139,0.14) 0%, rgba(71,85,105,0.05) 40%, transparent 70%)",
-    glowColor: "rgba(100,116,139,0.12)",
-  },
-  "polirovka-stekol": {
-    icon: CircleDot,
-    gradient:
-      "radial-gradient(ellipse at 30% 35%, rgba(34,211,238,0.2) 0%, rgba(6,182,212,0.07) 40%, transparent 70%)",
-    glowColor: "rgba(34,211,238,0.15)",
-  },
-  "polirovka-far": {
-    icon: CircleDot,
-    gradient:
-      "radial-gradient(ellipse at 60% 40%, rgba(251,191,36,0.16) 0%, rgba(245,158,11,0.06) 40%, transparent 70%)",
-    glowColor: "rgba(251,191,36,0.12)",
-  },
-  antidozhd: {
-    icon: CloudRain,
-    gradient:
-      "radial-gradient(ellipse at 35% 30%, rgba(56,189,248,0.2) 0%, rgba(14,165,233,0.07) 40%, transparent 70%)",
-    glowColor: "rgba(56,189,248,0.15)",
-  },
-  "rusifikaciya-avto": {
-    icon: Globe,
-    gradient:
-      "radial-gradient(ellipse at 70% 50%, rgba(239,68,68,0.16) 0%, rgba(185,28,28,0.06) 40%, transparent 70%)",
-    glowColor: "rgba(239,68,68,0.12)",
-    featured: true,
-  },
-  keramika: {
-    icon: GlassWater,
-    gradient:
-      "radial-gradient(ellipse at 40% 30%, rgba(56,189,248,0.18) 0%, rgba(14,165,233,0.06) 40%, transparent 70%)",
-    glowColor: "rgba(56,189,248,0.12)",
-  },
-};
+/** Services that span 2 columns in lg grid */
+const FEATURED_SLUGS = new Set([
+  "ppf",
+  "tonirovka",
+  "ustanovka-linz",
+  "rusifikaciya-avto",
+]);
 
 /* ───────── Component ───────── */
 
@@ -156,14 +52,7 @@ export default function ServicesGrid({ services, className }: ServicesGridProps)
           style={{ gridAutoFlow: "dense" }}
         >
           {visibleServices.map((service, index) => {
-            const visual = VISUALS[service.slug] || {
-              icon: Wrench,
-              gradient:
-                "radial-gradient(ellipse at 50% 50%, rgba(212,184,48,0.12) 0%, transparent 70%)",
-              glowColor: "rgba(212,184,48,0.1)",
-            };
-            const Icon = visual.icon;
-            const isFeatured = !!visual.featured;
+            const isFeatured = FEATURED_SLUGS.has(service.slug);
 
             return (
               <AnimatedSection
@@ -175,40 +64,22 @@ export default function ServicesGrid({ services, className }: ServicesGridProps)
                   href={service.url}
                   className={cn(
                     "group relative flex flex-col justify-end overflow-hidden",
-                    "rounded-[var(--radius-card)] border border-border/60 bg-bg-card",
+                    "rounded-[var(--radius-card)] border border-border/60",
                     "transition-all duration-300",
                     "hover:border-accent-gold/40 hover:shadow-lg hover:-translate-y-0.5",
                     "h-[220px] sm:h-[240px]"
                   )}
                 >
-                  {/* Service gradient glow */}
-                  <div
-                    className="absolute inset-0 transition-opacity duration-500"
-                    style={{ background: visual.gradient }}
-                  />
-                  {/* Intensified glow layer on hover */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: visual.gradient }}
+                  {/* Service photo */}
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
 
-                  {/* Center icon with glow halo */}
-                  <div className="absolute inset-0 flex items-center justify-center -translate-y-6">
-                    <div className="relative">
-                      <div
-                        className="absolute -inset-10 rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"
-                        style={{ background: visual.glowColor }}
-                      />
-                      <Icon
-                        size={isFeatured ? 56 : 44}
-                        strokeWidth={1.2}
-                        className="relative text-text/30 group-hover:text-text/55 transition-all duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Dark gradient overlay at bottom for text readability */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[65%] bg-gradient-to-t from-bg-card from-20% via-bg-card/85 via-50% to-transparent" />
+                  {/* Dark gradient overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 from-10% via-black/50 via-50% to-black/20" />
 
                   {/* Content */}
                   <div className="relative z-10 p-4 sm:p-5">
@@ -243,7 +114,7 @@ export default function ServicesGrid({ services, className }: ServicesGridProps)
                   <div
                     className="absolute inset-0 rounded-[var(--radius-card)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
-                      boxShadow: `inset 0 1px 0 0 rgba(212,184,48,0.15), 0 0 30px ${visual.glowColor}`,
+                      boxShadow: "inset 0 1px 0 0 rgba(212,184,48,0.15), 0 0 30px rgba(212,184,48,0.1)",
                     }}
                   />
 

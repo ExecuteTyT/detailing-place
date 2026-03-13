@@ -163,7 +163,7 @@ export default function Header() {
         )}
       >
         {/* Bottom accent line */}
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-accent-gold/40 via-accent-cyan/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-accent-gold/40 via-accent-gold/20 to-transparent" />
 
         <div className="container-main flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}

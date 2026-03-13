@@ -58,7 +58,7 @@ export default function SocialProofToast() {
             <div className="flex-1 min-w-0">
               <p className="text-sm text-text">
                 <span className="font-semibold">{item.name}</span> заказал{" "}
-                <span className="text-accent-cyan">{item.service}</span>
+                <span className="text-accent-gold">{item.service}</span>
               </p>
               <p className="text-xs text-text-secondary mt-0.5">
                 {item.car} • {item.minutesAgo} мин назад

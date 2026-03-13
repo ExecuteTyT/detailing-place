@@ -32,7 +32,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
               "w-full min-h-[44px] appearance-none rounded-[var(--radius-button)] bg-bg-card border border-border px-4 py-3 pr-10",
               "text-text text-[16px]",
               "outline-none transition-colors duration-200 cursor-pointer",
-              "focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30",
+              "focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30",
               error && "border-accent-red",
               className
             )}

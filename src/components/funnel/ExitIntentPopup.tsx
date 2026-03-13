@@ -140,7 +140,7 @@ export default function ExitIntentPopup() {
                         placeholder="+7 (___) ___-__-__"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30"
+                        className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
                       />
                       <Button type="submit" variant="primary" className="w-full btn-cta-glow">
                         Получить скидку
@@ -152,8 +152,8 @@ export default function ExitIntentPopup() {
                 {variant === "leadmagnet" && (
                   <>
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-2xl bg-accent-cyan/10 flex items-center justify-center">
-                        <FileText size={28} className="text-accent-cyan" />
+                      <div className="w-12 h-12 rounded-2xl bg-accent-gold/10 flex items-center justify-center">
+                        <FileText size={28} className="text-accent-gold" />
                       </div>
                       <h3 className="text-xl font-bold font-display text-text">Бесплатный чек-лист</h3>
                     </div>
@@ -167,7 +167,7 @@ export default function ExitIntentPopup() {
                         placeholder="WhatsApp номер"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30"
+                        className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
                       />
                       <Button type="submit" variant="primary" className="w-full btn-cta-glow">
                         Получить чек-лист
@@ -179,8 +179,8 @@ export default function ExitIntentPopup() {
                 {variant === "photo" && (
                   <>
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-2xl bg-accent-cyan/10 flex items-center justify-center">
-                        <Camera size={28} className="text-accent-cyan" />
+                      <div className="w-12 h-12 rounded-2xl bg-accent-gold/10 flex items-center justify-center">
+                        <Camera size={28} className="text-accent-gold" />
                       </div>
                       <h3 className="text-xl font-bold font-display text-text">Расчёт по фото</h3>
                     </div>

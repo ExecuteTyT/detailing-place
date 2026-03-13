@@ -145,7 +145,7 @@ export default function CallbackWidget() {
                       placeholder="+7 (___) ___-__-__"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/30"
+                      className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
                     />
                     <Button type="submit" variant="primary" className="w-full btn-cta-glow">
                       Жду звонка

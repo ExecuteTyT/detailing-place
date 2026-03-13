@@ -22,7 +22,7 @@ export default function SEOText({ html, className }: SEOTextProps) {
           className={cn(
             "prose prose-invert prose-sm md:prose-base max-w-none",
             "prose-headings:font-display prose-headings:text-text",
-            "prose-p:text-text-secondary prose-a:text-accent-cyan",
+            "prose-p:text-text-secondary prose-a:text-accent-gold",
             !expanded && needsTruncation && "md:line-clamp-none line-clamp-[4] overflow-hidden"
           )}
           dangerouslySetInnerHTML={{ __html: html }}
@@ -31,7 +31,7 @@ export default function SEOText({ html, className }: SEOTextProps) {
         {needsTruncation && !expanded && (
           <button
             onClick={() => setExpanded(true)}
-            className="mt-3 text-sm text-accent-cyan hover:underline md:hidden cursor-pointer min-h-[44px]"
+            className="mt-3 text-sm text-accent-gold hover:underline md:hidden cursor-pointer min-h-[44px]"
           >
             Читать далее
           </button>

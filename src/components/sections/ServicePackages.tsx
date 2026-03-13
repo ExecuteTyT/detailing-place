@@ -141,7 +141,7 @@ export default function ServicePackages({
               >
                 {/* Popular gradient top bar */}
                 {pkg.isPopular && (
-                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[var(--radius-card)] bg-gradient-to-r from-accent-gold to-accent-cyan/40" />
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[var(--radius-card)] bg-gradient-to-r from-accent-gold to-accent-gold/40" />
                 )}
 
                 <h3 className="text-lg font-bold font-display text-text">
@@ -169,8 +169,8 @@ export default function ServicePackages({
                       key={feature}
                       className="flex items-start gap-2.5 text-sm text-text-secondary"
                     >
-                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-accent-cyan/10 flex items-center justify-center mt-0.5">
-                        <Check size={12} className="text-accent-cyan" />
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-accent-gold/10 flex items-center justify-center mt-0.5">
+                        <Check size={12} className="text-accent-gold" />
                       </div>
                       {feature}
                     </li>

@@ -42,10 +42,10 @@ export default function ContactsPage() {
               <div className="space-y-4 mb-8">
                 <a
                   href={`tel:${PHONE_RAW}`}
-                  className="card p-4 flex items-center gap-4 hover:border-accent-cyan/50 transition-colors"
+                  className="card p-4 flex items-center gap-4 hover:border-accent-gold/50 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-full bg-accent-cyan/10 flex items-center justify-center flex-shrink-0">
-                    <Phone size={20} className="text-accent-cyan" />
+                  <div className="w-10 h-10 rounded-full bg-accent-gold/10 flex items-center justify-center flex-shrink-0">
+                    <Phone size={20} className="text-accent-gold" />
                   </div>
                   <div>
                     <p className="font-bold text-text">{PHONE}</p>
@@ -69,8 +69,8 @@ export default function ContactsPage() {
                 </a>
 
                 <div className="card p-4 flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-accent-cyan/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin size={20} className="text-accent-cyan" />
+                  <div className="w-10 h-10 rounded-full bg-accent-gold/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin size={20} className="text-accent-gold" />
                   </div>
                   <div>
                     <p className="font-bold text-text">{ADDRESS}</p>
@@ -79,8 +79,8 @@ export default function ContactsPage() {
                 </div>
 
                 <div className="card p-4 flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-accent-cyan/10 flex items-center justify-center flex-shrink-0">
-                    <Clock size={20} className="text-accent-cyan" />
+                  <div className="w-10 h-10 rounded-full bg-accent-gold/10 flex items-center justify-center flex-shrink-0">
+                    <Clock size={20} className="text-accent-gold" />
                   </div>
                   <div>
                     <p className="font-bold text-text">{HOURS}</p>

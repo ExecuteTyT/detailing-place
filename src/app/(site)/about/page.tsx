@@ -45,7 +45,7 @@ export default function AboutPage() {
               const Icon = stat.icon;
               return (
                 <div key={stat.label} className="card p-5 text-center">
-                  <Icon size={28} className="mx-auto text-accent-cyan mb-2" />
+                  <Icon size={28} className="mx-auto text-accent-gold mb-2" />
                   <p className="text-2xl font-extrabold font-display text-accent-gold">{stat.value}</p>
                   <p className="text-xs text-text-secondary mt-1">{stat.label}</p>
                 </div>

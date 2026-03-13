@@ -31,7 +31,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-gradient-to-r from-accent-gold to-[#B89E20] text-bg font-bold hover:from-[#E0C840] hover:to-accent-gold active:scale-[0.98]",
   secondary:
-    "border border-accent-cyan text-accent-cyan font-semibold hover:bg-accent-cyan/10",
+    "border border-accent-gold text-accent-gold font-semibold hover:bg-accent-gold/10",
   outline:
     "border border-border/80 text-text font-semibold hover:bg-bg-hover hover:border-accent-gold/40 hover:text-accent-gold",
   whatsapp:

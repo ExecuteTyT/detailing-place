@@ -99,7 +99,7 @@ export default function WorkExamples({
             <SwiperSlide>
               <Link
                 href={moreLink}
-                className="card card-glow-top flex items-center justify-center aspect-video text-accent-cyan font-bold text-lg hover:bg-bg-hover hover:shadow-[var(--shadow-glow-cyan)] transition-all"
+                className="card card-glow-top flex items-center justify-center aspect-video text-accent-gold font-bold text-lg hover:bg-bg-hover hover:shadow-[var(--shadow-glow-gold)] transition-all"
               >
                 Все работы &rarr;
               </Link>

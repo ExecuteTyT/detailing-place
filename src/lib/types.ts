@@ -101,6 +101,7 @@ export interface HomepageService {
   tagline: string;
   price: string;
   isNew: boolean;
+  image: string;
 }
 
 export interface CarClass {

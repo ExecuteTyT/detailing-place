@@ -79,7 +79,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-text-secondary hover:text-accent-cyan transition-colors"
+                    className="text-sm text-text-secondary hover:text-accent-gold transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -95,7 +95,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-text-secondary hover:text-accent-cyan transition-colors"
+                    className="text-sm text-text-secondary hover:text-accent-gold transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -110,7 +110,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`tel:${phoneRaw}`}
-                  className="flex items-center gap-2 text-sm text-text hover:text-accent-cyan transition-colors"
+                  className="flex items-center gap-2 text-sm text-text hover:text-accent-gold transition-colors"
                 >
                   <Phone size={16} className="flex-shrink-0" />
                   {phone}

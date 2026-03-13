@@ -307,6 +307,7 @@ export function getHomepageServices(): HomepageService[] {
       tagline,
       price,
       isNew,
+      image: `/images/hero/${svc.slug}.webp`,
     };
   });
 }

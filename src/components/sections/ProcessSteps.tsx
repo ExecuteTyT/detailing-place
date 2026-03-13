@@ -23,7 +23,7 @@ export default function ProcessSteps({ steps, className }: ProcessStepsProps) {
           <div
             className="absolute top-6 left-[10%] right-[10%] h-0.5"
             style={{
-              background: "linear-gradient(90deg, var(--color-accent-gold) 0%, var(--color-accent-cyan) 100%)",
+              background: "linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-lime))",
               opacity: 0.3,
             }}
           />
@@ -46,7 +46,7 @@ export default function ProcessSteps({ steps, className }: ProcessStepsProps) {
           <div
             className="absolute left-[18px] top-0 bottom-0 w-0.5"
             style={{
-              background: "linear-gradient(180deg, var(--color-accent-cyan) 0%, var(--color-accent-lime) 100%)",
+              background: "linear-gradient(180deg, var(--color-accent-gold) 0%, var(--color-accent-lime) 100%)",
               opacity: 0.2,
             }}
           />

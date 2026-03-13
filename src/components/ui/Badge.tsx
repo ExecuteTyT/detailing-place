@@ -10,7 +10,7 @@ interface BadgeProps {
 
 const variantStyles: Record<BadgeVariant, string> = {
   new: "bg-accent-gold/15 text-accent-gold border-accent-gold/30",
-  popular: "bg-accent-cyan/15 text-accent-cyan border-accent-cyan/30",
+  popular: "bg-accent-gold/15 text-accent-gold border-accent-gold/30",
   discount: "bg-accent-red/15 text-accent-red border-accent-red/30",
 };
 

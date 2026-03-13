@@ -13,7 +13,6 @@
   --color-text: #F5F4F0;
   --color-text-secondary: #9A9590;
 
-  --color-accent-cyan: #7DD3E8;
   --color-accent-gold: #D4B830;
   --color-accent-lime: #D4B830;
   --color-accent-red: #D45555;
@@ -41,7 +40,6 @@
   /* Shadows */
   --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.4);
   --shadow-header: 0 4px 24px rgba(0, 0, 0, 0.5);
-  --shadow-glow-cyan: 0 0 24px rgba(125, 211, 232, 0.1);
   --shadow-glow-gold: 0 0 24px rgba(212, 184, 48, 0.12);
   --shadow-glow-lime: 0 0 24px rgba(212, 184, 48, 0.12);
 
@@ -178,8 +176,8 @@ input, select, textarea {
 }
 
 .btn-secondary {
-  border: 1px solid var(--color-accent-cyan);
-  color: var(--color-accent-cyan);
+  border: 1px solid var(--color-accent-gold);
+  color: var(--color-accent-gold);
   border-radius: var(--radius-button);
   font-weight: 600;
   min-height: 44px;
@@ -190,7 +188,7 @@ input, select, textarea {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(125, 211, 232, 0.08);
+  background-color: rgba(212, 184, 48, 0.08);
 }
 
 .btn-whatsapp {
@@ -281,7 +279,7 @@ input, select, textarea {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--color-accent-gold) 40%, rgba(125, 211, 232, 0.4) 70%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--color-accent-gold) 40%, rgba(212, 184, 48, 0.2) 70%, transparent 100%);
   opacity: 0.4;
 }
 
@@ -301,7 +299,7 @@ input, select, textarea {
 .cta-section-bg {
   background:
     radial-gradient(ellipse at 20% 50%, rgba(212, 184, 48, 0.04) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(125, 211, 232, 0.02) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(212, 184, 48, 0.02) 0%, transparent 60%),
     linear-gradient(to bottom, var(--color-bg), var(--color-bg-gradient-end));
 }
 
