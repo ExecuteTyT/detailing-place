@@ -52,13 +52,15 @@ export default function Footer() {
         <div className="md:grid md:grid-cols-4 md:gap-8">
           {/* Column 1: Logo + Offer */}
           <div className="pb-6 md:pb-0">
-            <img
-              src="/images/logo.webp"
-              alt="Detailing Place"
-              className="h-10 w-auto"
-              width={140}
-              height={36}
-            />
+            <Link href="/">
+              <img
+                src="/images/logo.webp"
+                alt="Detailing Place"
+                className="h-10 w-auto"
+                width={140}
+                height={36}
+              />
+            </Link>
             <p className="mt-3 text-sm text-text-secondary leading-relaxed">
               Премиальный детейлинг в Казани. Защита, красота, комфорт вашего автомобиля.
             </p>

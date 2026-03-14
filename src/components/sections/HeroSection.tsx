@@ -52,7 +52,7 @@ export default function HeroSection({
         className="absolute inset-0"
         style={{
           background: hasPhoto
-            ? "linear-gradient(to bottom, rgba(12,11,9,0.35) 0%, rgba(12,11,9,0.7) 50%, rgba(12,11,9,0.92) 100%)"
+            ? "linear-gradient(to bottom, rgba(12,11,9,0.30) 0%, rgba(12,11,9,0.55) 50%, rgba(12,11,9,0.82) 100%)"
             : "linear-gradient(to bottom, rgba(12,11,9,0.6) 0%, rgba(12,11,9,0.92) 100%)",
         }}
       />

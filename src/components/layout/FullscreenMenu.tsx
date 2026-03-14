@@ -165,13 +165,15 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
             >
               {/* Header */}
               <motion.div variants={fadeInRight} className="flex items-center justify-between mb-8">
-                <img
-                  src="/images/logo.webp"
-                  alt="Detailing Place"
-                  className="h-10 w-auto"
-                  width={140}
-                  height={36}
-                />
+                <Link href="/" onClick={onClose}>
+                  <img
+                    src="/images/logo.webp"
+                    alt="Detailing Place"
+                    className="h-10 w-auto"
+                    width={140}
+                    height={36}
+                  />
+                </Link>
                 <button
                   onClick={onClose}
                   className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-secondary hover:text-text hover:border-text-secondary/50 transition-colors cursor-pointer"
