@@ -29,7 +29,7 @@ export default function HeroBackground({ src, alt }: HeroBackgroundProps) {
       alt={alt}
       fill
       priority
-      className="object-cover object-[center_35%] md:object-center"
+      className="object-cover object-[65%_40%] md:object-[center_60%]"
       sizes="100vw"
       onError={() => setError(true)}
     />
