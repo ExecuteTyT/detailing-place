@@ -70,20 +70,20 @@ export default function Home() {
         {/* Background layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-bg via-bg-card to-bg-gradient-end" />
         <HeroBackground src="/images/hero/home.webp" alt="Detailing Place — студия премиального детейлинга в Казани" />
-        {/* Mobile overlay — stronger: text starts earlier, hide wall */}
+        {/* Mobile overlay — photo is dark, light touch needed */}
         <div
           className="absolute inset-0 md:hidden"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(12,11,9,0.40) 0%, rgba(12,11,9,0.25) 15%, rgba(12,11,9,0.70) 40%, rgba(12,11,9,0.95) 60%, rgba(12,11,9,0.98) 100%)",
+              "linear-gradient(to bottom, rgba(12,11,9,0.15) 0%, rgba(12,11,9,0.10) 20%, rgba(12,11,9,0.50) 45%, rgba(12,11,9,0.88) 65%, rgba(12,11,9,0.95) 100%)",
           }}
         />
-        {/* Desktop overlay — lighter center to show car, dark bottom for text */}
+        {/* Desktop overlay — minimal, photo handles darkness naturally */}
         <div
           className="absolute inset-0 hidden md:block"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(12,11,9,0.40) 0%, rgba(12,11,9,0.15) 20%, rgba(12,11,9,0.50) 50%, rgba(12,11,9,0.92) 72%, rgba(12,11,9,0.98) 100%)",
+              "linear-gradient(to bottom, rgba(12,11,9,0.10) 0%, rgba(12,11,9,0.05) 25%, rgba(12,11,9,0.30) 55%, rgba(12,11,9,0.85) 75%, rgba(12,11,9,0.95) 100%)",
           }}
         />
 
