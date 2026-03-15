@@ -110,7 +110,7 @@ export default function ReviewsCarousel({ reviews, className }: ReviewsCarouselP
           <Button
             variant="secondary"
             size="md"
-            href="https://yandex.ru/maps/"
+            href="https://yandex.ru/maps/org/detailing_place/49387442667/"
             target="_blank"
             rel="noopener noreferrer"
           >

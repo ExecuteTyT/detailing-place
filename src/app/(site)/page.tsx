@@ -69,7 +69,7 @@ export default function Home() {
       <section className="relative min-h-[60vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-bg via-bg-card to-bg-gradient-end" />
-        <HeroBackground src="/images/hero/home.webp" alt="Detailing Place — студия премиального детейлинга в Казани" />
+        <HeroBackground src="/images/hero/home.jpg" alt="Detailing Place — студия премиального детейлинга в Казани" />
         {/* Mobile overlay — photo is dark, light touch needed */}
         <div
           className="absolute inset-0 md:hidden"
