@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getPortfolioItemBySlug } from "@/lib/db/queries/content";
 import CTAForm from "@/components/sections/CTAForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import PortfolioGallery from "./PortfolioGallery";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -67,27 +67,8 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Gallery */}
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {item.gallery.map((img, i) => (
-              <div
-                key={i}
-                className={`relative overflow-hidden rounded-[var(--radius-card)] border border-border ${
-                  i === 0 ? "sm:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
-                }`}
-              >
-                <Image
-                  src={img}
-                  alt={`${item.car} — фото ${i + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes={i === 0 ? "(max-width: 768px) 100vw, 1200px" : "(max-width: 640px) 100vw, 50vw"}
-                  priority={i === 0}
-                  loading={i === 0 ? "eager" : "lazy"}
-                />
-              </div>
-            ))}
-          </div>
+          {/* Gallery with lightbox */}
+          <PortfolioGallery images={item.gallery} car={item.car} />
         </div>
       </section>
 
