@@ -141,11 +141,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: service.title,
       description: service.subtitle,
-      url: `https://detailingplace.ru${service.url}`,
+      url: `https://dpkzn.ru${service.url}`,
       type: "website",
     },
     alternates: {
-      canonical: `https://detailingplace.ru${service.url}`,
+      canonical: `https://dpkzn.ru${service.url}`,
     },
   };
 }
@@ -165,7 +165,7 @@ export default async function ServicePage({ params }: PageProps) {
     provider: {
       "@type": "LocalBusiness",
       name: "Detailing Place",
-      "@id": "https://detailingplace.ru/#organization",
+      "@id": "https://dpkzn.ru/#organization",
     },
     areaServed: "Казань",
     offers: service.packages.length > 0

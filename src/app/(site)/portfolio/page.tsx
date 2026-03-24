@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Портфолио работ — детейлинг в Казани | Detailing Place",
     description: "Примеры наших работ: антигравийная плёнка, полировка, керамика, тонировка, Bi-LED линзы. Фото до и после.",
-    url: "https://detailingplace.ru/portfolio",
+    url: "https://dpkzn.ru/portfolio",
   },
-  alternates: { canonical: "https://detailingplace.ru/portfolio" },
+  alternates: { canonical: "https://dpkzn.ru/portfolio" },
 };
 
 export default function PortfolioPage() {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { getHomepageServices } from "@/lib/db/queries/services";
-import { getTrustBadges, getPartnerBrands } from "@/lib/db/queries/settings";
+import { getTrustBadges } from "@/lib/db/queries/settings";
 import { getVisibleReviews } from "@/lib/db/queries/content";
 import TrustBadges from "@/components/sections/TrustBadges";
 
@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     title: "Детейлинг в Казани — Премиум автодетейлинг | Detailing Place",
     description:
       "Антигравийная плёнка, полировка, керамика, тонировка, шумоизоляция, Bi-LED линзы. Премиальный детейлинг в Казани.",
-    url: "https://detailingplace.ru",
+    url: "https://dpkzn.ru",
   },
   alternates: {
-    canonical: "https://detailingplace.ru",
+    canonical: "https://dpkzn.ru",
   },
 };
 import ServicesGrid from "@/components/sections/ServicesGrid";
@@ -40,24 +40,23 @@ const ReviewsCarousel = dynamic(
 );
 
 const HOMEPAGE_WORKS = [
-  { image: "/images/works/ppf-1.webp", car: "BMW X5", tags: ["PPF", "Полная оклейка"] },
-  { image: "/images/works/polish-1.webp", car: "Mercedes C-Class", tags: ["Полировка", "Керамика"] },
-  { image: "/images/works/linz-1.webp", car: "Kia Ceed", tags: ["Bi-LED линзы"] },
-  { image: "/images/works/antihrom-1.webp", car: "BMW X3", tags: ["Антихром", "Full Black"] },
-  { image: "/images/works/tonirovka-1.webp", car: "Toyota Camry", tags: ["Тонировка"] },
-  { image: "/images/works/himchistka-1.webp", car: "Toyota Camry", tags: ["Химчистка"] },
+  { image: "/images/works/IMG_4975.webp", car: "Lamborghini Urus", tags: ["PPF", "Детейлинг"] },
+  { image: "/images/works/IMG_3857.webp", car: "Rolls-Royce Cullinan", tags: ["PPF", "Премиум"] },
+  { image: "/images/works/IMG_4450.webp", car: "Porsche Cayenne", tags: ["Полировка", "Керамика"] },
+  { image: "/images/works/IMG_0941.webp", car: "BMW 420d", tags: ["Полировка", "Глянец"] },
+  { image: "/images/works/IMG_8627.webp", car: "Mercedes-Benz GLA", tags: ["Полировка", "Финиш"] },
+  { image: "/images/works/IMG_9045.webp", car: "Porsche Cayenne Coupe", tags: ["PPF", "Керамика"] },
 ];
 
 const HOMEPAGE_SEO = `
 <h2>Детейлинг студия в Казани — Detailing Place</h2>
 <p>Detailing Place — студия премиального автодетейлинга в Казани. Мы специализируемся на защите, уходе и тюнинге автомобилей: антигравийная плёнка (PPF), полировка и керамическое покрытие, тонировка, шумоизоляция, установка Bi-LED линз, химчистка салона и многое другое.</p>
-<p>Работаем с премиальными материалами LLumar, SunTek, Koch Chemie, Ceramic Pro, Comfort Mat. Охраняемый бокс с видеонаблюдением. Фотоотчёты каждого этапа. Гарантия на все работы.</p>
+<p>Работаем с премиальными материалами. Охраняемый бокс с видеонаблюдением. Фотоотчёты каждого этапа. Гарантия на все работы.</p>
 `;
 
 export default function Home() {
   const homepageServices = getHomepageServices();
   const trustBadges = getTrustBadges();
-  const partnerBrands = getPartnerBrands();
   const reviews = getVisibleReviews();
 
   return (
@@ -69,7 +68,7 @@ export default function Home() {
       <section className="relative min-h-[60vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-bg via-bg-card to-bg-gradient-end" />
-        <HeroBackground src="/images/hero/home.jpg" alt="Detailing Place — студия премиального детейлинга в Казани" />
+        <HeroBackground src="/images/hero/home.webp" alt="Detailing Place — студия премиального детейлинга в Казани" />
         {/* Mobile overlay — photo is dark, light touch needed */}
         <div
           className="absolute inset-0 md:hidden"
@@ -96,7 +95,7 @@ export default function Home() {
                   <span className="absolute inline-flex h-full w-full rounded-full bg-accent-gold opacity-75 animate-pulse-ring" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-gold" />
                 </span>
-                Оплатим такси до студии
+                Оплатим дорогу до дома
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-display text-text leading-tight">
                 <span className="bg-gradient-to-r from-accent-gold via-[#E0C840] to-accent-gold bg-clip-text text-transparent">Премиальный</span>{" "}
@@ -111,7 +110,7 @@ export default function Home() {
         </div>
       </section>
 
-      <TrustBadges badges={trustBadges} brands={partnerBrands} />
+      <TrustBadges badges={trustBadges} />
 
       <ServicesGrid services={homepageServices} />
 
@@ -125,7 +124,7 @@ export default function Home() {
         <CTAForm
           variant="section"
           title="Рассчитайте стоимость за 15 минут"
-          subtitle="Оплатим такси при заказе комплекса услуг"
+          subtitle="Оплатим дорогу до дома при заказе комплекса"
         />
       </div>
 

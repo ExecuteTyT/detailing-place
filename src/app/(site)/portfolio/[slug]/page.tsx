@@ -20,10 +20,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${title} — Портфолио | Detailing Place`,
       description: `Детейлинг ${title} в Казани. Фото работы до и после.`,
-      url: `https://detailingplace.ru/portfolio/${slug}`,
+      url: `https://dpkzn.ru/portfolio/${slug}`,
     },
     alternates: {
-      canonical: `https://detailingplace.ru/portfolio/${slug}`,
+      canonical: `https://dpkzn.ru/portfolio/${slug}`,
     },
   };
 }

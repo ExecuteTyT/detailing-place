@@ -158,15 +158,15 @@ const SERVICES_DATA: SeedService[] = [
     slug: "ppf",
     title: "Антигравийная плёнка на авто в Казани — цены, оклейка кузова | Detailing Place",
     h1: "Антигравийная плёнка на автомобиль в Казани",
-    subtitle: "Полиуретановая защита кузова от сколов, царапин и реагентов. Режем лекала на плоттере — без ножей на кузове",
-    badge: "Режем на плоттере. Без ножей на кузове",
+    subtitle: "Полиуретановая защита кузова от сколов, царапин и реагентов. Без ножей на кузове",
+    badge: "Без ножей на кузове",
     keywords: ["антигравийная плёнка казань", "оклейка плёнкой казань", "защита кузова плёнкой", "ppf казань цена", "бронирование кузова казань"],
     packages: [
       {
         name: "КОМПЛЕКС 1",
         description: "Капот, фары, крылья, стойки, крыша (перед), ручки, пороги",
         classPrices: ["50 000₽", "55 000₽", "60 000₽", "65 000₽", null],
-        features: ["Капот + фары + крылья", "Передние стойки + перед крыши", "Зона ручек + пороги", "Плоттерная нарезка"],
+        features: ["Капот + фары + крылья", "Передние стойки + перед крыши", "Зона ручек + пороги", "Точная нарезка"],
       },
       {
         name: "КОМПЛЕКС 2",
@@ -179,7 +179,7 @@ const SERVICES_DATA: SeedService[] = [
         name: "ПОЛНАЯ ОКЛЕЙКА",
         description: "Весь кузов",
         classPrices: ["от 180 000₽"],
-        features: ["100% кузова", "Самозатягивание царапин", "Плоттерная нарезка", "Гарантия"],
+        features: ["100% кузова", "Самозатягивание царапин", "Точная нарезка", "Гарантия"],
       },
     ],
     elementPrices: [
@@ -198,13 +198,13 @@ const SERVICES_DATA: SeedService[] = [
     process: [
       { title: "Приёмка", description: "Осмотр, замер толщины ЛКП, фиксация дефектов" },
       { title: "Подготовка", description: "Мойка, деконтаминация, сушка" },
-      { title: "Раскрой", description: "Нарезка лекал на плоттере, без ножей на кузове" },
+      { title: "Раскрой", description: "Нарезка плёнки по форме кузова, без ножей" },
       { title: "Оклейка", description: "Нанесение с прогревом и выгонкой воды, заводка за края" },
       { title: "Контроль", description: "Осмотр под малярным светом, фотоотчёт" },
     ],
     faq: [
-      { question: "Порежете ли вы лак ножом?", answer: "Нет. Режем на плоттере заранее. Нож не касается кузова." },
-      { question: "Какую плёнку используете?", answer: "LLumar PPF, SunTek PPF — самозатягивание царапин." },
+      { question: "Порежете ли вы лак ножом?", answer: "Нет. Плёнка нарезается заранее. Нож не касается кузова." },
+      { question: "Какую плёнку используете?", answer: "Премиальные полиуретановые плёнки с самозатягиванием царапин." },
       { question: "Сколько стоит полная оклейка?", answer: "От 150 000₽. Рассчитаем за 15 минут по фото." },
       { question: "Как долго служит?", answer: "Гарантия 5-10 лет. Реально до 12 лет." },
     ],
@@ -217,15 +217,15 @@ const SERVICES_DATA: SeedService[] = [
     beforeAfter: {
       before: "/images/ppf-before.webp",
       after: "/images/ppf-after.webp",
-      beforeLabel: "47 сколов на бампере BMW",
-      afterLabel: "После оклейки PPF LLumar",
+      beforeLabel: "До: сколы и повреждения ЛКП",
+      afterLabel: "После оклейки PPF",
     },
     works: [
       { image: "/images/works/ppf-1.webp", car: "BMW X5", tags: ["PPF", "Полная оклейка"] },
       { image: "/images/works/ppf-2.webp", car: "Mercedes GLE", tags: ["PPF", "Фронт"] },
       { image: "/images/works/ppf-3.webp", car: "Porsche Cayenne", tags: ["PPF", "Зоны риска"] },
     ],
-    seoText: "<h2>Антигравийная плёнка (PPF) в Казани</h2><p>Защитная антигравийная плёнка — это полиуретановое покрытие толщиной 150-200 микрон, которое защищает лакокрасочное покрытие автомобиля от сколов, царапин, песка и химических реагентов. В студии Detailing Place мы используем премиальные плёнки LLumar и SunTek с функцией самозатягивания мелких царапин.</p><p>Все лекала нарезаются на плоттере — нож не касается кузова вашего автомобиля. Это исключает риск повреждения заводского ЛКП. Гарантия на работы — от 5 до 10 лет в зависимости от выбранного пакета.</p>",
+    seoText: "<h2>Антигравийная плёнка (PPF) в Казани</h2><p>Защитная антигравийная плёнка — это полиуретановое покрытие толщиной 150-200 микрон, которое защищает лакокрасочное покрытие автомобиля от сколов, царапин, песка и химических реагентов. Используем премиальные плёнки с функцией самозатягивания мелких царапин.</p><p>Плёнка нарезается точно под форму вашего автомобиля — нож не касается кузова. Это исключает риск повреждения заводского ЛКП. Гарантия на работы — от 5 до 10 лет в зависимости от выбранного пакета.</p>",
     hasBeforeAfter: true,
     showOnHomepage: true,
   },
@@ -452,7 +452,7 @@ const SERVICES_DATA: SeedService[] = [
     ],
     process: [
       { title: "Подготовка", description: "Мойка и очистка стёкол" },
-      { title: "Раскрой", description: "Нарезка плёнки по лекалам" },
+      { title: "Раскрой", description: "Нарезка плёнки по размеру" },
       { title: "Нанесение", description: "Тонировка с выгонкой воздуха" },
       { title: "Контроль", description: "Проверка качества, замер светопропускания" },
     ],
@@ -1189,7 +1189,7 @@ console.log(`Trust badges: ${TRUST_BADGES_DATA.length}`);
 
 // ── 9. Partner Brands ──
 
-const PARTNER_BRANDS_DATA = ["LLumar", "SunTek", "Koch Chemie", "Ceramic Pro", "Comfort Mat", "STP"];
+const PARTNER_BRANDS_DATA: string[] = [];
 
 for (let i = 0; i < PARTNER_BRANDS_DATA.length; i++) {
   db.insert(partnerBrands).values({ name: PARTNER_BRANDS_DATA[i], sortOrder: i }).run();
@@ -1255,8 +1255,8 @@ console.log("Seasonal offer: 1");
 const BLOG_POSTS_DATA = [
   {
     slug: "kak-vybrat-ppf-plenku",
-    title: "Как выбрать антигравийную плёнку: LLumar vs SunTek",
-    excerpt: "Сравниваем два топовых бренда PPF-плёнок по ключевым параметрам: толщина, самозатягивание, гарантия, цена.",
+    title: "Как выбрать антигравийную плёнку: на что обратить внимание",
+    excerpt: "Разбираемся в ключевых параметрах PPF-плёнок: толщина, самозатягивание, гарантия, цена. Что важно при выборе.",
     image: "/images/blog/ppf-guide.webp",
     category: "Защита кузова",
     date: "2026-02-15",
@@ -1320,7 +1320,7 @@ const REVIEWS_DATA = [
   {
     author: "Ильнар М.",
     rating: 5,
-    text: "Оклеили весь перёд плёнкой LLumar. Прошло полгода — ни одного скола. Рекомендую.",
+    text: "Оклеили весь перёд антигравийной плёнкой. Прошло полгода — ни одного скола. Рекомендую.",
     car: "BMW X5",
   },
   {
@@ -1387,18 +1387,18 @@ console.log(`Stats: ${STATS_DATA.length}`);
 // ── 17. Portfolio works (standalone, not linked to a service) ──
 
 const PORTFOLIO_DATA = [
-  { slug: "bmw-x5-ppf", car: "BMW X5", serviceName: "Оклейка PPF — Полный фронт", image: "/images/works/ppf-1.webp", tags: ["PPF"] },
-  { slug: "mercedes-gle-ppf", car: "Mercedes GLE", serviceName: "PPF + Керамика", image: "/images/works/ppf-2.webp", tags: ["PPF", "Керамика"] },
-  { slug: "porsche-cayenne-ppf", car: "Porsche Cayenne", serviceName: "PPF зоны риска", image: "/images/works/ppf-3.webp", tags: ["PPF"] },
-  { slug: "mercedes-c-polish", car: "Mercedes C-Class", serviceName: "Полировка + Керамика", image: "/images/works/polish-1.webp", tags: ["Полировка"] },
-  { slug: "bmw-5-polish", car: "BMW 5 Series", serviceName: "Exhibition полировка", image: "/images/works/polish-2.webp", tags: ["Полировка"] },
-  { slug: "kia-ceed-linz", car: "Kia Ceed", serviceName: "Установка Bi-LED линз", image: "/images/works/linz-1.webp", tags: ["Bi-LED"] },
-  { slug: "hyundai-solaris-linz", car: "Hyundai Solaris", serviceName: "Bi-LED Premium", image: "/images/works/linz-2.webp", tags: ["Bi-LED"] },
-  { slug: "bmw-x3-antihrom", car: "BMW X3", serviceName: "Антихром Full Black", image: "/images/works/antihrom-1.webp", tags: ["Антихром"] },
-  { slug: "toyota-camry-tonirovka", car: "Toyota Camry", serviceName: "Тонировка полный круг", image: "/images/works/tonirovka-1.webp", tags: ["Тонировка"] },
-  { slug: "toyota-camry-himchistka", car: "Toyota Camry", serviceName: "Химчистка STANDARD", image: "/images/works/himchistka-1.webp", tags: ["Химчистка"] },
-  { slug: "zeekr-001-ceramica", car: "Zeekr 001", serviceName: "Керамика 9H", image: "/images/works/polish-1.webp", tags: ["Керамика"] },
-  { slug: "haval-jolion-rusifikaciya", car: "Haval Jolion", serviceName: "Русификация + навигация", image: "/images/works/linz-1.webp", tags: ["Русификация"] },
+  { slug: "lamborghini-urus-ppf", car: "Lamborghini Urus", serviceName: "PPF + Детейлинг", image: "/images/portfolio/IMG_4975.webp", tags: ["PPF", "Детейлинг"] },
+  { slug: "rolls-royce-cullinan-ppf", car: "Rolls-Royce Cullinan", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_3857.webp", tags: ["PPF", "Премиум"] },
+  { slug: "porsche-cayenne-polish", car: "Porsche Cayenne", serviceName: "Полировка + Керамика", image: "/images/portfolio/IMG_4450.webp", tags: ["Полировка", "Керамика"] },
+  { slug: "bmw-420d-detailing", car: "BMW 420d", serviceName: "Комплексный детейлинг", image: "/images/portfolio/IMG_0941.webp", tags: ["Полировка", "Детейлинг"] },
+  { slug: "mercedes-gla-polish", car: "Mercedes-Benz GLA", serviceName: "Полировка кузова", image: "/images/portfolio/IMG_8627.webp", tags: ["Полировка"] },
+  { slug: "porsche-cayenne-coupe-ppf", car: "Porsche Cayenne Coupe", serviceName: "PPF + Керамика", image: "/images/portfolio/IMG_9045.webp", tags: ["PPF", "Керамика"] },
+  { slug: "toyota-camry-toning", car: "Toyota Camry", serviceName: "Полировка + Тонировка", image: "/images/portfolio/IMG_6322.webp", tags: ["Полировка", "Тонировка"] },
+  { slug: "audi-detailing", car: "Audi", serviceName: "PPF + Детейлинг", image: "/images/portfolio/IMG_4705.webp", tags: ["PPF", "Детейлинг"] },
+  { slug: "bmw-x5-ppf", car: "BMW X5", serviceName: "Полная оклейка PPF", image: "/images/portfolio/IMG_3910.webp", tags: ["PPF"] },
+  { slug: "mercedes-interior", car: "Mercedes-Benz", serviceName: "Химчистка салона", image: "/images/portfolio/IMG_5122.webp", tags: ["Химчистка"] },
+  { slug: "ppf-process-hands", car: "Процесс оклейки", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_4694.webp", tags: ["PPF", "Процесс"] },
+  { slug: "ppf-process-master", car: "Процесс работы", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_3893.webp", tags: ["PPF", "Процесс"] },
 ];
 
 let portfolioWorksCount = 0;

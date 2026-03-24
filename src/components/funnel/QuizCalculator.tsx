@@ -7,7 +7,7 @@ import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
 import { useSiteData } from "@/lib/site-data";
 import Button from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import { cn, isWorkingHours } from "@/lib/utils";
 
 /* ───────── Price estimation data ───────── */
 
@@ -135,7 +135,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
     return (
       <div className={cn("card card-glow-top p-6 text-center", className)}>
         <p className="text-2xl font-bold font-display text-accent-gold mb-2">
-          Расчёт будет через 15 минут
+          {isWorkingHours() ? "Расчёт будет через 15 минут" : "Расчёт будет утром"}
         </p>
         <p className="text-text-secondary mb-4">
           Мы подготовим персональное предложение
@@ -371,7 +371,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                   {formatNum(estimate.min)} — {formatNum(estimate.max)}₽
                 </p>
                 <p className="text-xs text-text-secondary mt-1">
-                  Точный расчёт пришлём за 15 минут
+                  {isWorkingHours() ? "Точный расчёт пришлём за 15 минут" : "Точный расчёт пришлём утром"}
                 </p>
               </div>
             )}

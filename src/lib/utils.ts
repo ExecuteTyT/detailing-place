@@ -17,3 +17,10 @@ export function isValidPhone(phone: string): boolean {
   const digits = phone.replace(/\D/g, "");
   return digits.length === 11 && (digits.startsWith("7") || digits.startsWith("8"));
 }
+
+/** Check if current Moscow time (UTC+3) is within working hours 10:00–20:00 */
+export function isWorkingHours(): boolean {
+  const now = new Date();
+  const moscowHour = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Moscow" })).getHours();
+  return moscowHour >= 10 && moscowHour < 20;
+}

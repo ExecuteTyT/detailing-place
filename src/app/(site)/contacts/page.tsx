@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Контакты Detailing Place — адрес, телефон, карта | Detailing Place",
     description: "Адрес студии Detailing Place в Казани. Телефон, WhatsApp, карта проезда. Ежедневно 10:00–20:00.",
-    url: "https://detailingplace.ru/contacts",
+    url: "https://dpkzn.ru/contacts",
   },
-  alternates: { canonical: "https://detailingplace.ru/contacts" },
+  alternates: { canonical: "https://dpkzn.ru/contacts" },
 };
 
 export default function ContactsPage() {

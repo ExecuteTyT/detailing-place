@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${title} — Блог | Detailing Place`,
       description: `Статья: ${title}. Полезные советы от Detailing Place.`,
-      url: `https://detailingplace.ru/blog/${slug}`,
+      url: `https://dpkzn.ru/blog/${slug}`,
       type: "article",
     },
     alternates: {
-      canonical: `https://detailingplace.ru/blog/${slug}`,
+      canonical: `https://dpkzn.ru/blog/${slug}`,
     },
   };
 }
@@ -43,11 +43,11 @@ export default async function BlogPostPage({ params }: PageProps) {
     publisher: {
       "@type": "Organization",
       name: "Detailing Place",
-      url: "https://detailingplace.ru",
+      url: "https://dpkzn.ru",
     },
     datePublished: "2026-02-01",
-    image: `https://detailingplace.ru/images/blog/${slug}.webp`,
-    url: `https://detailingplace.ru/blog/${slug}`,
+    image: `https://dpkzn.ru/images/blog/${slug}.webp`,
+    url: `https://dpkzn.ru/blog/${slug}`,
   };
 
   return (

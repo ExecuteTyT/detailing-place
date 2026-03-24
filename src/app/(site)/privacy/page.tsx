@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Политика конфиденциальности | Detailing Place",
     description: "Политика конфиденциальности и обработки персональных данных Detailing Place.",
-    url: "https://detailingplace.ru/privacy",
+    url: "https://dpkzn.ru/privacy",
   },
-  alternates: { canonical: "https://detailingplace.ru/privacy" },
+  alternates: { canonical: "https://dpkzn.ru/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
           <h2>1. Общие положения</h2>
           <p>
             Настоящая Политика конфиденциальности определяет порядок обработки и защиты
-            персональных данных пользователей сайта detailingplace.ru (далее — Сайт),
+            персональных данных пользователей сайта dpkzn.ru (далее — Сайт),
             управляемого ИП ________ (далее — Оператор).
           </p>
           <p>

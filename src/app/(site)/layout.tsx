@@ -35,11 +35,11 @@ export default function SiteLayout({
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://detailingplace.ru/#organization",
+    "@id": "https://dpkzn.ru/#organization",
     name: "Detailing Place",
     description:
       "Студия премиального автодетейлинга в Казани. Антигравийная плёнка, полировка, керамика, тонировка, шумоизоляция, Bi-LED линзы.",
-    url: "https://detailingplace.ru",
+    url: "https://dpkzn.ru",
     telephone: phone,
     address: {
       "@type": "PostalAddress",
@@ -55,7 +55,7 @@ export default function SiteLayout({
     },
     openingHours: hours,
     priceRange: "₽₽₽",
-    image: "https://detailingplace.ru/images/studio-1.webp",
+    image: "https://dpkzn.ru/images/studio-1.webp",
   };
 
   const siteData = {

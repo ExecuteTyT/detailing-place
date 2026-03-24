@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTeamMembers } from "@/lib/db/queries/content";
-import { getPartnerBrands, getStats } from "@/lib/db/queries/settings";
+import { getStats } from "@/lib/db/queries/settings";
 import CTAForm from "@/components/sections/CTAForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
@@ -11,15 +11,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "О студии Detailing Place — детейлинг в Казани | Detailing Place",
     description: "Студия премиального детейлинга в Казани. Команда профессионалов, охраняемый бокс, оригинальные материалы.",
-    url: "https://detailingplace.ru/about",
+    url: "https://dpkzn.ru/about",
   },
-  alternates: { canonical: "https://detailingplace.ru/about" },
+  alternates: { canonical: "https://dpkzn.ru/about" },
 };
 
 export default function AboutPage() {
   const TEAM = getTeamMembers();
   const STATS = getStats();
-  const PARTNER_BRANDS = getPartnerBrands();
   return (
     <>
       {/* Hero / Manifesto */}
@@ -111,22 +110,6 @@ export default function AboutPage() {
                 loading="lazy"
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Partners */}
-      <section className="py-8">
-        <div className="container-main">
-          <h2 className="text-lg font-bold font-display text-text text-center mb-6">
-            Сертифицированные материалы
-          </h2>
-          <div className="flex items-center justify-center gap-6 md:gap-10 flex-wrap">
-            {PARTNER_BRANDS.map((brand) => (
-              <span key={brand} className="text-base font-semibold text-text-secondary/70">
-                {brand}
-              </span>
-            ))}
           </div>
         </div>
       </section>

@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Блог о детейлинге — статьи и советы | Detailing Place",
     description: "Полезные статьи о защите кузова, полировке, тонировке, уходе за автомобилем. Советы от специалистов Detailing Place.",
-    url: "https://detailingplace.ru/blog",
+    url: "https://dpkzn.ru/blog",
   },
-  alternates: { canonical: "https://detailingplace.ru/blog" },
+  alternates: { canonical: "https://dpkzn.ru/blog" },
 };
 
 export default function BlogPage() {

@@ -24,7 +24,7 @@ export default function Breadcrumbs({ items, className }: BreadcrumbsProps) {
       position: i + 1,
       name: item.label,
       ...(item.href
-        ? { item: `https://detailingplace.ru${item.href}` }
+        ? { item: `https://dpkzn.ru${item.href}` }
         : {}),
     })),
   };

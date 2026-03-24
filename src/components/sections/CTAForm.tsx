@@ -6,7 +6,7 @@ import { MessageCircle, CheckCircle } from "lucide-react";
 import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
 import { useSiteData } from "@/lib/site-data";
-import { cn } from "@/lib/utils";
+import { cn, isWorkingHours } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 
@@ -185,7 +185,7 @@ export default function CTAForm({
               <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 animate-pulse-ring" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
             </span>
-            <span>Ответим за 15 минут</span>
+            <span>{isWorkingHours() ? "Ответим за 15 минут" : "Ответим утром"}</span>
             <a
               href={whatsappUrl}
               target="_blank"
@@ -205,7 +205,7 @@ export default function CTAForm({
           <CheckCircle size={48} className="text-accent-gold mb-3" />
           <p className="text-text text-lg font-semibold">Заявка отправлена!</p>
           <p className="mt-2 text-text-secondary">
-            Перезвоним в течение 15 минут
+            {isWorkingHours() ? "Перезвоним в течение 15 минут" : "Перезвоним утром в рабочее время"}
           </p>
           <a
             href={whatsappUrl}

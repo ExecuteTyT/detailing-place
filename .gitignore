@@ -42,5 +42,8 @@ public/uploads/**/*
 !public/uploads/**/.gitkeep
 
 
+# original high-res photos (530MB+ originals, not for deploy)
+public/images/real works/
+
 # claude
 .claude/

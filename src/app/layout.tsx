@@ -31,20 +31,20 @@ export const metadata: Metadata = {
     title: "Detailing Place — Премиальный детейлинг в Казани",
     description:
       "Антигравийная плёнка, полировка, керамика, тонировка, шумоизоляция, Bi-LED линзы. Премиальный автодетейлинг в Казани.",
-    url: "https://detailingplace.ru",
+    url: "https://dpkzn.ru",
     siteName: "Detailing Place",
     locale: "ru_RU",
     type: "website",
   },
   alternates: {
-    canonical: "https://detailingplace.ru",
+    canonical: "https://dpkzn.ru",
   },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
-  metadataBase: new URL("https://detailingplace.ru"),
+  metadataBase: new URL("https://dpkzn.ru"),
 };
 
 export default function RootLayout({
