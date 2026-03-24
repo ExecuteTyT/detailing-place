@@ -162,6 +162,15 @@ export const workTags = sqliteTable("work_tags", {
   tag: text("tag").notNull(),
 });
 
+// ── Work Images (gallery) ──
+
+export const workImages = sqliteTable("work_images", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  workId: integer("work_id").notNull().references(() => works.id, { onDelete: "cascade" }),
+  image: text("image").notNull(),
+  sortOrder: integer("sort_order").notNull().default(0),
+});
+
 // ── Blog Posts ──
 
 export const blogPosts = sqliteTable("blog_posts", {
@@ -339,8 +348,13 @@ export const serviceBeforeAfterRelations = relations(serviceBeforeAfter, ({ one 
 export const worksRelations = relations(works, ({ one, many }) => ({
   service: one(services, { fields: [works.serviceId], references: [services.id] }),
   tags: many(workTags),
+  images: many(workImages),
 }));
 
 export const workTagsRelations = relations(workTags, ({ one }) => ({
   work: one(works, { fields: [workTags.workId], references: [works.id] }),
+}));
+
+export const workImagesRelations = relations(workImages, ({ one }) => ({
+  work: one(works, { fields: [workImages.workId], references: [works.id] }),
 }));

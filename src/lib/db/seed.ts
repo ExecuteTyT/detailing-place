@@ -16,6 +16,7 @@ import {
   serviceBeforeAfter,
   works,
   workTags,
+  workImages,
   blogPosts,
   reviews,
   teamMembers,
@@ -39,6 +40,7 @@ console.log("Seeding database...\n");
 
 // ── 1. Delete all data (reverse dependency order) ──
 
+db.delete(workImages).run();
 db.delete(workTags).run();
 db.delete(works).run();
 db.delete(serviceBeforeAfter).run();
@@ -1387,22 +1389,23 @@ console.log(`Stats: ${STATS_DATA.length}`);
 // ── 17. Portfolio works (standalone, not linked to a service) ──
 
 const PORTFOLIO_DATA = [
-  { slug: "lamborghini-urus-ppf", car: "Lamborghini Urus", serviceName: "PPF + Детейлинг", image: "/images/portfolio/IMG_4975.webp", tags: ["PPF", "Детейлинг"] },
-  { slug: "rolls-royce-cullinan-ppf", car: "Rolls-Royce Cullinan", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_3857.webp", tags: ["PPF", "Премиум"] },
-  { slug: "porsche-cayenne-polish", car: "Porsche Cayenne", serviceName: "Полировка + Керамика", image: "/images/portfolio/IMG_4450.webp", tags: ["Полировка", "Керамика"] },
-  { slug: "bmw-420d-detailing", car: "BMW 420d", serviceName: "Комплексный детейлинг", image: "/images/portfolio/IMG_0941.webp", tags: ["Полировка", "Детейлинг"] },
-  { slug: "mercedes-gla-polish", car: "Mercedes-Benz GLA", serviceName: "Полировка кузова", image: "/images/portfolio/IMG_8627.webp", tags: ["Полировка"] },
-  { slug: "porsche-cayenne-coupe-ppf", car: "Porsche Cayenne Coupe", serviceName: "PPF + Керамика", image: "/images/portfolio/IMG_9045.webp", tags: ["PPF", "Керамика"] },
-  { slug: "toyota-camry-toning", car: "Toyota Camry", serviceName: "Полировка + Тонировка", image: "/images/portfolio/IMG_6322.webp", tags: ["Полировка", "Тонировка"] },
-  { slug: "audi-detailing", car: "Audi", serviceName: "PPF + Детейлинг", image: "/images/portfolio/IMG_4705.webp", tags: ["PPF", "Детейлинг"] },
-  { slug: "bmw-x5-ppf", car: "BMW X5", serviceName: "Полная оклейка PPF", image: "/images/portfolio/IMG_3910.webp", tags: ["PPF"] },
-  { slug: "mercedes-interior", car: "Mercedes-Benz", serviceName: "Химчистка салона", image: "/images/portfolio/IMG_5122.webp", tags: ["Химчистка"] },
-  { slug: "ppf-process-hands", car: "Процесс оклейки", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_4694.webp", tags: ["PPF", "Процесс"] },
-  { slug: "ppf-process-master", car: "Процесс работы", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_3893.webp", tags: ["PPF", "Процесс"] },
+  { slug: "lamborghini-urus-ppf", car: "Lamborghini Urus", serviceName: "PPF + Детейлинг", image: "/images/portfolio/IMG_4975.webp", tags: ["PPF", "Детейлинг"], gallery: ["/images/portfolio/gallery/lamborghini-urus-IMG_4972.webp", "/images/portfolio/gallery/lamborghini-urus-IMG_4973.webp", "/images/portfolio/gallery/lamborghini-urus-IMG_4974.webp"] },
+  { slug: "rolls-royce-cullinan-ppf", car: "Rolls-Royce Cullinan", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_3857.webp", tags: ["PPF", "Премиум"], gallery: ["/images/portfolio/gallery/rolls-royce-IMG_3858.webp", "/images/portfolio/gallery/rolls-royce-IMG_3861.webp", "/images/portfolio/gallery/rolls-royce-IMG_3865.webp"] },
+  { slug: "porsche-cayenne-polish", car: "Porsche Cayenne", serviceName: "Полировка + Керамика", image: "/images/portfolio/IMG_4450.webp", tags: ["Полировка", "Керамика"], gallery: ["/images/portfolio/gallery/porsche-cayenne-IMG_4453.webp", "/images/portfolio/gallery/porsche-cayenne-IMG_4455.webp", "/images/portfolio/gallery/porsche-cayenne-IMG_4458.webp"] },
+  { slug: "bmw-420d-detailing", car: "BMW 420d", serviceName: "Комплексный детейлинг", image: "/images/portfolio/IMG_0941.webp", tags: ["Полировка", "Детейлинг"], gallery: ["/images/portfolio/gallery/bmw-420d-IMG_0942.webp", "/images/portfolio/gallery/bmw-420d-IMG_0943.webp", "/images/portfolio/gallery/bmw-420d-IMG_0950.webp"] },
+  { slug: "mercedes-gla-polish", car: "Mercedes-Benz GLA", serviceName: "Полировка кузова", image: "/images/portfolio/IMG_8627.webp", tags: ["Полировка"], gallery: ["/images/portfolio/gallery/mercedes-gla-IMG_8630.webp", "/images/portfolio/gallery/mercedes-gla-IMG_8631.webp", "/images/portfolio/gallery/mercedes-gla-IMG_8636.webp"] },
+  { slug: "porsche-cayenne-coupe-ppf", car: "Porsche Cayenne Coupe", serviceName: "PPF + Керамика", image: "/images/portfolio/IMG_9045.webp", tags: ["PPF", "Керамика"], gallery: ["/images/portfolio/gallery/porsche-coupe-IMG_9041.webp", "/images/portfolio/gallery/porsche-coupe-IMG_9042.webp", "/images/portfolio/gallery/porsche-coupe-IMG_9050.webp"] },
+  { slug: "toyota-camry-toning", car: "Toyota Camry", serviceName: "Полировка + Тонировка", image: "/images/portfolio/IMG_6322.webp", tags: ["Полировка", "Тонировка"], gallery: ["/images/portfolio/gallery/toyota-camry-IMG_6323.webp", "/images/portfolio/gallery/toyota-camry-IMG_6324.webp", "/images/portfolio/gallery/toyota-camry-IMG_6325.webp"] },
+  { slug: "audi-detailing", car: "Audi", serviceName: "PPF + Детейлинг", image: "/images/portfolio/IMG_4705.webp", tags: ["PPF", "Детейлинг"], gallery: ["/images/portfolio/gallery/audi-IMG_4706.webp", "/images/portfolio/gallery/audi-IMG_4707.webp", "/images/portfolio/gallery/audi-IMG_4710.webp"] },
+  { slug: "bmw-x5-ppf", car: "BMW X5", serviceName: "Полная оклейка PPF", image: "/images/portfolio/IMG_3910.webp", tags: ["PPF"], gallery: ["/images/portfolio/gallery/bmw-x5-IMG_3882.webp", "/images/portfolio/gallery/bmw-x5-IMG_3885.webp", "/images/portfolio/gallery/bmw-x5-IMG_3890.webp"] },
+  { slug: "mercedes-interior", car: "Mercedes-Benz", serviceName: "Химчистка салона", image: "/images/portfolio/IMG_5122.webp", tags: ["Химчистка"], gallery: ["/images/portfolio/gallery/mercedes-interior-IMG_5123.webp", "/images/portfolio/gallery/mercedes-interior-IMG_5124.webp", "/images/portfolio/gallery/mercedes-interior-IMG_5130.webp"] },
+  { slug: "ppf-process-hands", car: "Процесс оклейки", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_4694.webp", tags: ["PPF", "Процесс"], gallery: ["/images/portfolio/gallery/ppf-hands-IMG_4690.webp", "/images/portfolio/gallery/ppf-hands-IMG_4691.webp", "/images/portfolio/gallery/ppf-hands-IMG_4693.webp"] },
+  { slug: "ppf-process-master", car: "Процесс работы", serviceName: "Оклейка PPF", image: "/images/portfolio/IMG_3893.webp", tags: ["PPF", "Процесс"], gallery: ["/images/portfolio/gallery/ppf-master-IMG_3884.webp", "/images/portfolio/gallery/ppf-master-IMG_3886.webp", "/images/portfolio/gallery/ppf-master-IMG_3888.webp"] },
 ];
 
 let portfolioWorksCount = 0;
 let portfolioTagsCount = 0;
+let portfolioImagesCount = 0;
 
 for (let i = 0; i < PORTFOLIO_DATA.length; i++) {
   const p = PORTFOLIO_DATA[i];
@@ -1423,10 +1426,17 @@ for (let i = 0; i < PORTFOLIO_DATA.length; i++) {
     db.insert(workTags).values({ workId: pWorkRows[0].id, tag }).run();
     portfolioTagsCount++;
   }
+  if (p.gallery) {
+    for (let gi = 0; gi < p.gallery.length; gi++) {
+      db.insert(workImages).values({ workId: pWorkRows[0].id, image: p.gallery[gi], sortOrder: gi }).run();
+      portfolioImagesCount++;
+    }
+  }
   portfolioWorksCount++;
 }
 console.log(`Portfolio works: ${portfolioWorksCount}`);
 console.log(`Portfolio work tags: ${portfolioTagsCount}`);
+console.log(`Portfolio work images: ${portfolioImagesCount}`);
 
 // ── Done ──
 

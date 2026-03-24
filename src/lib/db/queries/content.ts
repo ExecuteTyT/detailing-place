@@ -4,6 +4,7 @@ import {
   blogPosts,
   works,
   workTags,
+  workImages,
   reviews,
   teamMembers,
 } from "../schema";
@@ -100,6 +101,40 @@ export function getPortfolioTags(): string[] {
     .all();
 
   return rows.map((r) => r.tag);
+}
+
+export function getPortfolioItemBySlug(slug: string) {
+  const row = db
+    .select()
+    .from(works)
+    .where(eq(works.slug, slug))
+    .get();
+
+  if (!row) return null;
+
+  const tags = db
+    .select({ tag: workTags.tag })
+    .from(workTags)
+    .where(eq(workTags.workId, row.id))
+    .all()
+    .map((t) => t.tag);
+
+  const images = db
+    .select({ image: workImages.image })
+    .from(workImages)
+    .where(eq(workImages.workId, row.id))
+    .orderBy(asc(workImages.sortOrder))
+    .all()
+    .map((i) => i.image);
+
+  return {
+    slug: row.slug!,
+    car: row.car,
+    serviceName: row.serviceName,
+    image: row.image,
+    tags,
+    gallery: [row.image, ...images],
+  };
 }
 
 // ── Reviews ──
