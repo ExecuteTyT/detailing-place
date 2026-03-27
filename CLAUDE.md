@@ -183,7 +183,7 @@ Phone:    +7 (843) 000-00-00
 WhatsApp: wa.me/78430000000
 Address:  г. Казань, ул. ________
 Hours:    Ежедневно 10:00–20:00
-Metrika:  ID 00000000
+Metrika:  ID 108264725
 CRM URL:  (amoCRM webhook — set as CRM_WEBHOOK_URL env var)
 Partner brands: LLumar, SunTek, Koch Chemie, Ceramic Pro, Comfort Mat, STP
 ```

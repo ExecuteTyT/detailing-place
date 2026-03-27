@@ -83,7 +83,7 @@ const SETTINGS_DATA: { key: string; value: string }[] = [
   { key: "hours", value: "Ежедневно 10:00–20:00" },
   { key: "coordinates_lat", value: "55.7887" },
   { key: "coordinates_lng", value: "49.1221" },
-  { key: "metrika_id", value: "00000000" },
+  { key: "metrika_id", value: "108264725" },
 ];
 
 for (const s of SETTINGS_DATA) {

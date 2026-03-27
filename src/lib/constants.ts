@@ -12,7 +12,7 @@ export const WHATSAPP_URL = "https://wa.me/78430000000";
 export const ADDRESS = "г. Казань, ул. ________";
 export const HOURS = "Ежедневно 10:00–20:00";
 export const COORDINATES = { lat: 55.7887, lng: 49.1221 }; // Kazan center
-export const METRIKA_ID = "00000000";
+export const METRIKA_ID = "108264725";
 export const CRM_WEBHOOK_URL = process.env.CRM_WEBHOOK_URL || "";
 
 // ===== NAVIGATION =====
