@@ -11,9 +11,15 @@ Premium auto detailing studio website for Kazan, Russia. 18+ pages, Next.js 16 (
 
 ```bash
 npm run dev          # localhost:3000
-npm run build        # Production build (validates types + pages)
+npm run build        # db:migrate + db:seed + next build (validates types + pages)
 npm run start        # Run production server
 npm run lint         # ESLint (eslint-config-next with core-web-vitals + typescript)
+
+# Database
+npm run db:generate  # Generate Drizzle migrations from schema changes
+npm run db:migrate   # Apply migrations to SQLite database
+npm run db:seed      # Seed database from src/lib/db/seed.ts
+npm run db:reset     # Delete DB + migrate + seed (destructive)
 
 # Deploy
 vercel --prod        # Env vars: CRM_WEBHOOK_URL, TG_BOT_TOKEN, TG_CHAT_ID
@@ -25,19 +31,21 @@ E2E testing uses Playwright (`playwright` package installed as devDependency).
 
 - Next.js 16.1.6 (App Router, TypeScript, `src/` directory, `@/*` path alias)
 - React 19, Tailwind CSS 4 with `@tailwindcss/typography`
+- **SQLite** (better-sqlite3) + **Drizzle ORM** — file-based DB at `data/detailing.db`
 - Framer Motion 12 (scroll animations desktop only >768px)
 - Swiper.js 12 (carousels, touch)
 - React Hook Form 7 + Zod 4 (forms + validation)
-- Lucide React (icons)
+- Lucide React (icons), sharp (image processing)
 - next/font/google: Inter (400,600,700) + Montserrat (700,800)
+- jose + bcryptjs (admin auth via JWT)
 
 ## Principles (violation = bug)
 
 ### MOBILE-FIRST (80% traffic)
 - CSS: start at 375px, then `md:` 768px, then `lg:` 1280px
-- All buttons `min-h-[44px]` (tap targets ≥ 44×44px)
-- Input font-size ≥ 16px (iOS zoom prevention on all inputs)
-- Padding-bottom on last block ≥ 80px (floating panel clearance via `.pb-safe`)
+- All buttons `min-h-[44px]` (tap targets >= 44x44px)
+- Input font-size >= 16px (iOS zoom prevention on all inputs)
+- Padding-bottom on last block >= 80px (floating panel clearance via `.pb-safe`)
 - No hover-only effects without touch fallback
 - No horizontal scroll — test at 320px, 375px, 414px
 - `scroll-margin-top: 80px` on anchor targets (header clearance)
@@ -69,73 +77,96 @@ gradient:   #0E0E0E → #1A1A2E (section backgrounds for depth)
 
 ## Architecture
 
+Two route groups under `src/app/`:
+- `(site)/` — public-facing pages (layout includes Header, Footer, MobileFloatingPanel, funnel elements)
+- `(admin)/admin/` — admin panel (separate layout, JWT auth)
+
 ```
 src/
-├── app/                        # 18+ pages + API
-│   ├── layout.tsx              # Root: Header+Footer+Panels+Metrika+SocialProofToast+ExitPopup+CallbackWidget
-│   ├── page.tsx                # Homepage (ServicesGrid + LiveStatus + QuizCalculator in hero)
-│   ├── [service]/page.tsx      # 14 dynamic service pages (ppf, polirovka, himchistka, etc.)
-│   ├── portfolio/              # Listing + [slug] detail pages
-│   ├── blog/                   # Listing + [slug] detail pages
-│   ├── about/ contacts/ privacy/  # Static pages
-│   ├── not-found.tsx           # 404 page
-│   ├── sitemap.ts / robots.ts  # Auto-generated SEO files
-│   └── api/submit/route.ts     # POST → CRM webhook + optional Telegram notify
+├── app/
+│   ├── layout.tsx              # Root: fonts, viewport, metadata only
+│   ├── (site)/
+│   │   ├── layout.tsx          # Site shell: Header+Footer+Panels+Metrika+SiteDataProvider+funnel
+│   │   ├── page.tsx            # Homepage
+│   │   ├── [service]/page.tsx  # 14 dynamic service pages
+│   │   ├── portfolio/          # Listing + [slug] detail (with gallery lightbox)
+│   │   ├── blog/               # Listing + [slug] detail
+│   │   ├── about/ contacts/ privacy/
+│   │   └── not-found.tsx
+│   ├── (admin)/admin/
+│   │   ├── login/page.tsx      # Admin login
+│   │   └── (dashboard)/        # CRUD for services, blog, portfolio, reviews, team, settings
+│   ├── api/
+│   │   ├── submit/route.ts     # POST → CRM webhook + Telegram
+│   │   └── admin/              # REST API for admin panel (auth, CRUD, upload, settings)
+│   ├── sitemap.ts / robots.ts
+│   └── layout.tsx              # Root layout
 ├── components/
 │   ├── layout/                 # Header, Footer, MobileFloatingPanel, FullscreenMenu
-│   ├── sections/               # 12+ reusable section blocks (see below)
+│   ├── sections/               # 12+ reusable section blocks
 │   ├── funnel/                 # ExitPopup, Callback, Quiz, Toast, Timer, LoadBar, ScrollTracker
-│   └── ui/                     # Button, Input, Select, Badge, Card, Modal, Breadcrumbs, AnimatedSection
+│   └── ui/                     # Button, Input, Badge, Card, Modal, AnimatedSection, etc.
 ├── lib/
-│   ├── constants.ts            # Phone, address, socials, nav, SEASONAL_OFFER, SOCIAL_PROOF_ITEMS
-│   ├── services.ts             # ALL data for 14 services (packages, FAQ, SEO) + getService(slug)
-│   ├── analytics.ts            # Yandex.Metrika wrapper, 24 goals
+│   ├── db/
+│   │   ├── schema.ts           # Drizzle schema (20+ tables with relations)
+│   │   ├── index.ts            # DB connection (better-sqlite3, WAL mode)
+│   │   ├── seed.ts             # Seed script (run via tsx)
+│   │   └── queries/
+│   │       ├── services.ts     # getService(slug), getServicesForHomepage, getCarClassesForPricing
+│   │       ├── settings.ts     # getSettings, getNavItems, getLiveStatus, getSocialProofItems, etc.
+│   │       └── content.ts      # Blog posts, portfolio works, reviews, team queries
+│   ├── site-data.tsx           # SiteDataProvider context (React Context for shared site data)
+│   ├── analytics.ts            # Yandex.Metrika wrapper
 │   ├── form-submit.ts          # submitForm() → fetch /api/submit + UTM + localStorage markers
+│   ├── constants.ts            # Static constants
+│   ├── types.ts                # Shared TypeScript types
+│   ├── icons.ts                # Icon name → Lucide component mapping
 │   └── utils.ts                # cn(), formatPhone(), isValidPhone()
-└── styles/globals.css          # Tailwind + custom utilities (.container-main, .section-padding, .glass, .pb-safe)
+├── styles/globals.css          # Tailwind + custom utilities (.container-main, .section-padding, .glass, .pb-safe)
+data/                           # SQLite database file (gitignored, created by db:migrate + db:seed)
+drizzle/                        # Migration SQL files (committed)
 ```
-
-### Section Components
-
-11 universal + 1 homepage-only:
-HeroSection, BeforeAfterSlider, ServicePackages, ProcessSteps, WorkExamples, FAQAccordion, CTAForm, SEOText, CrossSellBanner, TrustBadges, WhyUsGrid, **ServicesGrid** (homepage 3×3 grid using `HOMEPAGE_SERVICES`)
-
-Plus homepage LiveStatus ("В работе: N авто" with live list).
-
-3 service-specific unique blocks:
-- PhotoComparison → `/tonirovka` (4 tint levels: 5%/15%/35%/80%)
-- CarBrandGrid → `/ustanovka-linz` (popular car models)
-- BrandsGrid → `/rusifikaciya-avto` (Chinese brands)
-
-Note: `/shumoizolyaciya` has NO BeforeAfterSlider (not visual). `/remont-vmyatin` is SEO-only placeholder.
 
 ## Key Architecture Patterns
 
-**Data-driven sections:** All section components receive data via props. Content lives in `src/lib/services.ts` (sourced from `docs/SERVICES_DATA.md`). NEVER hardcode text, prices, or FAQ in components. Use `getService(slug)` to fetch service data.
+### Database-driven content
+All content (services, prices, FAQ, blog, portfolio, settings) lives in SQLite via Drizzle ORM. Schema: `src/lib/db/schema.ts`. Queries: `src/lib/db/queries/`. The `data/detailing.db` file is created at build time (`npm run build` runs migrate + seed). NEVER hardcode text, prices, or FAQ in components.
 
-**Service page assembly:** Each `[service]/page.tsx` = import sections + `getService(slug)`. Standard order: HeroSection → BeforeAfterSlider (if visual) → ServicePackages → ProcessSteps → WorkExamples → FAQAccordion → CTAForm → SEOText → CrossSellBanner.
+### SiteDataProvider context
+The `(site)/layout.tsx` fetches shared data (phone, nav, live status, seasonal offer, quiz categories, car classes) from the DB and passes it via `SiteDataProvider`. Client components access it via `useSiteData()` hook from `src/lib/site-data.tsx`.
 
-**BeforeAfterSlider is CSS-only** — uses range input with clip-path, no JS library.
+### Service page assembly
+Each `[service]/page.tsx` = import sections + `getService(slug)` from DB. Standard order: HeroSection -> BeforeAfterSlider (if visual) -> ServicePackages -> ProcessSteps -> WorkExamples -> FAQAccordion -> CTAForm -> SEOText -> CrossSellBanner.
 
-**Funnel system (6 elements, spec in `docs/FUNNEL.md`):**
-- ExitIntentPopup — 3 A/B variants, 72h localStorage cooldown, suppressed post-submit
-- CallbackWidget — pulsing ring, "Перезвоним за 28 сек" countdown, after-hours message
-- QuizCalculator — 4-step wizard embedded in homepage hero, also modal elsewhere
-- StudioLoadBar — progress bar 75-92% filled, gradient `#CCFF00→#FF4444`
-- SeasonalTimer — countdown banner dd:hh:mm:ss, data from `SEASONAL_OFFER`
-- SocialProofToast — rotates 15 reviews every 45s, suppressed post-submit
+### Admin panel
+Full CRUD at `/admin` with JWT auth (jose + bcryptjs). REST API routes under `src/app/api/admin/`. Manages all DB content: services (with nested packages, prices, FAQ, process steps), blog, portfolio, reviews, team, and site settings.
 
-**FAQAccordion generates JSON-LD FAQPage** — renders `<script type="application/ld+json">`. Critical for SEO.
+### Pricing model
+Two pricing patterns in DB: **package-based** (servicePackages -> packageClassPrices matrix by car class) and **element-based** (elementPrices -> elementClassPrices matrix). Car classes are 5 pricing tiers. Price can be NULL = "Дог." (negotiable).
 
-**SEO per page:** Every page needs `generateMetadata()` with title ≤60 chars including "Казань" + "| Detailing Place", description ≤160 chars. JSON-LD types: LocalBusiness (layout), Service (service pages), Article (blog), FAQPage (FAQAccordion), BreadcrumbList (all pages except home). Breadcrumbs required on all pages except home.
+### Section components
+11 universal + 1 homepage-only (ServicesGrid). 3 service-specific unique blocks:
+- PhotoComparison -> `/tonirovka`
+- CarBrandGrid -> `/ustanovka-linz`
+- BrandsGrid -> `/rusifikaciya-avto`
 
-**Form pipeline:** CTAForm → `submitForm()` → `POST /api/submit` → CRM webhook + Telegram. Post-submit: "Thank you" modal (auto-close 5s) + localStorage marker suppresses exit popup and social proof toast.
+Note: `/shumoizolyaciya` has NO BeforeAfterSlider (not visual).
 
-**Framer Motion:** Scroll animations (`useInView` + `motion.div` fade-up) on desktop >768px ONLY. Mobile gets instant rendering. Swiper carousels use `touchRatio: 1.5`, `resistance: true`, `freeMode`.
+### Funnel system (spec in `docs/FUNNEL.md`)
+ExitIntentPopup, CallbackWidget, QuizCalculator, StudioLoadBar, SeasonalTimer, SocialProofToast. All mounted in `(site)/layout.tsx`. Post-submit localStorage marker suppresses exit popup and social proof toast.
+
+### SEO
+Every page needs `generateMetadata()` with title <= 60 chars including "Казань" + "| Detailing Place". JSON-LD types: LocalBusiness (site layout), Service (service pages), Article (blog), FAQPage (FAQAccordion auto-generates), BreadcrumbList (all pages except home).
+
+### Form pipeline
+CTAForm -> `submitForm()` -> `POST /api/submit` -> CRM webhook + Telegram.
+
+### Framer Motion
+Scroll animations (`useInView` + `motion.div` fade-up) on desktop >768px ONLY. Mobile gets instant rendering.
 
 ## Sprint Workflow
 
-Implementation follows sprints in `docs/sprints/` strictly in order. Each sprint has a checklist — verify before moving on.
+Implementation follows sprints in `docs/sprints/` strictly in order. Each sprint has a checklist.
 
 | Sprint | What |
 |--------|------|
