@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { MessageCircle, CheckCircle } from "lucide-react";
+import { MessageCircle, CheckCircle, Send } from "lucide-react";
 import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
 import { useSiteData } from "@/lib/site-data";
@@ -37,7 +37,7 @@ export default function CTAForm({
   serviceName,
   className,
 }: CTAFormProps) {
-  const { whatsappUrl } = useSiteData();
+  const { whatsappUrl, telegramUrl, maxUrl } = useSiteData();
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -195,6 +195,15 @@ export default function CTAForm({
               <MessageCircle size={14} />
               WhatsApp
             </a>
+            <a
+              href={telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[#2AABEE] hover:underline"
+            >
+              <Send size={14} />
+              Telegram
+            </a>
           </div>
         </div>
       </div>
@@ -207,15 +216,35 @@ export default function CTAForm({
           <p className="mt-2 text-text-secondary">
             {isWorkingHours() ? "Перезвоним в течение 15 минут" : "Перезвоним утром в рабочее время"}
           </p>
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 btn-whatsapp px-5 py-2.5 text-sm inline-flex items-center gap-2"
-          >
-            <MessageCircle size={16} />
-            Написать в WhatsApp, если срочно
-          </a>
+          <div className="mt-4 flex flex-wrap gap-2 justify-center">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-whatsapp px-4 py-2.5 text-sm inline-flex items-center gap-2"
+            >
+              <MessageCircle size={16} />
+              WhatsApp
+            </a>
+            <a
+              href={telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 text-sm inline-flex items-center gap-2 bg-[#2AABEE] text-white rounded-[var(--radius-button)] hover:bg-[#229ED9] transition-colors"
+            >
+              <Send size={16} />
+              Telegram
+            </a>
+            <a
+              href={maxUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 text-sm inline-flex items-center gap-2 bg-[#0077FF] text-white rounded-[var(--radius-button)] hover:bg-[#0066DD] transition-colors"
+            >
+              <MessageCircle size={16} />
+              Max
+            </a>
+          </div>
         </div>
       </Modal>
     </>

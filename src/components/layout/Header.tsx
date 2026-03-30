@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   Phone,
   MessageCircle,
+  Send,
   Menu,
   ChevronDown,
   Shield,
@@ -94,7 +95,7 @@ const MEGA_COLUMNS: MegaCategory[][] = [
 /* ───────── Component ───────── */
 
 export default function Header() {
-  const { phone, phoneRaw, whatsappUrl, liveStatus, infoNav } = useSiteData();
+  const { phone, phoneRaw, whatsappUrl, telegramUrl, maxUrl, liveStatus, infoNav } = useSiteData();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
@@ -308,16 +309,38 @@ export default function Header() {
               </span>
             </a>
 
+            {/* Telegram (md+) */}
+            <a
+              href={telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center justify-center min-h-[44px] w-[44px] bg-[#2AABEE] text-white rounded-[var(--radius-button)] hover:bg-[#229ED9] transition-colors"
+              title="Telegram"
+            >
+              <Send size={18} />
+            </a>
+
             {/* WhatsApp (md+) */}
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleWhatsAppClick}
-              className="hidden md:flex items-center gap-2 min-h-[44px] px-3.5 py-2 bg-accent-whatsapp text-white rounded-[var(--radius-button)] font-semibold text-sm hover:bg-[#1ebe57] transition-colors shadow-md"
+              className="hidden md:flex items-center justify-center min-h-[44px] w-[44px] bg-accent-whatsapp text-white rounded-[var(--radius-button)] hover:bg-[#1ebe57] transition-colors shadow-md"
+              title="WhatsApp"
             >
               <MessageCircle size={18} />
-              <span className="hidden xl:inline">WhatsApp</span>
+            </a>
+
+            {/* Max (md+) */}
+            <a
+              href={maxUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center justify-center min-h-[44px] w-[44px] bg-[#0077FF] text-white rounded-[var(--radius-button)] hover:bg-[#0066DD] transition-colors"
+              title="Max"
+            >
+              <MessageCircle size={18} />
             </a>
 
             {/* Burger — mobile & tablet only */}
