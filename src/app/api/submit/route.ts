@@ -13,8 +13,11 @@ const submitSchema = z.object({
   carClass: z.string().optional(),
   carBrand: z.string().optional(),
   service: z.string().optional(),
+  services: z.array(z.string()).optional(),
+  urgency: z.string().optional(),
   source: z.string().optional(),
   page: z.string().optional(),
+  timestamp: z.string().optional(),
   utm: z
     .object({
       utm_source: z.string().optional(),
@@ -65,6 +68,8 @@ export async function POST(request: NextRequest) {
         body.carClass ? `🚗 Класс: ${body.carClass}` : "",
         body.carBrand ? `🚗 Марка: ${body.carBrand}` : "",
         body.service ? `🔧 Услуга: ${body.service}` : "",
+        body.services?.length ? `🔧 Услуги: ${body.services.join(", ")}` : "",
+        body.urgency ? `⏰ Срочность: ${body.urgency}` : "",
         body.source ? `📍 Источник: ${body.source}` : "",
         body.page ? `📄 Страница: ${body.page}` : "",
         body.utm?.utm_source

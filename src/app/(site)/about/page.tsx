@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getTeamMembers } from "@/lib/db/queries/content";
 import { getStats } from "@/lib/db/queries/settings";
 import CTAForm from "@/components/sections/CTAForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
@@ -17,7 +16,6 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const TEAM = getTeamMembers();
   const STATS = getStats();
   return (
     <>
@@ -50,35 +48,6 @@ export default function AboutPage() {
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="section-padding">
-        <div className="container-main">
-          <h2 className="text-2xl md:text-3xl font-bold font-display text-text text-center mb-8">
-            Команда
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {TEAM.map((member) => (
-              <div key={member.name} className="card overflow-hidden">
-                <div className="relative aspect-[3/4] bg-bg-hover">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-3 text-center">
-                  <p className="font-bold text-text">{member.name}</p>
-                  <p className="text-xs text-text-secondary">{member.role}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

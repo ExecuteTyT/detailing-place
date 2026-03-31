@@ -25,7 +25,9 @@ export default function SiteLayout({
 
   const phone = settings.phone || "+7 (843) 000-00-00";
   const phoneRaw = settings.phone_raw || "78430000000";
-  const whatsappUrl = settings.whatsapp_url || "https://wa.me/78430000000";
+  const whatsappUrl = settings.whatsapp_url || "https://wa.me/79196449393";
+  const telegramUrl = settings.telegram_url || "https://t.me/+79196449393";
+  const maxUrl = settings.max_url || "https://max.im/+79196449393";
   const address = settings.address || "";
   const hours = settings.hours || "";
   const metrikaId = settings.metrika_id || "00000000";
@@ -62,6 +64,8 @@ export default function SiteLayout({
     phone,
     phoneRaw,
     whatsappUrl,
+    telegramUrl,
+    maxUrl,
     address,
     hours,
     serviceNav: nav.service,

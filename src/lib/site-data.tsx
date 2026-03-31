@@ -7,6 +7,8 @@ export interface SiteData {
   phone: string;
   phoneRaw: string;
   whatsappUrl: string;
+  telegramUrl: string;
+  maxUrl: string;
   address: string;
   hours: string;
   serviceNav: NavItem[];

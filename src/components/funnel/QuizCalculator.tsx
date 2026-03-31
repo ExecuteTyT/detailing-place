@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Car, Truck, Zap, Bus, Check, MessageCircle } from "lucide-react";
+import { Car, Truck, Zap, Bus, Check, MessageCircle, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
@@ -12,13 +12,18 @@ import { cn, isWorkingHours } from "@/lib/utils";
 /* ───────── Price estimation data ───────── */
 
 const SERVICE_PRICES: Record<string, { min: number; max: number }> = {
-  "Защита кузова (плёнка, керамика, антидождь)": { min: 45000, max: 150000 },
-  "Полировка (кузов, фары, стёкла)": { min: 15000, max: 60000 },
-  "Тонировка и антихром": { min: 6000, max: 20000 },
-  "Шумоизоляция": { min: 8000, max: 60000 },
+  "Антигравийная плёнка (PPF)": { min: 50000, max: 180000 },
+  "Керамическое покрытие": { min: 5000, max: 30000 },
+  "Антидождь": { min: 1500, max: 5000 },
+  "Полировка кузова": { min: 16000, max: 26000 },
+  "Полировка фар": { min: 2000, max: 5000 },
+  "Полировка стёкол": { min: 2000, max: 5000 },
+  "Тонировка": { min: 7000, max: 12000 },
+  "Антихром": { min: 2000, max: 15000 },
+  "Шумоизоляция": { min: 10000, max: 60000 },
   "Оптика (линзы, регулировка фар)": { min: 10000, max: 30000 },
-  "Химчистка салона": { min: 5000, max: 20000 },
-  "Русификация / ремонт вмятин": { min: 3000, max: 30000 },
+  "Химчистка салона": { min: 15000, max: 18500 },
+  "Ремонт вмятин (PDR)": { min: 5000, max: 30000 },
 };
 
 const CLASS_MULTIPLIERS: Record<string, number> = {
@@ -85,7 +90,7 @@ interface QuizCalculatorProps {
 }
 
 export default function QuizCalculator({ className }: QuizCalculatorProps) {
-  const { whatsappUrl, quizCategories } = useSiteData();
+  const { whatsappUrl, telegramUrl, maxUrl, quizCategories } = useSiteData();
   const [step, setStep] = useState(1);
   const [carClass, setCarClass] = useState("");
   const [services, setServices] = useState<string[]>([]);
@@ -140,16 +145,43 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
         <p className="text-text-secondary mb-4">
           Мы подготовим персональное предложение
         </p>
-        <Button
-          variant="whatsapp"
-          size="md"
-          href={`${whatsappUrl}?text=${encodeURIComponent("Здравствуйте! Жду расчёт стоимости детейлинга.")}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <MessageCircle size={18} />
-          Написать в WhatsApp
-        </Button>
+        <div className="flex flex-col gap-2 w-full">
+          <Button
+            variant="whatsapp"
+            size="md"
+            href={`${whatsappUrl}?text=${encodeURIComponent("Здравствуйте! Жду расчёт стоимости детейлинга.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full"
+          >
+            <MessageCircle size={18} />
+            WhatsApp
+          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="md"
+              href={telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+            >
+              <Send size={18} />
+              Telegram
+            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              href={maxUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+            >
+              <MessageCircle size={18} />
+              Max
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
