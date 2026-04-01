@@ -118,12 +118,16 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!phone) return;
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 10) return;
     setIsSubmitting(true);
     reachGoal(goals.QUIZ_SUBMIT);
 
-    await submitForm({
-      phone,
+    // Normalize: if 10 digits, prepend 7 for Russian number
+    const normalizedPhone = digits.length === 10 ? `7${digits}` : digits;
+
+    const result = await submitForm({
+      phone: normalizedPhone,
       name,
       carClass,
       services,
@@ -131,8 +135,10 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
       source: "quiz",
     });
 
-    reachGoal(goals.QUIZ_SUCCESS);
-    setSubmitted(true);
+    if (result.success) {
+      reachGoal(goals.QUIZ_SUCCESS);
+      setSubmitted(true);
+    }
     setIsSubmitting(false);
   }
 
