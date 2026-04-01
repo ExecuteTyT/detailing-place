@@ -101,8 +101,9 @@ export default function Home() {
                 <span className="bg-gradient-to-r from-accent-gold via-[#E0C840] to-accent-gold bg-clip-text text-transparent">Премиальный</span>{" "}
                 детейлинг в Казани
               </h1>
-              <p className="mt-4 text-base md:text-lg text-text-secondary max-w-xl leading-relaxed">
-                Только оригинальные материалы от проверенных брендов. Антигравийная плёнка, полировка, керамика, тонировка, шумоизоляция, Bi-LED линзы
+              <p className="mt-4 text-base md:text-lg text-text-secondary max-w-xl leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.8)]">
+                Только оригинальные материалы от проверенных брендов.
+                <span className="hidden md:inline"> Антигравийная плёнка, полировка, керамика, тонировка, шумоизоляция, Bi-LED линзы</span>
               </p>
             </div>
             <QuizCalculator />
