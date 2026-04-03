@@ -19,32 +19,34 @@ export default function HeroSlideshow() {
   const [errors, setErrors] = useState<Set<number>>(new Set());
 
   return (
-    <Swiper
-      modules={[Autoplay, EffectFade]}
-      effect="fade"
-      fadeEffect={{ crossFade: true }}
-      autoplay={{ delay: 5000, disableOnInteraction: false }}
-      speed={1200}
-      loop
-      allowTouchMove={false}
-      className="absolute inset-0 w-full h-full"
-    >
-      {HERO_IMAGES.map((img, i) =>
-        errors.has(i) ? null : (
-          <SwiperSlide key={img.src} className="relative">
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              priority={i === 0}
-              loading={i === 0 ? "eager" : "lazy"}
-              className="object-cover object-[65%_40%] md:object-[center_60%]"
-              sizes="100vw"
-              onError={() => setErrors((prev) => new Set(prev).add(i))}
-            />
-          </SwiperSlide>
-        )
-      )}
-    </Swiper>
+    <div className="absolute inset-0 w-full h-full">
+      <Swiper
+        modules={[Autoplay, EffectFade]}
+        effect="fade"
+        fadeEffect={{ crossFade: true }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        speed={1200}
+        loop
+        allowTouchMove={false}
+        style={{ width: "100%", height: "100%" }}
+      >
+        {HERO_IMAGES.map((img, i) =>
+          errors.has(i) ? null : (
+            <SwiperSlide key={img.src} style={{ position: "relative", width: "100%", height: "100%" }}>
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                priority={i === 0}
+                loading={i === 0 ? "eager" : "lazy"}
+                className="object-cover object-[65%_40%] md:object-[center_60%]"
+                sizes="100vw"
+                onError={() => setErrors((prev) => new Set(prev).add(i))}
+              />
+            </SwiperSlide>
+          )
+        )}
+      </Swiper>
+    </div>
   );
 }
