@@ -25,7 +25,7 @@ import CTAForm from "@/components/sections/CTAForm";
 import SEOText from "@/components/sections/SEOText";
 import QuizCalculator from "@/components/funnel/QuizCalculator";
 import SeasonalTimer from "@/components/funnel/SeasonalTimer";
-import HeroBackground from "@/components/ui/HeroBackground";
+import HeroSlideshow from "@/components/ui/HeroSlideshow";
 import WorkExamplesSkeleton from "@/components/sections/WorkExamplesSkeleton";
 import ReviewsCarouselSkeleton from "@/components/sections/ReviewsCarouselSkeleton";
 
@@ -68,7 +68,7 @@ export default function Home() {
       <section className="relative min-h-[60vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-bg via-bg-card to-bg-gradient-end" />
-        <HeroBackground src="/images/hero/home.webp" alt="Detailing Place — студия премиального детейлинга в Казани" />
+        <HeroSlideshow />
         {/* Mobile overlay — photo is dark, light touch needed */}
         <div
           className="absolute inset-0 md:hidden"
