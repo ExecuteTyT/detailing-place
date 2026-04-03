@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     canonical: "https://dpkzn.ru",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.svg",
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
