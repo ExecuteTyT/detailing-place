@@ -86,14 +86,20 @@ export async function POST(request: NextRequest) {
         .join("\n");
 
       try {
-        await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+        const tgRes = await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ chat_id: tgChat, text, parse_mode: "HTML" }),
         });
+        if (!tgRes.ok) {
+          const tgBody = await tgRes.json().catch(() => null);
+          console.error("Telegram API error:", tgRes.status, tgBody);
+        }
       } catch (e) {
-        console.error("Telegram notify error:", e);
+        console.error("Telegram network error:", e);
       }
+    } else {
+      console.warn("Telegram not configured: TG_BOT_TOKEN or TG_CHAT_ID missing");
     }
 
     return NextResponse.json({ success: true });
