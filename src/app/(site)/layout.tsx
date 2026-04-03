@@ -27,7 +27,7 @@ export default function SiteLayout({
   const phoneRaw = settings.phone_raw || "78430000000";
   const whatsappUrl = settings.whatsapp_url || "https://wa.me/79196449393";
   const telegramUrl = settings.telegram_url || "https://t.me/+79196449393";
-  const maxUrl = settings.max_url || "https://max.im/+79196449393";
+  const maxUrl = settings.max_url || "https://max.ru/";
   const address = settings.address || "";
   const hours = settings.hours || "";
   const metrikaId = settings.metrika_id || "00000000";

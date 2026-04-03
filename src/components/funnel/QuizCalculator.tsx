@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Car, Truck, Zap, Bus, Check, MessageCircle, Send } from "lucide-react";
+import {
+  Car, Truck, Zap, Bus, Check, MessageCircle, Send,
+  ChevronLeft, ChevronDown, Shield, Sparkles, Palette, Volume2, Wrench,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
@@ -64,6 +68,42 @@ function formatNum(n: number): string {
   return n.toLocaleString("ru-RU");
 }
 
+/* ───────── Service categories (accordion groups) ───────── */
+
+interface ServiceCategory {
+  label: string;
+  icon: LucideIcon;
+  items: string[];
+}
+
+const SERVICE_CATEGORIES: ServiceCategory[] = [
+  {
+    label: "Защита кузова",
+    icon: Shield,
+    items: ["Антигравийная плёнка (PPF)", "Керамическое покрытие", "Антидождь"],
+  },
+  {
+    label: "Полировка",
+    icon: Sparkles,
+    items: ["Полировка кузова", "Полировка фар", "Полировка стёкол"],
+  },
+  {
+    label: "Стайлинг",
+    icon: Palette,
+    items: ["Тонировка", "Антихром"],
+  },
+  {
+    label: "Комфорт и оптика",
+    icon: Volume2,
+    items: ["Шумоизоляция", "Оптика (линзы, регулировка фар)"],
+  },
+  {
+    label: "Уход и ремонт",
+    icon: Wrench,
+    items: ["Химчистка салона", "Ремонт вмятин (PDR)"],
+  },
+];
+
 /* ───────── Component ───────── */
 
 const CAR_OPTIONS = [
@@ -100,8 +140,15 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [phoneError, setPhoneError] = useState("");
+  const [openCategories, setOpenCategories] = useState<string[]>([]);
 
   const estimate = estimatePrice(carClass, services);
+
+  // Filter categories to only include items that exist in quizCategories from DB
+  const filteredCategories = SERVICE_CATEGORIES.map((cat) => ({
+    ...cat,
+    items: cat.items.filter((item) => quizCategories.includes(item)),
+  })).filter((cat) => cat.items.length > 0);
 
   function nextStep() {
     const next = step + 1;
@@ -111,9 +158,19 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
     if (next === 4) reachGoal(goals.QUIZ_STEP_4);
   }
 
+  function prevStep() {
+    if (step > 1) setStep(step - 1);
+  }
+
   function toggleService(s: string) {
     setServices((prev) =>
       prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
+    );
+  }
+
+  function toggleCategory(label: string) {
+    setOpenCategories((prev) =>
+      prev.includes(label) ? prev.filter((x) => x !== label) : [...prev, label]
     );
   }
 
@@ -205,9 +262,20 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
     <div className={cn("card card-glow-top p-5 md:p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
-        <p className="text-xs font-semibold text-accent-gold uppercase tracking-wider">
-          Калькулятор стоимости
-        </p>
+        <div className="flex items-center gap-2">
+          {step > 1 && (
+            <button
+              onClick={prevStep}
+              className="flex items-center gap-0.5 text-xs text-text-secondary hover:text-text transition-colors cursor-pointer"
+            >
+              <ChevronLeft size={14} />
+              <span>Назад</span>
+            </button>
+          )}
+          <p className="text-xs font-semibold text-accent-gold uppercase tracking-wider">
+            Калькулятор стоимости
+          </p>
+        </div>
         <span className="text-xs text-text-secondary font-mono">
           {step}/4
         </span>
@@ -222,7 +290,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
           >
             <div
               className={cn(
-                "h-full rounded-full transition-all duration-500",
+                "h-full rounded-full transition-[width] duration-500",
                 s <= step ? "w-full" : "w-0"
               )}
               style={
@@ -264,7 +332,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                       nextStep();
                     }}
                     className={cn(
-                      "card p-4 flex flex-col items-center gap-2 min-h-[44px] cursor-pointer transition-all",
+                      "card p-4 flex flex-col items-center gap-2 min-h-[44px] cursor-pointer transition-colors duration-200",
                       carClass === opt.value
                         ? "border-accent-gold bg-accent-gold/5 shadow-[var(--shadow-glow-gold)]"
                         : "hover:border-accent-gold/50 hover:bg-bg-hover"
@@ -283,7 +351,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
           </motion.div>
         )}
 
-        {/* Step 2: Services */}
+        {/* Step 2: Services (accordion categories) */}
         {step === 2 && (
           <motion.div
             key="step2"
@@ -297,32 +365,89 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
               Что хотите сделать?
             </p>
             <div className="space-y-2">
-              {quizCategories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => toggleService(cat)}
-                  className={cn(
-                    "w-full flex items-center gap-3 p-3 rounded-[var(--radius-button)] border text-left min-h-[44px] cursor-pointer transition-all",
-                    services.includes(cat)
-                      ? "border-accent-gold bg-accent-gold/5 shadow-sm"
-                      : "border-border hover:border-accent-gold/50 hover:bg-bg-hover"
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 transition-colors",
-                      services.includes(cat)
-                        ? "bg-accent-gold"
-                        : "border border-border"
-                    )}
-                  >
-                    {services.includes(cat) && (
-                      <Check size={14} className="text-bg" />
-                    )}
+              {filteredCategories.map((cat) => {
+                const Icon = cat.icon;
+                const isOpen = openCategories.includes(cat.label);
+                const selectedCount = cat.items.filter((item) =>
+                  services.includes(item)
+                ).length;
+
+                return (
+                  <div key={cat.label}>
+                    {/* Category header */}
+                    <button
+                      onClick={() => toggleCategory(cat.label)}
+                      className={cn(
+                        "w-full flex items-center gap-3 p-3 rounded-[var(--radius-button)] border text-left min-h-[44px] cursor-pointer transition-colors duration-200",
+                        isOpen || selectedCount > 0
+                          ? "border-accent-gold/40 bg-accent-gold/5"
+                          : "border-border hover:border-accent-gold/50 hover:bg-bg-hover"
+                      )}
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-accent-gold/10 flex items-center justify-center flex-shrink-0">
+                        <Icon size={18} className="text-accent-gold" />
+                      </div>
+                      <span className="text-sm font-semibold text-text flex-1">
+                        {cat.label}
+                      </span>
+                      {selectedCount > 0 && (
+                        <span className="text-xs text-accent-gold font-semibold px-1.5 py-0.5 rounded-full bg-accent-gold/10">
+                          {selectedCount}
+                        </span>
+                      )}
+                      <ChevronDown
+                        size={16}
+                        className={cn(
+                          "text-text-secondary transition-transform duration-200 flex-shrink-0",
+                          isOpen && "rotate-180"
+                        )}
+                      />
+                    </button>
+
+                    {/* Subcategories (animated) */}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pl-4 pt-1.5 space-y-1.5">
+                            {cat.items.map((item) => (
+                              <button
+                                key={item}
+                                onClick={() => toggleService(item)}
+                                className={cn(
+                                  "w-full flex items-center gap-3 p-2.5 rounded-[var(--radius-button)] border text-left min-h-[44px] cursor-pointer transition-colors duration-200",
+                                  services.includes(item)
+                                    ? "border-accent-gold bg-accent-gold/5"
+                                    : "border-border/50 hover:border-accent-gold/50 hover:bg-bg-hover"
+                                )}
+                              >
+                                <div
+                                  className={cn(
+                                    "w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 transition-colors duration-200",
+                                    services.includes(item)
+                                      ? "bg-accent-gold"
+                                      : "border border-border"
+                                  )}
+                                >
+                                  {services.includes(item) && (
+                                    <Check size={14} className="text-bg" />
+                                  )}
+                                </div>
+                                <span className="text-sm text-text">{item}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                  <span className="text-sm text-text">{cat}</span>
-                </button>
-              ))}
+                );
+              })}
             </div>
 
             {/* Price estimate — shows immediately as user selects services */}
@@ -381,7 +506,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
                     nextStep();
                   }}
                   className={cn(
-                    "w-full p-4 rounded-[var(--radius-button)] border text-left min-h-[44px] cursor-pointer transition-all font-semibold text-text",
+                    "w-full p-4 rounded-[var(--radius-button)] border text-left min-h-[44px] cursor-pointer transition-colors duration-200 font-semibold text-text",
                     urgency === opt.value
                       ? "border-accent-gold bg-accent-gold/5 shadow-sm"
                       : "border-border hover:border-accent-gold/50 hover:bg-bg-hover"

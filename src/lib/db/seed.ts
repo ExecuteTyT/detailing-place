@@ -78,7 +78,7 @@ const SETTINGS_DATA: { key: string; value: string }[] = [
   { key: "phone_raw", value: "79196449393" },
   { key: "whatsapp_url", value: "https://wa.me/79196449393" },
   { key: "telegram_url", value: "https://t.me/+79196449393" },
-  { key: "max_url", value: "https://max.im/+79196449393" },
+  { key: "max_url", value: "https://max.ru/" },
   { key: "address", value: "г. Казань, ул. ________" },
   { key: "hours", value: "Ежедневно 10:00–20:00" },
   { key: "coordinates_lat", value: "55.7887" },
