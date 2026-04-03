@@ -5,6 +5,12 @@ const submitSchema = z.object({
   phone: z
     .string()
     .min(1, "Phone is required")
+    .transform((val) => {
+      let digits = val.replace(/\D/g, "");
+      if (digits.length === 10) digits = "7" + digits;
+      if (digits.startsWith("8") && digits.length === 11) digits = "7" + digits.slice(1);
+      return "+" + digits;
+    })
     .refine(
       (val) => val.replace(/\D/g, "").length >= 11,
       "Invalid phone number"

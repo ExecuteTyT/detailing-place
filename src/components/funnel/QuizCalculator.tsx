@@ -7,7 +7,7 @@ import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
 import { useSiteData } from "@/lib/site-data";
 import Button from "@/components/ui/Button";
-import { cn, isWorkingHours } from "@/lib/utils";
+import { cn, isWorkingHours, formatPhoneInput } from "@/lib/utils";
 
 /* ───────── Price estimation data ───────── */
 
@@ -99,6 +99,7 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
 
   const estimate = estimatePrice(carClass, services);
 
@@ -116,18 +117,24 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
     );
   }
 
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const formatted = formatPhoneInput(e.target.value);
+    setPhone(formatted);
+    setPhoneError("");
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const digits = phone.replace(/\D/g, "");
-    if (digits.length < 10) return;
+    if (digits.length < 10) {
+      setPhoneError("Введите корректный номер");
+      return;
+    }
     setIsSubmitting(true);
     reachGoal(goals.QUIZ_SUBMIT);
 
-    // Normalize: if 10 digits, prepend 7 for Russian number
-    const normalizedPhone = digits.length === 10 ? `7${digits}` : digits;
-
     const result = await submitForm({
-      phone: normalizedPhone,
+      phone,
       name,
       carClass,
       services,
@@ -135,11 +142,13 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
       source: "quiz",
     });
 
+    setIsSubmitting(false);
     if (result.success) {
       reachGoal(goals.QUIZ_SUCCESS);
       setSubmitted(true);
+    } else {
+      setPhoneError(result.error || "Ошибка отправки");
     }
-    setIsSubmitting(false);
   }
 
   if (submitted) {
@@ -417,13 +426,20 @@ export default function QuizCalculator({ className }: QuizCalculatorProps) {
             <form onSubmit={handleSubmit} className="space-y-3">
               <input
                 type="tel"
+                inputMode="tel"
                 autoComplete="tel"
                 placeholder="+7 (___) ___-__-__"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={handlePhoneChange}
                 required
-                className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
+                className={cn(
+                  "w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30",
+                  phoneError && "border-accent-red focus:border-accent-red focus:ring-accent-red/30"
+                )}
               />
+              {phoneError && (
+                <p className="mt-1 text-sm text-accent-red">{phoneError}</p>
+              )}
               <input
                 type="text"
                 autoComplete="given-name"

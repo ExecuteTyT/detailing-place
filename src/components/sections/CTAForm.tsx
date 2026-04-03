@@ -6,7 +6,7 @@ import { MessageCircle, CheckCircle, Send } from "lucide-react";
 import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
 import { useSiteData } from "@/lib/site-data";
-import { cn, isWorkingHours } from "@/lib/utils";
+import { cn, isWorkingHours, formatPhoneInput } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 
@@ -44,6 +44,7 @@ export default function CTAForm({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm<FormValues>();
@@ -129,9 +130,13 @@ export default function CTAForm({
                 )}
                 {...register("phone", {
                   required: "Введите номер телефона",
+                  onChange: (e) => {
+                    const formatted = formatPhoneInput(e.target.value);
+                    setValue("phone", formatted);
+                  },
                   validate: (val) => {
                     const digits = val.replace(/\D/g, "");
-                    return digits.length >= 11 || "Введите корректный номер";
+                    return digits.length >= 10 || "Введите корректный номер";
                   },
                 })}
               />

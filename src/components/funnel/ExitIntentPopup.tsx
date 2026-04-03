@@ -3,10 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { X, Gift, FileText, Camera } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { submitForm } from "@/lib/form-submit";
-import { isFormSubmitted } from "@/lib/form-submit";
+import { submitForm, isFormSubmitted } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
 import { useSiteData } from "@/lib/site-data";
+import { formatPhoneInput, cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 
 type Variant = "discount" | "leadmagnet" | "photo";
@@ -38,6 +38,7 @@ export default function ExitIntentPopup() {
   const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [ready, setReady] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
 
   // Wait 15s before arming the trigger
   useEffect(() => {
@@ -77,10 +78,23 @@ export default function ExitIntentPopup() {
     setVisible(false);
   }
 
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setPhone(formatPhoneInput(e.target.value));
+    setPhoneError("");
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!phone) return;
-    await submitForm({ phone, source: `exit_popup_${variant}` });
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 10) {
+      setPhoneError("Введите корректный номер");
+      return;
+    }
+    const result = await submitForm({ phone, source: `exit_popup_${variant}` });
+    if (!result.success) {
+      setPhoneError(result.error || "Ошибка отправки");
+      return;
+    }
     reachGoal(goals.EXIT_POPUP_SUBMIT);
     setSubmitted(true);
   }
@@ -134,14 +148,23 @@ export default function ExitIntentPopup() {
                       Промокод: EXIT10 &bull; Осталось {hoursLeft} ч
                     </p>
                     <form onSubmit={handleSubmit} className="space-y-3">
-                      <input
-                        type="tel"
-                        autoComplete="tel"
-                        placeholder="+7 (___) ___-__-__"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
-                      />
+                      <div>
+                        <input
+                          type="tel"
+                          inputMode="tel"
+                          autoComplete="tel"
+                          placeholder="+7 (___) ___-__-__"
+                          value={phone}
+                          onChange={handlePhoneChange}
+                          className={cn(
+                            "w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30",
+                            phoneError && "border-accent-red focus:border-accent-red focus:ring-accent-red/30"
+                          )}
+                        />
+                        {phoneError && (
+                          <p className="mt-1 text-sm text-accent-red">{phoneError}</p>
+                        )}
+                      </div>
                       <Button type="submit" variant="primary" className="w-full btn-cta-glow">
                         Получить скидку
                       </Button>
@@ -161,14 +184,23 @@ export default function ExitIntentPopup() {
                       20 пунктов проверки детейлинга &mdash; чтобы вас не обманули
                     </p>
                     <form onSubmit={handleSubmit} className="space-y-3">
-                      <input
-                        type="tel"
-                        autoComplete="tel"
-                        placeholder="WhatsApp номер"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
-                      />
+                      <div>
+                        <input
+                          type="tel"
+                          inputMode="tel"
+                          autoComplete="tel"
+                          placeholder="+7 (___) ___-__-__"
+                          value={phone}
+                          onChange={handlePhoneChange}
+                          className={cn(
+                            "w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30",
+                            phoneError && "border-accent-red focus:border-accent-red focus:ring-accent-red/30"
+                          )}
+                        />
+                        {phoneError && (
+                          <p className="mt-1 text-sm text-accent-red">{phoneError}</p>
+                        )}
+                      </div>
                       <Button type="submit" variant="primary" className="w-full btn-cta-glow">
                         Получить чек-лист
                       </Button>

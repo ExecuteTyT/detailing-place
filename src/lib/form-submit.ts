@@ -22,8 +22,14 @@ function getUTMParams(): Record<string, string> {
 
 export async function submitForm(data: FormData): Promise<{ success: boolean; error?: string }> {
   try {
+    // Normalize phone before sending
+    let phone = data.phone.replace(/\D/g, "");
+    if (phone.length === 10) phone = "7" + phone;
+    if (phone.startsWith("8") && phone.length === 11) phone = "7" + phone.slice(1);
+
     const payload = {
       ...data,
+      phone: "+" + phone,
       utm: getUTMParams(),
       page: typeof window !== "undefined" ? window.location.pathname : "",
       timestamp: new Date().toISOString(),
@@ -36,7 +42,9 @@ export async function submitForm(data: FormData): Promise<{ success: boolean; er
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+      const body = await response.json().catch(() => null);
+      const msg = body?.details?.fieldErrors?.phone?.[0] || body?.error || `Ошибка ${response.status}`;
+      throw new Error(msg);
     }
 
     // Mark form as submitted in localStorage

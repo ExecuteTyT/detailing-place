@@ -5,6 +5,7 @@ import { Phone, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { submitForm } from "@/lib/form-submit";
 import { reachGoal, goals } from "@/lib/analytics";
+import { formatPhoneInput, cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 
 export default function CallbackWidget() {
@@ -12,6 +13,7 @@ export default function CallbackWidget() {
   const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [countdown, setCountdown] = useState(28);
+  const [phoneError, setPhoneError] = useState("");
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const isAfterHours = new Date().getHours() >= 20;
@@ -26,13 +28,27 @@ export default function CallbackWidget() {
     setSubmitted(false);
     setCountdown(28);
     setPhone("");
+    setPhoneError("");
     if (intervalRef.current) clearInterval(intervalRef.current);
+  }
+
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setPhone(formatPhoneInput(e.target.value));
+    setPhoneError("");
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!phone) return;
-    await submitForm({ phone, source: "callback_widget" });
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 10) {
+      setPhoneError("Введите корректный номер");
+      return;
+    }
+    const result = await submitForm({ phone, source: "callback_widget" });
+    if (!result.success) {
+      setPhoneError(result.error || "Ошибка отправки");
+      return;
+    }
     reachGoal(goals.CALLBACK_SUBMIT);
     setSubmitted(true);
 
@@ -141,12 +157,19 @@ export default function CallbackWidget() {
                   <form onSubmit={handleSubmit} className="space-y-3">
                     <input
                       type="tel"
+                      inputMode="tel"
                       autoComplete="tel"
                       placeholder="+7 (___) ___-__-__"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30"
+                      onChange={handlePhoneChange}
+                      className={cn(
+                        "w-full min-h-[44px] rounded-[var(--radius-button)] bg-bg border border-border px-4 py-3 text-text text-[16px] placeholder:text-text-secondary/50 outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold/30",
+                        phoneError && "border-accent-red focus:border-accent-red focus:ring-accent-red/30"
+                      )}
                     />
+                    {phoneError && (
+                      <p className="mt-1 text-sm text-accent-red">{phoneError}</p>
+                    )}
                     <Button type="submit" variant="primary" className="w-full btn-cta-glow">
                       Жду звонка
                     </Button>
