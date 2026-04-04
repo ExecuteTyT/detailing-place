@@ -3,13 +3,14 @@ import { METRIKA_ID } from "./constants";
 // Yandex.Metrika types
 declare global {
   interface Window {
-    ym?: (id: string, action: string, target?: string, params?: Record<string, unknown>) => void;
+    ym?: (id: number, action: string, target?: string, params?: Record<string, unknown>) => void;
   }
 }
 
+const METRIKA_NUM = Number(METRIKA_ID);
 export function ym(action: string, target?: string, params?: Record<string, unknown>) {
   if (typeof window !== "undefined" && window.ym) {
-    window.ym(METRIKA_ID, action, target, params);
+    window.ym(METRIKA_NUM, action, target, params);
   }
 }
 
