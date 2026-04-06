@@ -121,15 +121,6 @@ export default function ContactsPage() {
                 />
               </div>
 
-              {/* YouTube embed */}
-              <div className="rounded-[var(--radius-card)] overflow-hidden border border-border aspect-video">
-                <div className="w-full h-full bg-bg-card flex items-center justify-center">
-                  <p className="text-text-secondary text-sm text-center px-4">
-                    Видео-обзор студии<br />
-                    <span className="text-xs">(YouTube embed будет добавлен)</span>
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
