@@ -137,6 +137,21 @@ export function getPortfolioItemBySlug(slug: string) {
   };
 }
 
+export function getPortfolioNavigation(slug: string): { prev: { slug: string; car: string } | null; next: { slug: string; car: string } | null } {
+  const allSlugs = db
+    .select({ slug: works.slug, car: works.car })
+    .from(works)
+    .where(isNotNull(works.slug))
+    .orderBy(asc(works.sortOrder))
+    .all();
+
+  const idx = allSlugs.findIndex((r) => r.slug === slug);
+  return {
+    prev: idx > 0 ? { slug: allSlugs[idx - 1].slug!, car: allSlugs[idx - 1].car } : null,
+    next: idx < allSlugs.length - 1 ? { slug: allSlugs[idx + 1].slug!, car: allSlugs[idx + 1].car } : null,
+  };
+}
+
 // ── Reviews ──
 
 export function getVisibleReviews(): Review[] {

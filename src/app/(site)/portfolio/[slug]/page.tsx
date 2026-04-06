@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPortfolioItemBySlug } from "@/lib/db/queries/content";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { getPortfolioItemBySlug, getPortfolioNavigation } from "@/lib/db/queries/content";
 import CTAForm from "@/components/sections/CTAForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import PortfolioGallery from "./PortfolioGallery";
@@ -36,6 +38,8 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
 
   if (!item) notFound();
 
+  const nav = getPortfolioNavigation(slug);
+
   return (
     <>
       <section className="section-padding">
@@ -69,6 +73,42 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
 
           {/* Gallery with lightbox */}
           <PortfolioGallery images={item.gallery} car={item.car} />
+
+          {/* Prev / Next navigation */}
+          <div className="mt-10 flex items-center justify-between gap-4">
+            {nav.prev ? (
+              <Link
+                href={`/portfolio/${nav.prev.slug}`}
+                className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors min-h-[44px] group"
+              >
+                <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                <div className="text-left">
+                  <span className="text-xs text-text-secondary">Назад</span>
+                  <p className="text-sm font-semibold text-text">{nav.prev.car}</p>
+                </div>
+              </Link>
+            ) : <div />}
+
+            <Link
+              href="/portfolio"
+              className="text-sm text-text-secondary hover:text-text transition-colors min-h-[44px] flex items-center"
+            >
+              Все работы
+            </Link>
+
+            {nav.next ? (
+              <Link
+                href={`/portfolio/${nav.next.slug}`}
+                className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors min-h-[44px] group"
+              >
+                <div className="text-right">
+                  <span className="text-xs text-text-secondary">Далее</span>
+                  <p className="text-sm font-semibold text-text">{nav.next.car}</p>
+                </div>
+                <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            ) : <div />}
+          </div>
         </div>
       </section>
 
