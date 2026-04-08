@@ -18,7 +18,6 @@ import {
   SlidersHorizontal,
   CircleDot,
   CloudRain,
-  Globe,
   Wrench,
   ArrowUpRight,
   type LucideIcon,
@@ -77,7 +76,6 @@ const SERVICE_GROUPS: MenuGroup[] = [
   {
     title: "Другое",
     items: [
-      { href: "/rusifikaciya-avto", label: "Русификация авто", icon: Globe, isNew: true },
       { href: "/remont-vmyatin", label: "Ремонт вмятин", icon: Wrench, isNew: true },
     ],
   },

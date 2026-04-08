@@ -18,7 +18,6 @@ import {
   SlidersHorizontal,
   CircleDot,
   CloudRain,
-  Globe,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -85,7 +84,6 @@ const MEGA_COLUMNS: MegaCategory[][] = [
     {
       title: "Другое",
       items: [
-        { href: "/rusifikaciya-avto", label: "Русификация", icon: Globe, isNew: true },
         { href: "/remont-vmyatin", label: "Ремонт вмятин", icon: Wrench, isNew: true },
       ],
     },

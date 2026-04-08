@@ -28,7 +28,6 @@ import {
   CircleDot,
   GlassWater,
   CloudRain,
-  Globe,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -102,11 +101,6 @@ const HERO_THEMES: Record<string, ServiceTheme> = {
     gradient:
       "radial-gradient(ellipse at 35% 30%, rgba(56,189,248,0.1) 0%, transparent 60%), radial-gradient(ellipse at 75% 65%, rgba(14,165,233,0.04) 0%, transparent 50%)",
     icon: CloudRain,
-  },
-  "rusifikaciya-avto": {
-    gradient:
-      "radial-gradient(ellipse at 65% 50%, rgba(239,68,68,0.08) 0%, transparent 55%), radial-gradient(ellipse at 25% 25%, rgba(185,28,28,0.04) 0%, transparent 50%)",
-    icon: Globe,
   },
   "remont-vmyatin": {
     gradient:

@@ -680,59 +680,6 @@ const SERVICES_DATA: SeedService[] = [
     showOnHomepage: true,
   },
 
-  // 12. Русификация
-  {
-    slug: "rusifikaciya-avto",
-    title: "Русификация китайских автомобилей в Казани — цены | Detailing Place",
-    h1: "Русификация китайских автомобилей в Казани",
-    subtitle: "Русский язык, метрическая система, навигация. Без потери гарантии",
-    badge: "Без потери гарантии",
-    keywords: ["русификация авто казань", "русификация китайских авто", "русский язык в haval"],
-    packages: [
-      {
-        name: "РУСИФИКАЦИЯ",
-        description: "Русский язык + метрическая система",
-        classPrices: ["от 5 000₽"],
-        features: ["Русский язык интерфейса", "Метрическая система"],
-      },
-      {
-        name: "+ КАРТЫ",
-        description: "Язык + навигация",
-        classPrices: ["от 8 000₽"],
-        features: ["Русский язык", "Навигация с картами РФ"],
-        isPopular: true,
-      },
-      {
-        name: "ПОЛНАЯ АДАПТАЦИЯ",
-        description: "Язык + карты + голос + обновление ПО",
-        classPrices: ["от 12 000₽"],
-        features: ["Русский язык", "Навигация", "Голосовой помощник", "Обновление ПО"],
-      },
-    ],
-    process: [
-      { title: "Диагностика", description: "Определение версии ПО" },
-      { title: "Резервное копирование", description: "Бэкап текущих настроек" },
-      { title: "Прошивка", description: "Установка русского языка и карт" },
-      { title: "Проверка", description: "Тестирование всех функций" },
-    ],
-    faq: [
-      { question: "Не слетит ли гарантия?", answer: "Нет. Меняем только язык и карты, не затрагиваем критические системы." },
-      { question: "Какие марки поддерживаете?", answer: "Haval, Chery, Geely, Exeed, Changan, Omoda, Jetour, Dongfeng." },
-      { question: "Сколько времени?", answer: "1-3 часа." },
-    ],
-    crossSell: {
-      title: "Только купили? Защитите кузов плёнкой",
-      description: "Скидка 10% на PPF для новых авто",
-      href: "/ppf",
-      discount: "10%",
-    },
-    works: [],
-    seoText: "<h2>Русификация китайских авто в Казани</h2><p>Русификация бортовой системы китайских автомобилей: Haval, Chery, Geely, Exeed, Changan, Omoda, Jetour, Dongfeng. Установка русского языка, навигации с картами России.</p>",
-    hasBeforeAfter: false,
-    uniqueBlock: "BrandsGrid",
-    showOnHomepage: true,
-  },
-
   // 13. Ремонт вмятин PDR
   {
     slug: "remont-vmyatin",
@@ -1110,7 +1057,6 @@ const NAV_ITEMS_DATA = [
   { label: "Полировка стёкол", href: "/polirovka-stekol", isNew: true },
   { label: "Полировка фар", href: "/polirovka-far", isNew: true },
   { label: "Антидождь", href: "/antidozhd", isNew: true },
-  { label: "Русификация авто", href: "/rusifikaciya-avto", isNew: true },
   { label: "Ремонт вмятин (PDR)", href: "/remont-vmyatin", isNew: true },
   { label: "Портфолио", href: "/portfolio", isNew: false },
   { label: "О студии", href: "/about", isNew: false },
@@ -1194,7 +1140,6 @@ const LIVE_STATUS_DATA = [
   { car: "Kia Ceed", service: "Установка Bi-LED" },
   { car: "Zeekr 001", service: "Керамика" },
   { car: "Toyota Camry", service: "Тонировка" },
-  { car: "Haval Jolion", service: "Русификация" },
 ];
 
 for (const ls of LIVE_STATUS_DATA) {
@@ -1211,12 +1156,10 @@ const SOCIAL_PROOF_DATA = [
   { name: "Алексей", car: "Toyota Camry", service: "тонировку", minutesAgo: 45 },
   { name: "Дамир", car: "VW Polo", service: "полировку фар", minutesAgo: 8 },
   { name: "Руслан", car: "Hyundai Creta", service: "шумоизоляцию", minutesAgo: 55 },
-  { name: "Тимур", car: "Haval Jolion", service: "русификацию", minutesAgo: 18 },
   { name: "Ренат", car: "Lada Vesta", service: "полировку стёкол", minutesAgo: 29 },
   { name: "Эдуард", car: "Skoda Rapid", service: "химчистку", minutesAgo: 41 },
   { name: "Айрат", car: "Porsche Cayenne", service: "антихром Full Black", minutesAgo: 7 },
   { name: "Вадим", car: "Mercedes C-Class", service: "полировку + керамику", minutesAgo: 33 },
-  { name: "Олег", car: "Chery Tiggo 7", service: "русификацию + тонировку", minutesAgo: 52 },
   { name: "Денис", car: "Ford Focus", service: "регулировку фар", minutesAgo: 15 },
   { name: "Рамиль", car: "Geely Monjaro", service: "антидождь", minutesAgo: 27 },
   { name: "Фарид", car: "Exeed VX", service: "полную оклейку", minutesAgo: 44 },

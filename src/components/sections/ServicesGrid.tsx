@@ -16,7 +16,7 @@ const FEATURED_SLUGS = new Set([
   "ppf",
   "tonirovka",
   "ustanovka-linz",
-  "rusifikaciya-avto",
+  "polirovka",
 ]);
 
 /* ───────── Component ───────── */
