@@ -2,6 +2,8 @@ import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getService, getAllServices } from "@/lib/db/queries/services";
+import { getAggregateRating } from "@/lib/db/queries/content";
+import { formatPageTitle } from "@/lib/utils";
 import HeroSection from "@/components/sections/HeroSection";
 import BeforeAfterSlider from "@/components/sections/BeforeAfterSlider";
 import ServicePackages from "@/components/sections/ServicePackages";
@@ -10,6 +12,7 @@ import FAQAccordion from "@/components/sections/FAQAccordion";
 import CTAForm from "@/components/sections/CTAForm";
 import SEOText from "@/components/sections/SEOText";
 import CrossSellBanner from "@/components/sections/CrossSellBanner";
+import RelatedServices from "@/components/sections/RelatedServices";
 import PhotoComparison from "@/components/sections/PhotoComparison";
 import CarBrandGrid from "@/components/sections/CarBrandGrid";
 import BrandsGrid from "@/components/sections/BrandsGrid";
@@ -129,17 +132,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const service = getService(slug);
   if (!service) return {};
 
+  const title = formatPageTitle(service.h1);
+  const description = service.seoDescription ?? service.subtitle;
+  const url = `https://dpkzn.ru${service.url}`;
+
   return {
-    title: service.title,
-    description: service.subtitle,
+    title,
+    description,
+    keywords: service.keywords.length > 0 ? service.keywords : undefined,
     openGraph: {
-      title: service.title,
-      description: service.subtitle,
-      url: `https://dpkzn.ru${service.url}`,
+      title,
+      description,
+      url,
       type: "website",
+      locale: "ru_RU",
+      siteName: "Detailing Place",
     },
     alternates: {
-      canonical: `https://dpkzn.ru${service.url}`,
+      canonical: url,
     },
   };
 }
@@ -150,12 +160,13 @@ export default async function ServicePage({ params }: PageProps) {
   if (!service) notFound();
 
   const theme = HERO_THEMES[slug];
+  const rating = getAggregateRating();
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.h1,
-    description: service.subtitle,
+    description: service.seoDescription ?? service.subtitle,
     provider: {
       "@type": "LocalBusiness",
       name: "Detailing Place",
@@ -170,7 +181,33 @@ export default async function ServicePage({ params }: PageProps) {
           offerCount: service.packages.length,
         }
       : undefined,
+    ...(rating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: rating.ratingValue,
+            reviewCount: rating.reviewCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
   };
+
+  const faqJsonLd = service.faq.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: service.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
 
   return (
     <>
@@ -179,6 +216,12 @@ export default async function ServicePage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       {/* Breadcrumbs with JSON-LD */}
       <div className="container-main pt-4">
@@ -232,6 +275,8 @@ export default async function ServicePage({ params }: PageProps) {
       </div>
 
       <SEOText html={service.seoText} />
+
+      <RelatedServices currentSlug={service.slug} />
 
       {service.crossSell && (
         <CrossSellBanner

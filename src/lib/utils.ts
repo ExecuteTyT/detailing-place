@@ -43,6 +43,28 @@ export function formatPhoneInput(value: string): string {
   return result;
 }
 
+const TITLE_LIMIT = 60;
+const TITLE_SUFFIX = " | Detailing Place";
+
+/**
+ * Build a page title that fits within 60 characters for Google SERP.
+ * Pattern: "<H1> в Казани | Detailing Place".
+ * If H1 already mentions Казань/Казани, the city insert is skipped.
+ * If the full title overflows, H1 is truncated with an ellipsis so the brand suffix stays.
+ */
+export function formatPageTitle(h1: string): string {
+  const cleaned = h1.trim();
+  const mentionsCity = /казан/i.test(cleaned);
+  const corePart = mentionsCity ? cleaned : `${cleaned} в Казани`;
+  const fullTitle = `${corePart}${TITLE_SUFFIX}`;
+
+  if (fullTitle.length <= TITLE_LIMIT) return fullTitle;
+
+  const budget = TITLE_LIMIT - TITLE_SUFFIX.length - 1;
+  const truncated = corePart.slice(0, Math.max(0, budget)).trimEnd();
+  return `${truncated}…${TITLE_SUFFIX}`;
+}
+
 /** Check if current Moscow time (UTC+3) is within working hours 10:00–20:00 */
 export function isWorkingHours(): boolean {
   const now = new Date();

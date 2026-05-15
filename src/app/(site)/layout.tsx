@@ -8,6 +8,7 @@ import ScrollTracker from "@/components/funnel/ScrollTracker";
 import { SiteDataProvider } from "@/lib/site-data";
 import { getSettings, getNavItems, getLiveStatus, getSocialProofItems, getSeasonalOffer, getQuizCategories } from "@/lib/db/queries/settings";
 import { getCarClassesForPricing } from "@/lib/db/queries/services";
+import { getAggregateRating } from "@/lib/db/queries/content";
 import { METRIKA_SCRIPT } from "@/lib/analytics";
 
 export default function SiteLayout({
@@ -22,6 +23,7 @@ export default function SiteLayout({
   const seasonalOffer = getSeasonalOffer();
   const quizCategories = getQuizCategories();
   const carClasses = getCarClassesForPricing();
+  const rating = getAggregateRating();
 
   const phone = settings.phone || "+7 (843) 000-00-00";
   const phoneRaw = settings.phone_raw || "78430000000";
@@ -58,6 +60,17 @@ export default function SiteLayout({
     openingHours: hours,
     priceRange: "₽₽₽",
     image: "https://dpkzn.ru/images/studio-1.webp",
+    ...(rating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: rating.ratingValue,
+            reviewCount: rating.reviewCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
   };
 
   const siteData = {

@@ -195,6 +195,7 @@ function transformService(
   };
 
   if (raw.badge) data.badge = raw.badge;
+  if (raw.seoDescription) data.seoDescription = raw.seoDescription;
   if (elPrices) data.elementPrices = elPrices;
   if (crossSell) data.crossSell = crossSell;
   if (beforeAfter) data.beforeAfter = beforeAfter;

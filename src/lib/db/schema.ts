@@ -35,6 +35,7 @@ export const services = sqliteTable("services", {
   h1: text("h1").notNull(),
   subtitle: text("subtitle").notNull(),
   badge: text("badge"),
+  seoDescription: text("seo_description"),
   seoText: text("seo_text").notNull().default(""),
   hasBeforeAfter: integer("has_before_after", { mode: "boolean" }).notNull().default(false),
   uniqueBlock: text("unique_block"), // "PhotoComparison" | "CarBrandGrid" | "BrandsGrid" | null

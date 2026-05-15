@@ -154,6 +154,28 @@ export function getPortfolioNavigation(slug: string): { prev: { slug: string; ca
 
 // ── Reviews ──
 
+export interface AggregateRating {
+  ratingValue: number;
+  reviewCount: number;
+}
+
+export function getAggregateRating(): AggregateRating | null {
+  const rows = db
+    .select({ rating: reviews.rating })
+    .from(reviews)
+    .where(eq(reviews.isVisible, true))
+    .all();
+
+  if (rows.length === 0) return null;
+
+  const sum = rows.reduce((acc, r) => acc + r.rating, 0);
+  const avg = sum / rows.length;
+  return {
+    ratingValue: Math.round(avg * 10) / 10,
+    reviewCount: rows.length,
+  };
+}
+
 export function getVisibleReviews(): Review[] {
   const rows = db
     .select()

@@ -45,6 +45,10 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   metadataBase: new URL("https://dpkzn.ru"),
+  verification: {
+    yandex: "533c7acbe681d96d",
+    google: "1UZieVrHK58CGZYBo9dl9Y4-kNQtH64Pvy77VS_MKw4",
+  },
 };
 
 export default function RootLayout({

@@ -50,6 +50,7 @@ export interface ServiceData {
   h1: string;
   subtitle: string;
   badge?: string;
+  seoDescription?: string;
   keywords: string[];
   packages: ServicePackage[];
   elementPrices?: ElementPrice[];

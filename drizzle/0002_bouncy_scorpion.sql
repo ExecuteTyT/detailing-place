@@ -1,0 +1,1 @@
+ALTER TABLE `services` ADD `seo_description` text;
