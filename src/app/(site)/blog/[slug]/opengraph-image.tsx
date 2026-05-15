@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { getBlogPost, getBlogPosts } from "@/lib/db/queries/content";
 
 export const runtime = "nodejs";
@@ -19,6 +21,7 @@ export default async function Image({ params }: Props) {
   const post = getBlogPost(slug);
   const heading = post?.title ?? "Блог Detailing Place";
   const category = post?.category ?? "Полезные статьи";
+  const fontData = await readFile(join(process.cwd(), "public", "fonts", "Montserrat-Bold.ttf"));
 
   return new ImageResponse(
     (
@@ -32,7 +35,7 @@ export default async function Image({ params }: Props) {
           padding: "80px",
           background:
             "linear-gradient(135deg, #0E0E0E 0%, #1A1A2E 100%)",
-          fontFamily: "Inter, system-ui, sans-serif",
+          fontFamily: "Montserrat",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
@@ -81,6 +84,16 @@ export default async function Image({ params }: Props) {
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [
+        {
+          name: "Montserrat",
+          data: fontData,
+          weight: 700,
+          style: "normal",
+        },
+      ],
+    },
   );
 }

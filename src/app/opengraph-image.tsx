@@ -1,11 +1,19 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const runtime = "nodejs";
 export const alt = "Detailing Place — Премиальный детейлинг в Казани";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+async function loadFont() {
+  return readFile(join(process.cwd(), "public", "fonts", "Montserrat-Bold.ttf"));
+}
+
 export default async function Image() {
+  const fontData = await loadFont();
+
   return new ImageResponse(
     (
       <div
@@ -18,7 +26,7 @@ export default async function Image() {
           padding: "80px",
           background:
             "linear-gradient(135deg, #0E0E0E 0%, #1A1A2E 100%)",
-          fontFamily: "Inter, system-ui, sans-serif",
+          fontFamily: "Montserrat",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
@@ -82,6 +90,16 @@ export default async function Image() {
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [
+        {
+          name: "Montserrat",
+          data: fontData,
+          weight: 700,
+          style: "normal",
+        },
+      ],
+    },
   );
 }
