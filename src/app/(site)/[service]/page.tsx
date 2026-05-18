@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getService, getAllServices } from "@/lib/db/queries/services";
-import { getAggregateRating } from "@/lib/db/queries/content";
 import { formatPageTitle } from "@/lib/utils";
 import HeroSection from "@/components/sections/HeroSection";
 import BeforeAfterSlider from "@/components/sections/BeforeAfterSlider";
@@ -160,7 +159,6 @@ export default async function ServicePage({ params }: PageProps) {
   if (!service) notFound();
 
   const theme = HERO_THEMES[slug];
-  const rating = getAggregateRating();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -168,8 +166,6 @@ export default async function ServicePage({ params }: PageProps) {
     name: service.h1,
     description: service.seoDescription ?? service.subtitle,
     provider: {
-      "@type": "LocalBusiness",
-      name: "Detailing Place",
       "@id": "https://dpkzn.ru/#organization",
     },
     areaServed: "Казань",
@@ -181,47 +177,15 @@ export default async function ServicePage({ params }: PageProps) {
           offerCount: service.packages.length,
         }
       : undefined,
-    ...(rating
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: rating.ratingValue,
-            reviewCount: rating.reviewCount,
-            bestRating: 5,
-            worstRating: 1,
-          },
-        }
-      : {}),
   };
-
-  const faqJsonLd = service.faq.length > 0
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: service.faq.map((item) => ({
-          "@type": "Question",
-          name: item.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.answer,
-          },
-        })),
-      }
-    : null;
 
   return (
     <>
-      {/* JSON-LD Service */}
+      {/* JSON-LD Service (FAQPage is emitted by FAQAccordion to avoid duplication) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
 
       {/* Breadcrumbs with JSON-LD */}
       <div className="container-main pt-4">
