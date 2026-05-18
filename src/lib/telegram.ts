@@ -63,9 +63,20 @@ export async function sendTelegramMessage(
 
     return { ok: true, status: res.status };
   } catch (e) {
-    return {
-      ok: false,
-      error: e instanceof Error ? e.message : "network error",
-    };
+    const parts: string[] = [];
+    if (e instanceof Error) {
+      parts.push(e.message);
+      const cause = (e as Error & { cause?: unknown }).cause;
+      if (cause instanceof Error) {
+        parts.push(`cause=${cause.message}`);
+        const code = (cause as Error & { code?: string }).code;
+        if (code) parts.push(`code=${code}`);
+      } else if (cause) {
+        parts.push(`cause=${String(cause)}`);
+      }
+    } else {
+      parts.push(String(e));
+    }
+    return { ok: false, error: parts.join(" | ") };
   }
 }
