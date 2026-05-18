@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { sendTelegramMessage } from "@/lib/telegram";
 
 const submitSchema = z.object({
   phone: z
@@ -85,18 +86,13 @@ export async function POST(request: NextRequest) {
         .filter(Boolean)
         .join("\n");
 
-      try {
-        const tgRes = await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: tgChat, text, parse_mode: "HTML" }),
-        });
-        if (!tgRes.ok) {
-          const tgBody = await tgRes.json().catch(() => null);
-          console.error("Telegram API error:", tgRes.status, tgBody);
-        }
-      } catch (e) {
-        console.error("Telegram network error:", e);
+      const tgResult = await sendTelegramMessage(tgToken, {
+        chatId: tgChat,
+        text,
+        parseMode: "HTML",
+      });
+      if (!tgResult.ok) {
+        console.error("Telegram error:", tgResult.status, tgResult.error);
       }
     } else {
       console.warn("Telegram not configured: TG_BOT_TOKEN or TG_CHAT_ID missing");
