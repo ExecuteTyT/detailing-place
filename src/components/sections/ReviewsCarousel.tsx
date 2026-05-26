@@ -13,7 +13,11 @@ export interface Review {
   text: string;
   car?: string;
   date?: string;
+  source?: string;
+  sourceUrl?: string;
 }
+
+const YANDEX_MAPS_URL = "https://yandex.ru/maps/org/detailing_place/49387442667/";
 
 interface ReviewsCarouselProps {
   reviews: Review[];
@@ -35,13 +39,34 @@ function getInitials(name: string) {
 export default function ReviewsCarousel({ reviews, className }: ReviewsCarouselProps) {
   if (reviews.length === 0) return null;
 
+  const avgRating =
+    Math.round(
+      (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length) * 10
+    ) / 10;
+
   return (
     <section className={cn("section-padding section-warm section-spotlight", className)}>
       <div className="container-main">
         <AnimatedSection>
-          <h2 className="text-2xl md:text-3xl font-bold font-display text-text text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold font-display text-text text-center mb-3">
             Отзывы клиентов
           </h2>
+          {/* Aggregate rating — реальная социальная доказательность */}
+          <a
+            href={YANDEX_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 mb-8 text-sm text-text-secondary hover:text-text transition-colors"
+          >
+            <span className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, s) => (
+                <Star key={s} size={16} className="text-accent-gold fill-accent-gold" />
+              ))}
+            </span>
+            <span className="font-semibold text-text">{avgRating.toFixed(1)}</span>
+            <span>·</span>
+            <span>{reviews.length} отзывов на Яндекс.Картах</span>
+          </a>
         </AnimatedSection>
 
         <AnimatedSection>
@@ -92,12 +117,18 @@ export default function ReviewsCarousel({ reviews, className }: ReviewsCarouselP
                   )}>
                     {getInitials(review.author)}
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-semibold text-text">{review.author}</p>
-                    {review.car && (
-                      <p className="text-xs text-text-secondary">{review.car}</p>
-                    )}
+                    <p className="text-xs text-text-secondary truncate">
+                      {[review.car, review.date].filter(Boolean).join(" · ")}
+                    </p>
                   </div>
+                  {review.source && (
+                    <span className="ml-auto flex-shrink-0 inline-flex items-center gap-1 text-[11px] text-text-secondary/80 border border-border rounded-full px-2 py-0.5">
+                      <Star size={10} className="text-accent-gold fill-accent-gold" />
+                      {review.source}
+                    </span>
+                  )}
                 </div>
               </div>
             </SwiperSlide>
@@ -110,7 +141,7 @@ export default function ReviewsCarousel({ reviews, className }: ReviewsCarouselP
           <Button
             variant="secondary"
             size="md"
-            href="https://yandex.ru/maps/org/detailing_place/49387442667/"
+            href={YANDEX_MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
           >

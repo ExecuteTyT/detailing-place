@@ -145,6 +145,8 @@ export interface Review {
   text: string;
   car?: string;
   date?: string;
+  source?: string;
+  sourceUrl?: string;
 }
 
 export interface TeamMember {

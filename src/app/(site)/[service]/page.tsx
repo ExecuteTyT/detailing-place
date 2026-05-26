@@ -2,8 +2,10 @@ import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getService, getAllServices } from "@/lib/db/queries/services";
+import { getVisibleReviews } from "@/lib/db/queries/content";
 import { formatPageTitle } from "@/lib/utils";
 import HeroSection from "@/components/sections/HeroSection";
+import ReviewsCarousel from "@/components/sections/ReviewsCarousel";
 import BeforeAfterSlider from "@/components/sections/BeforeAfterSlider";
 import ServicePackages from "@/components/sections/ServicePackages";
 import ProcessSteps from "@/components/sections/ProcessSteps";
@@ -159,6 +161,7 @@ export default async function ServicePage({ params }: PageProps) {
   if (!service) notFound();
 
   const theme = HERO_THEMES[slug];
+  const reviews = getVisibleReviews();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -226,6 +229,9 @@ export default async function ServicePage({ params }: PageProps) {
       )}
 
       {service.faq.length > 0 && <FAQAccordion items={service.faq} />}
+
+      {/* Social proof right before the conversion form */}
+      <ReviewsCarousel reviews={reviews} />
 
       <StudioLoadBar />
 

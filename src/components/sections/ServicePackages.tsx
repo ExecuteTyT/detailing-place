@@ -49,8 +49,9 @@ export default function ServicePackages({
   serviceName,
   className,
 }: ServicePackagesProps) {
-  const { carClasses } = useSiteData();
-  const [selectedClass, setSelectedClass] = useState(0);
+  const { carClasses, whatsappUrl } = useSiteData();
+  // Pre-select 2nd class (most common: Camry/Tiguan-tier) so a price is shown immediately
+  const [selectedClass, setSelectedClass] = useState(1);
   const showClassSelector = hasClassPricing(packages) || (elementPrices && elementPrices.some(ep => ep.classPrices.length > 1));
 
   function scrollToCTA() {
@@ -104,13 +105,26 @@ export default function ServicePackages({
                       >
                         {cls.label}
                       </span>
-                      <span className="text-[10px] text-text-secondary/60 hidden sm:block">
+                      <span className="text-[10px] text-text-secondary/70 block">
                         {cls.example.split(",")[0]}
                       </span>
                     </button>
                   );
                 })}
               </div>
+              {/* Helper for visitors unsure of their class — removes the friction we saw */}
+              <p className="text-center text-xs text-text-secondary mt-3">
+                Не знаете класс?{" "}
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent-whatsapp font-semibold hover:underline"
+                >
+                  Напишите модель в WhatsApp
+                </a>{" "}
+                — подскажем за минуту.
+              </p>
             </div>
           )}
         </AnimatedSection>

@@ -341,6 +341,18 @@ export default function Header() {
               <MessageCircle size={18} />
             </a>
 
+            {/* WhatsApp — mobile only (always reachable at the top while scrolling) */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleWhatsAppClick}
+              className="md:hidden flex items-center justify-center min-h-[44px] w-[44px] bg-accent-whatsapp text-white rounded-[var(--radius-button)] shadow-[0_3px_12px_rgba(37,211,102,0.35)] active:scale-[0.97] transition-transform"
+              aria-label="Написать в WhatsApp"
+            >
+              <MessageCircle size={20} />
+            </a>
+
             {/* Burger — mobile & tablet only */}
             <button
               onClick={handleMenuOpen}

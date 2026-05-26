@@ -152,6 +152,7 @@ export const works = sqliteTable("works", {
   car: text("car").notNull(),
   serviceName: text("service_name"),
   image: text("image").notNull(),
+  description: text("description"), // optional case write-up: задача/решение/результат
   sortOrder: integer("sort_order").notNull().default(0),
 });
 
@@ -195,6 +196,8 @@ export const reviews = sqliteTable("reviews", {
   text: text("text").notNull(),
   car: text("car"),
   date: text("date"),
+  source: text("source"), // "Яндекс" | "Google" | "2GIS" | null
+  sourceUrl: text("source_url"),
   isVisible: integer("is_visible", { mode: "boolean" }).notNull().default(true),
   sortOrder: integer("sort_order").notNull().default(0),
 });

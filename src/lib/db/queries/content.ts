@@ -190,6 +190,8 @@ export function getVisibleReviews(): Review[] {
     text: row.text,
     ...(row.car != null ? { car: row.car } : {}),
     ...(row.date != null ? { date: row.date } : {}),
+    ...(row.source != null ? { source: row.source } : {}),
+    ...(row.sourceUrl != null ? { sourceUrl: row.sourceUrl } : {}),
   }));
 }
 
