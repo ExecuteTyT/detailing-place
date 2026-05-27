@@ -78,12 +78,13 @@ export default function Home() {
               "linear-gradient(to bottom, rgba(12,11,9,0.15) 0%, rgba(12,11,9,0.10) 20%, rgba(12,11,9,0.50) 45%, rgba(12,11,9,0.88) 65%, rgba(12,11,9,0.95) 100%)",
           }}
         />
-        {/* Desktop overlay — minimal, photo handles darkness naturally */}
+        {/* Desktop overlay — left scrim keeps the text column readable over any photo,
+            plus a bottom fade for the buttons. Right side stays lighter (quiz has its own dark card). */}
         <div
           className="absolute inset-0 hidden md:block"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(12,11,9,0.10) 0%, rgba(12,11,9,0.05) 25%, rgba(12,11,9,0.30) 55%, rgba(12,11,9,0.85) 75%, rgba(12,11,9,0.95) 100%)",
+              "linear-gradient(to right, rgba(12,11,9,0.92) 0%, rgba(12,11,9,0.70) 28%, rgba(12,11,9,0.25) 50%, rgba(12,11,9,0) 72%), linear-gradient(to bottom, rgba(12,11,9,0) 35%, rgba(12,11,9,0.45) 70%, rgba(12,11,9,0.85) 100%)",
           }}
         />
 
@@ -91,18 +92,18 @@ export default function Home() {
         <div className="relative z-10 container-main w-full pb-8 md:pb-20 pt-20 md:pt-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
             <div>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border bg-accent-gold/10 text-accent-gold border-accent-gold/25 mb-4">
+              <span className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-semibold bg-bg/55 backdrop-blur-md text-accent-gold border border-accent-gold/40 shadow-[0_4px_16px_rgba(0,0,0,0.4)] mb-4">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full rounded-full bg-accent-gold opacity-75 animate-pulse-ring" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-gold" />
                 </span>
                 Оплатим дорогу до дома
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-display text-text leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-display text-text leading-tight [text-shadow:_0_2px_16px_rgba(0,0,0,0.7)]">
                 <span className="bg-gradient-to-r from-accent-gold via-[#E0C840] to-accent-gold bg-clip-text text-transparent">Премиальный</span>{" "}
                 детейлинг в Казани
               </h1>
-              <p className="mt-4 text-base md:text-lg text-text-secondary max-w-xl leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.8)]">
+              <p className="mt-4 text-base md:text-lg text-text/90 max-w-lg leading-relaxed font-medium [text-shadow:_0_2px_12px_rgba(0,0,0,0.95)]">
                 Оригинальные материалы, гарантия и фотоотчёт. Работаем с Porsche, BMW, Mercedes, Lamborghini.
                 <span className="hidden md:inline"> Антигравийная плёнка, полировка, керамика, тонировка, шумоизоляция, Bi-LED линзы.</span>
               </p>
